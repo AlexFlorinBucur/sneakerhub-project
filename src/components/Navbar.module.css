@@ -1,0 +1,75 @@
+@import url("../assets/variables.module.css");
+
+.header-wrapper {
+  height: 16.2rem;
+  font-size: 1.8rem;
+}
+
+.header-discount {
+  background-color: var(--primary);
+  color: var(--primary-text);
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem 0;
+}
+
+.header-nav {
+  /* Because we want header to be sticky later */
+  padding: 1.4rem;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr;
+  align-items: center;
+}
+
+.outline svg {
+  height: 2.4rem;
+  width: 2.4rem;
+  color: var(--primary-text);
+}
+
+.logo {
+  line-height: 0;
+  text-align: center;
+}
+
+.logo img {
+  height: 9rem;
+}
+
+.nav-options {
+  justify-self: flex-end;
+}
+
+.main-nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4.2rem;
+  letter-spacing: -0.5px;
+}
+
+.main-nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.main-nav-link svg {
+  margin-right: 0.5rem;
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+  /* display: inline-block; */
+  color: var(--primary-text);
+  text-decoration: none;
+
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.main-nav-link:hover,
+.main-nav-link:active {
+  color: var(--primary);
+}
