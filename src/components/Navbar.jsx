@@ -4,7 +4,6 @@ import Logo from "../assets/logo.png";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import {
   HiOutlineSearch,
-  HiUser,
   HiShoppingCart,
   HiOutlineUserCircle,
 } from "react-icons/hi";
