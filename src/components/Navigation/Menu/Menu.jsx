@@ -18,18 +18,6 @@ const Menu = () => {
               <a href={url}>{name}</a>
             </li>
           ))}
-          {/* <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">Sneakers men</a>
-          </li>
-          <li>
-            <a href="#">Sneakers women</a>
-          </li>
-          <li>
-            <a href="#">Sneakers kids</a>
-          </li> */}
         </ul>
         {/*  */}
       </div>

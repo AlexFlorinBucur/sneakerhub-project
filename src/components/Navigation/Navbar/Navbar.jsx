@@ -2,12 +2,6 @@ import React from "react";
 import classes from "./Navbar.module.css";
 import Logo from "../../../assets/logo.png";
 import { HiOutlineBars3 } from "react-icons/hi2";
-import {
-  HiOutlineSearch,
-  HiUser,
-  HiShoppingCart,
-  HiOutlineUserCircle,
-} from "react-icons/hi";
 
 import { placeholders } from "../Placeholders";
 
@@ -58,24 +52,6 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
-              {/* <li>
-                <a className={classes["main-nav-link"]} href="#">
-                  <HiOutlineSearch />
-                  <span>Search</span>
-                </a>
-              </li>
-              <li>
-                <a className={classes["main-nav-link"]} href="#">
-                  <HiOutlineUserCircle />
-                  <span>SIGN UP</span>
-                </a>
-              </li>
-              <li>
-                <a className={classes["main-nav-link"]} href="#">
-                  <HiShoppingCart />
-                  <span>CART</span>
-                </a>
-              </li> */}
             </ul>
           </nav>
         </div>

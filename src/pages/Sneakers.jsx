@@ -1,32 +1,19 @@
 import React from "react";
 import classes from "./Sneakers.module.css";
 import { BiExpandVertical } from "react-icons/bi";
+import { placeholders } from "./Placeholders";
 
 const Sneakers = () => {
   return (
     <section style={{ padding: "3rem", backgroundColor: "#fafafa" }}>
       <div className={classes["sneaker-gender"]}>SNEAKERS MEN</div>
       <div className={classes["search-filters"]}>
-        <div className={`${classes["filter-cat"]} ${classes.active}`}>
-          <span>Categories</span>
-          <BiExpandVertical />
-        </div>
-        <div className={classes["filter-cat"]}>
-          <span>Brands</span>
-          <BiExpandVertical />
-        </div>
-        <div className={classes["filter-cat"]}>
-          <span>Price</span>
-          <BiExpandVertical />
-        </div>
-        <div className={classes["filter-cat"]}>
-          <span>Size</span>
-          <BiExpandVertical />
-        </div>
-        <div className={classes["filter-cat"]}>
-          <span>Sort by:select</span>
-          <BiExpandVertical />
-        </div>
+        {placeholders.filters.map(({ filterName }) => (
+          <div className={classes["filter-cat"]}>
+            <span>{filterName}</span>
+            <BiExpandVertical />
+          </div>
+        ))}
       </div>
       <ul>
         <li className={classes.sneaker}>

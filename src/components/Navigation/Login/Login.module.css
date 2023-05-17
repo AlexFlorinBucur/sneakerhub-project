@@ -13,7 +13,7 @@
 }
 
 .drawer {
-  width: 280px;
+  width: 28rem;
   position: fixed;
   max-width: 70%;
   height: 100%;
@@ -53,8 +53,6 @@
 
 .form input {
   font-size: 1.2rem;
-  /* font-family: "Apercu", sans-serif; */
-  /* font: inherit; */
   font-weight: 500;
   margin-bottom: 3vh;
   padding: 0.8rem 1.6rem;
@@ -70,7 +68,6 @@
 
 .actions button {
   cursor: pointer;
-  /* font: inherit; */
   color: #fff;
   background-color: var(--secondary);
   border: 1px solid var(--primary-light);

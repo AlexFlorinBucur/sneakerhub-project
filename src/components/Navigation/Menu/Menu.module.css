@@ -13,7 +13,7 @@
 }
 
 .drawer {
-  width: 280px;
+  width: 28rem;
   position: fixed;
   max-width: 70%;
   height: 100%;
@@ -62,9 +62,7 @@
   font-weight: 700;
   color: var(--primary);
   text-transform: uppercase;
-  /* padding-bottom: 8px; */
   font-size: 2.2rem;
-  /* background-color: transparent; */
   text-decoration: none;
   border: none;
   font-family: "Apercu", sans-serif;
