@@ -1,0 +1,96 @@
+@import url("../../../assets/variables.module.css");
+
+/* SA FACI SI FOCUS PT TAB KEY */
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.drawer {
+  width: 280px;
+  position: fixed;
+  max-width: 70%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  padding: 3.2rem 1.6rem;
+  box-sizing: border-box;
+}
+
+.logo-exit {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--secondary);
+}
+
+.exit-icon {
+  font-size: 1.6rem;
+  text-align: center;
+  height: 4rem;
+  width: 4rem;
+  cursor: pointer;
+}
+
+.exit-icon:hover {
+  color: var(--secondary-darker);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  margin-bottom: 8rem;
+  justify-content: center;
+}
+
+.form input {
+  font-size: 1.2rem;
+  /* font-family: "Apercu", sans-serif; */
+  /* font: inherit; */
+  font-weight: 500;
+  margin-bottom: 3vh;
+  padding: 0.8rem 1.6rem;
+  border: 0.1rem solid var(--secondary-text);
+}
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.actions button {
+  cursor: pointer;
+  /* font: inherit; */
+  color: #fff;
+  background-color: var(--secondary);
+  border: 1px solid var(--primary-light);
+  padding: 0.5rem 2.5rem;
+}
+
+.actions button:hover {
+  background-color: var(--secondary-darker);
+  border-color: var(--primary-darker);
+}
+
+.actions .toggle {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: var(--secondary-text);
+  border: none;
+  padding: 0.15rem 1.5rem;
+}
+
+.actions .toggle:hover {
+  background-color: transparent;
+  color: var(--primary-text);
+}

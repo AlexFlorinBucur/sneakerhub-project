@@ -1,12 +1,18 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Slider from "./Slider";
+import Navbar from "./Navigation/Navbar/Navbar";
+import Slider from "./Navigation/Slider/Slider";
+import Login from "./Navigation/Login/Login";
+import Menu from "./Navigation/Menu/Menu";
+import Sneakers from "../pages/Sneakers";
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <Slider />
+      {/* <Slider /> */}
+      {/* <Login /> */}
+      {/* <Menu /> */}
+      <Sneakers />
     </>
   );
 };

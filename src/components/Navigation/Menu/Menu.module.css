@@ -1,0 +1,78 @@
+@import url("../../../assets/variables.module.css");
+
+/* SA FACI SI FOCUS PT TAB KEY */
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.drawer {
+  width: 280px;
+  position: fixed;
+  max-width: 70%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-color: var(--primary-text);
+  padding: 3.2rem 1.6rem;
+  box-sizing: border-box;
+}
+
+.logo-exit {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--secondary);
+}
+
+.exit-icon {
+  font-size: 1.6rem;
+  text-align: center;
+  height: 4rem;
+  width: 4rem;
+  cursor: pointer;
+}
+
+.exit-icon:hover {
+  color: var(--secondary-darker);
+}
+
+/*  */
+
+.gender-selector {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  width: 100%;
+  justify-content: space-evenly;
+  /* text-align: center; */
+  padding: 0;
+}
+
+.gender-selector a {
+  display: inline-block;
+  width: 100%;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  /* padding-bottom: 8px; */
+  font-size: 2.2rem;
+  /* background-color: transparent; */
+  text-decoration: none;
+  border: none;
+  font-family: "Apercu", sans-serif;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+.gender-selector a:hover {
+  background-color: var(--primary);
+  color: var(--primary-text);
+}
