@@ -1,4 +1,4 @@
-@import url("../assets/variables.module.css");
+@import url("../../../assets/variables.module.css");
 
 .header-wrapper {
   height: 16.2rem;
@@ -53,6 +53,9 @@
 .main-nav-link {
   display: flex;
   align-items: center;
+  color: var(--primary-text);
+  font-weight: 500;
+  transition: all 0.3s;
 }
 
 .main-nav-link svg {
@@ -61,12 +64,7 @@
 
 .main-nav-link:link,
 .main-nav-link:visited {
-  /* display: inline-block; */
-  color: var(--primary-text);
   text-decoration: none;
-
-  font-weight: 500;
-  transition: all 0.3s;
 }
 
 .main-nav-link:hover,
