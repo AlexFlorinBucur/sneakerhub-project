@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Sneakers.module.css";
 import { BiExpandVertical } from "react-icons/bi";
 import { placeholders } from "./Placeholders";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const Sneakers = () => {
   return (
@@ -16,7 +17,41 @@ const Sneakers = () => {
             </div>
           ))}
         </div>
-        <div style={{ width: "1px", border: "1px solid #fafaf321" }}></div>
+        <div className={classes["filter-list"]}>
+          <ul>
+            <li>
+              <AiOutlineArrowRight />
+              <a href="#">
+                Jordan <span>(70)</span>
+              </a>
+            </li>
+            <li>
+              <AiOutlineArrowRight />
+              <a href="#">
+                Nike <span>(15)</span>
+              </a>
+            </li>
+            <li>
+              <AiOutlineArrowRight />
+              <a href="#">
+                Adidas <span>(70)</span>
+              </a>
+            </li>
+            <li>
+              <AiOutlineArrowRight />
+              <a href="#">
+                Adidas <span>(70)</span>
+              </a>
+            </li>
+            <li>
+              <AiOutlineArrowRight />
+              <a href="#">
+                Balenciaga <span>(70)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className={classes["simple-line"]}></div>
         <div className={classes["sneaker-products"]}>
           <ul>
             <li className={classes.sneaker}>

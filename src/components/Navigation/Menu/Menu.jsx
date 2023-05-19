@@ -1,26 +1,23 @@
 import React from "react";
-import { MdClose } from "react-icons/md";
 import classes from "./Menu.module.css";
 import { placeholders } from "../Placeholders";
+import Drawer from "../../UI/Drawer";
+import Modal from "../../UI/Modal";
 
 const Menu = () => {
   return (
     <>
-      <div className={classes.backdrop}></div>
-      <div className={classes.drawer}>
-        <div className={classes["logo-exit"]}>
-          <MdClose className={classes["exit-icon"]} />
-        </div>
-        {/*  */}
-        <ul className={classes["gender-selector"]}>
-          {placeholders.menuLinks.map(({ name, url }) => (
-            <li key={name}>
-              <a href={url}>{name}</a>
-            </li>
-          ))}
-        </ul>
-        {/*  */}
-      </div>
+      <Modal>
+        <Drawer cssClass={classes.left}>
+          <ul className={classes["gender-selector"]}>
+            {placeholders.menuLinks.map(({ name, url }) => (
+              <li key={name}>
+                <a href={url}>{name}</a>
+              </li>
+            ))}
+          </ul>
+        </Drawer>
+      </Modal>
     </>
   );
 };

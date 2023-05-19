@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <Navbar />
       {/* <Slider /> */}
-      {/* <Login /> */}
+      <Login />
       {/* <Menu /> */}
       <Sneakers />
     </>

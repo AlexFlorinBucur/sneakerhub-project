@@ -2,48 +2,10 @@
 
 /* SA FACI SI FOCUS PT TAB KEY */
 
-.backdrop {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  z-index: 99;
+.left {
   left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.drawer {
-  width: 28rem;
-  position: fixed;
-  max-width: 70%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 100;
   background-color: var(--primary-text);
-  padding: 3.2rem 1.6rem;
-  box-sizing: border-box;
 }
-
-.logo-exit {
-  display: flex;
-  justify-content: flex-end;
-  color: var(--secondary);
-}
-
-.exit-icon {
-  font-size: 1.6rem;
-  text-align: center;
-  height: 4rem;
-  width: 4rem;
-  cursor: pointer;
-}
-
-.exit-icon:hover {
-  color: var(--secondary-darker);
-}
-
-/*  */
 
 .gender-selector {
   list-style: none;
