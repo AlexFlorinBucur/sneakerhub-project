@@ -14,7 +14,12 @@ export const placeholders = {
   menuLinks: [
     { name: "home", url: "/" },
     { name: "sneakers men", url: "/men" },
-    { name: "sneakers womer", url: "women" },
+    { name: "sneakers women", url: "women" },
     { name: "sneakers kids", url: "kids" },
   ],
+};
+
+export const MODALS = {
+  login: "LOGIN",
+  menu: "MENU",
 };

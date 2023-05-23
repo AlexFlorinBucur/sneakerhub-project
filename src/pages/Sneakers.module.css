@@ -22,9 +22,9 @@
 .search-filters {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 2rem;
-  margin-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 
 .filter-cat {
@@ -41,6 +41,45 @@
 
 .filter-cat.active {
   background-color: #67a7df;
+}
+
+.filter-list {
+  display: none;
+}
+
+.filter-list ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  padding: 2.5rem 6rem;
+  background-color: #adcae3;
+  list-style: none;
+}
+
+.filter-list li {
+  font-size: 1.6rem;
+  display: flex;
+}
+
+.filter-list a {
+  color: #051026;
+  margin-left: 1rem;
+  line-height: 1.1;
+  text-decoration: none;
+}
+
+.filter-list a:hover {
+  text-decoration: underline;
+}
+
+.sneaker-products {
+  padding-top: 6rem;
+}
+
+.simple-line {
+  width: 100%;
+  border: 0.1rem solid #e1e1e1;
+  margin-top: 3rem;
 }
 
 .sneaker-products ul {
@@ -88,6 +127,7 @@
   font-size: 1.6rem;
   font-weight: 100;
   padding-top: 4rem;
+  z-index: 1;
 }
 
 .sneaker-price {
