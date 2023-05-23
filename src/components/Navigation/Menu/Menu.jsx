@@ -4,11 +4,11 @@ import { placeholders } from "../Placeholders";
 import Drawer from "../../UI/Drawer";
 import Modal from "../../UI/Modal";
 
-const Menu = () => {
+const Menu = ({ onCloseModal }) => {
   return (
     <>
-      <Modal>
-        <Drawer cssClass={classes.left}>
+      <Modal onClose={onCloseModal}>
+        <Drawer cssClass={classes.left} onCloseModal={onCloseModal}>
           <ul className={classes["gender-selector"]}>
             {placeholders.menuLinks.map(({ name, url }) => (
               <li key={name}>

@@ -2,13 +2,13 @@ import React from "react";
 import classes from "./Drawer.module.css";
 import { MdClose } from "react-icons/md";
 
-const Drawer = (props) => {
+const Drawer = ({ children, cssClass, onCloseModal }) => {
   return (
-    <div className={`${classes.drawer} ${props.cssClass}`}>
-      <div className={classes["logo-exit"]}>
+    <div className={`${classes.drawer} ${cssClass}`}>
+      <div className={classes["logo-exit"]} onClick={onCloseModal}>
         <MdClose className={classes["exit-icon"]} />
       </div>
-      {props.children}
+      {children}
     </div>
   );
 };

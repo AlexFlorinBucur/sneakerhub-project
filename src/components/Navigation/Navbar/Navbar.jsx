@@ -3,7 +3,7 @@ import classes from "./Navbar.module.css";
 import Logo from "../../../assets/logo.png";
 import { HiOutlineBars3 } from "react-icons/hi2";
 
-import { placeholders } from "../Placeholders";
+import { placeholders, MODALS } from "../Placeholders";
 
 const managedClick = ({ name, onSearch, onSignUp }) => {
   // destructuring
@@ -19,7 +19,7 @@ const managedClick = ({ name, onSearch, onSignUp }) => {
   }
 };
 
-const Navbar = () => {
+const Navbar = ({ onShowModal }) => {
   return (
     <>
       <header className={classes["header-wrapper"]}>
@@ -27,7 +27,10 @@ const Navbar = () => {
           <span>{placeholders.discount}</span>
         </div>
         <div className={classes["header-nav"]}>
-          <div className={classes.outline}>
+          <div
+            className={classes.outline}
+            onClick={() => onShowModal(MODALS.menu)}
+          >
             <HiOutlineBars3 viewBox="3 3 19 19" />
           </div>
           <a href="#home" className={classes.logo}>
@@ -44,7 +47,7 @@ const Navbar = () => {
                     onClick={managedClick({
                       name,
                       onSearch: () => console.log("Ai apasat SEARCH"),
-                      onSignUp: () => console.log("Ai apasat SIGNUP"),
+                      onSignUp: () => onShowModal(MODALS.login),
                     })}
                   >
                     {iconSvg}
