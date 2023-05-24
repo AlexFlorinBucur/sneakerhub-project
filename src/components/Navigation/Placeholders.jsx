@@ -13,9 +13,9 @@ export const placeholders = {
   ],
   menuLinks: [
     { name: "home", url: "/" },
-    { name: "sneakers men", url: "/men" },
-    { name: "sneakers women", url: "women" },
-    { name: "sneakers kids", url: "kids" },
+    { name: "sneakers men", url: "shopping/men" },
+    { name: "sneakers women", url: "shopping/women" },
+    { name: "sneakers kids", url: "shopping/kids" },
   ],
 };
 
