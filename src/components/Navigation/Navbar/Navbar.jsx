@@ -5,6 +5,8 @@ import { HiOutlineBars3 } from "react-icons/hi2";
 
 import { placeholders, MODALS } from "../Placeholders";
 
+import { Link } from "react-router-dom";
+
 const managedClick = ({ name, onSearch, onSignUp }) => {
   // destructuring
   const [{ name: search }, { name: signUp }] = placeholders.mainNavLinks;
@@ -33,9 +35,9 @@ const Navbar = ({ onShowModal }) => {
           >
             <HiOutlineBars3 viewBox="3 3 19 19" />
           </div>
-          <a href="#home" className={classes.logo}>
+          <Link to="/" className={classes.logo}>
             <img src={Logo} alt="Logo for site" className={classes.logo} />
-          </a>
+          </Link>
           <nav className={classes["nav-options"]}>
             <ul className={classes["main-nav-list"]}>
               {placeholders.mainNavLinks.map(({ name, iconSvg, url }) => (

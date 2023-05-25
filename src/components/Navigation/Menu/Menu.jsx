@@ -3,6 +3,7 @@ import classes from "./Menu.module.css";
 import { placeholders } from "../Placeholders";
 import Drawer from "../../UI/Drawer";
 import Modal from "../../UI/Modal";
+import { Link } from "react-router-dom";
 
 const Menu = ({ onCloseModal }) => {
   return (
@@ -12,7 +13,7 @@ const Menu = ({ onCloseModal }) => {
           <ul className={classes["gender-selector"]}>
             {placeholders.menuLinks.map(({ name, url }) => (
               <li key={name}>
-                <a href={url}>{name}</a>
+                <Link to={url}>{name}</Link>
               </li>
             ))}
           </ul>
