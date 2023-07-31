@@ -36,7 +36,7 @@ const Navbar = ({ onShowModal }) => {
             <HiOutlineBars3 viewBox="3 3 19 19" />
           </div>
           <Link to="/" className={classes.logo}>
-            <img src={Logo} alt="Logo for site" className={classes.logo} />
+            <img src={Logo} alt="Logo for site" />
           </Link>
           <nav className={classes["nav-options"]}>
             <ul className={classes["main-nav-list"]}>

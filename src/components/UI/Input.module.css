@@ -1,0 +1,12 @@
+@import url("../../assets/variables.module.css");
+
+.input input {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 3vh;
+  padding: 0.8rem 1.6rem;
+  border: 0.1rem solid var(--secondary-text);
+}
+
+/* NEED ADD A LABEL!! */

@@ -23,15 +23,23 @@
   align-items: center;
 }
 
-.outline svg {
-  height: 2.4rem;
+.outline {
   width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+}
+
+.outline svg {
+  width: 100%;
+  height: 100%;
   color: var(--primary-text);
 }
 
 .logo {
   line-height: 0;
   text-align: center;
+  width: 50%;
+  justify-self: center;
 }
 
 .logo img {
