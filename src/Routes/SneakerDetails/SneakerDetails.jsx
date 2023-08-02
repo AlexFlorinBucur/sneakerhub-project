@@ -19,7 +19,6 @@ const getTimeFromStamp = function (timestamp) {
 
 const SneakerDetails = () => {
   const params = useParams();
-  console.log(params);
 
   const [sneakersData, setSneakersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +36,6 @@ const SneakerDetails = () => {
       );
 
       const data = await response.json();
-      // console.log(data.map((el) => el.grid_picture_url));
 
       if (!response.ok || data == null) {
         throw new Error("Something went wrong!");
@@ -64,30 +62,23 @@ const SneakerDetails = () => {
             gender: sneakerData.gender[0],
           };
         })
-        // .filter(
-        //   (filtredGender) =>
-        //     filtredGender.id === Number(params.id) &&
-        //     filtredGender.gender === params.gender
-        // );
         .filter((filtredGender) => {
           return params.id
             ? filtredGender.id === Number(params.id) &&
                 filtredGender.gender === params.gender
             : filtredGender.gender === params.gender;
         });
-      // console.log(transformedData);
+
       setSneakersData(transformedData);
     } catch (err) {
       setError(err.message);
     }
     setIsLoading(false);
   }, []);
-  // console.log(sneakersData);
 
   useEffect(() => {
     sneakerFetchHandler(params);
   }, [sneakerFetchHandler, params]);
-  // console.log(isLoading, sneakersData.length);
   return (
     <>
       {isLoading && <p style={{ fontSize: "10rem" }}>LOADING DATA...</p>}

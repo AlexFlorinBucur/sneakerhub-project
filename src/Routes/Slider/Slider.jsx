@@ -22,8 +22,6 @@ const Slider = () => {
   totalSlides = slideImages.length;
 
   function slide(action) {
-    console.log(action, activeSlide, totalSlides - 1);
-
     if (action === "next") {
       if (activeSlide < totalSlides - 1) {
         setActiveSlide((previousState) => previousState + 1);
@@ -43,7 +41,6 @@ const Slider = () => {
     <div className={styles.slider}>
       <div className={styles.slides}>
         {slideImages.map((slide, index) => {
-          console.log(slide);
           return (
             <div
               className={`${styles.slide} 

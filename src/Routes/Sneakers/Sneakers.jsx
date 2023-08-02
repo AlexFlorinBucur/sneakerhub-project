@@ -12,7 +12,6 @@ const Sneakers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeFilters, setActiveFilters] = useState({});
-  console.log(activeFilters);
 
   const params = useParams();
   const location = useLocation();
@@ -104,7 +103,6 @@ const Sneakers = () => {
 
     setIsLoading(false);
   }, []);
-  // console.log(sneakersData);
 
   useEffect(() => {
     sneakerFetchHandler(params, query);

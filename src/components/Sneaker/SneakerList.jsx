@@ -22,7 +22,7 @@ const SneakerList = ({ sneakersData }) => {
                 <div className={classes["sneaker-name-size"]}>
                   <p>{name}</p>
                   <p>
-                    {`Available: `}
+                    {"Available: "}
                     {sizeRange
                       .sort((a, b) => a - b)
                       .map((size) => {

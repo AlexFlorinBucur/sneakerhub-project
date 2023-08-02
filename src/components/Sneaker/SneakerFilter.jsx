@@ -16,7 +16,7 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
   const [keyFilter, setKeyFilter] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location.search);
+
   const query = new URLSearchParams(location.search);
 
   const filterNavigateHandler = (nameItem) => {
