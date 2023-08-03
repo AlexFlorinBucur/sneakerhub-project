@@ -12,10 +12,12 @@ const animationTiming = {
   exit: 100,
 };
 
-const SneakerFilter = ({ sneakersData }) => {
+const SneakerFilter = ({ sneakersData, activeFilters }) => {
   const [keyFilter, setKeyFilter] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const query = new URLSearchParams(location.search);
 
   const filterNavigateHandler = (nameItem) => {
     navigate({
@@ -145,18 +147,23 @@ const SneakerFilter = ({ sneakersData }) => {
   return (
     <>
       <div className={classes["search-filters"]}>
-        {placeholders.filters.map(({ filterName }) => (
-          <div
-            className={`${classes["filter-cat"]} ${
-              keyFilter === filterName ? classes.active : ""
-            }`}
-            key={filterName}
-            onClick={() => filterHandlerName(filterName)}
-          >
-            <span>{filterName}</span>
-            <BiExpandVertical />
-          </div>
-        ))}
+        {placeholders.filters
+          .filter(
+            (filterActive) =>
+              !activeFilters.hasOwnProperty(filterActive.filterName)
+          )
+          .map(({ filterName }) => (
+            <div
+              className={`${classes["filter-cat"]} ${
+                keyFilter === filterName ? classes.active : ""
+              }`}
+              key={filterName}
+              onClick={() => filterHandlerName(filterName)}
+            >
+              <span>{filterName}</span>
+              <BiExpandVertical />
+            </div>
+          ))}
       </div>
       <CSSTransition
         mountOnEnter

@@ -3,3 +3,9 @@
   padding: 0 1.5rem;
   color: #051026;
 }
+
+.sneakers {
+  max-width: 150rem;
+  margin: 0 auto;
+  align-items: center;
+}

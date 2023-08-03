@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Sneakers from "./Routes/Sneakers/Sneakers.jsx";
 import RootLayout from "./Routes/RootLayout.jsx";
 import Slider from "./Routes/Slider/Slider.jsx";
-import SneakerDetails from "./Routes/SneakerDetails.jsx/SneakerDetails";
+import SneakerDetails from "./Routes/SneakerDetails/SneakerDetails";
 
 const router = createBrowserRouter([
   {

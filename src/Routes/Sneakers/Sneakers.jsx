@@ -1,29 +1,28 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import React, { useEffect, useState, useCallback, useRef } from "react";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import classes from "./Sneakers.module.css";
 import SneakerList from "../../components/Sneaker/SneakerList";
 import SneakerFilter from "../../components/Sneaker/SneakerFilter";
 import SneakerGender from "../../components/Sneaker/SneakerGender";
 import SimpleLine from "../../components/UI/SimpleLine";
+import SneakerFilterActive from "../../components/Sneaker/SneakerFilterActive";
 
 const Sneakers = () => {
   const [sneakersData, setSneakersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [activeFilters, setActiveFilters] = useState({});
 
   const params = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const query = new URLSearchParams(location.search);
-  for (const key of query.keys()) {
-    console.log(key);
-    let values = query.get(key);
-    console.log(values);
-  }
 
   // async function sneakerFetchHandler() {
-  const sneakerFetchHandler = useCallback(async (params) => {
+  const sneakerFetchHandler = useCallback(async (params, query) => {
     setIsLoading(true);
     setError(null);
+    setActiveFilters({});
 
     try {
       const response = await fetch(
@@ -36,6 +35,12 @@ const Sneakers = () => {
         throw new Error("Something went wrong!");
       }
 
+      const valueObj = {};
+      for (const key of query.keys()) {
+        valueObj[key] = query.get(key);
+
+        setActiveFilters(valueObj);
+      }
       const transformedData = data
         .map((sneakerData) => {
           return {
@@ -49,15 +54,48 @@ const Sneakers = () => {
             gender: sneakerData.gender[0],
           };
         })
-        // .filter((filtredGender) => {filtredGender.gender === params.gender);
-        .filter((filtredGender) => {
-          return params.id
-            ? filtredGender.id === Number(params.id) &&
-                filtredGender.gender === params.gender
-            : filtredGender.gender === params.gender;
+        .filter((sneaker) => {
+          if (sneaker.gender !== params.gender) {
+            return false;
+          }
+
+          // Verificam daca obiectul valueObj contine cheia "brands" si daca brandul corespunde
+          if ("brands" in valueObj && sneaker.brandName !== valueObj.brands) {
+            return false;
+          }
+
+          // Verificam daca obiectul valueObj contine cheia "categories" si daca categoria corespunde
+          if (
+            "categories" in valueObj &&
+            !sneaker.category.includes(valueObj.categories)
+          ) {
+            return false;
+          }
+
+          // Verificam daca obiectul valueObj contine cheia "price" si daca pretul se incadreaza in intervalul specificat
+          if ("price" in valueObj) {
+            const priceRange = valueObj.price.split("-").map(Number);
+            const minPrice = priceRange[0];
+            const maxPrice = priceRange[1];
+            const sneakerPrice = sneaker.retailPriceCents;
+
+            if (sneakerPrice < minPrice || sneakerPrice > maxPrice) {
+              return false;
+            }
+          }
+
+          // Verificăm dacă obiectul valueObj conține cheia "size" și dacă mărimea este specificată în array-ul size_range al sneaker-ului
+          if (
+            "size" in valueObj &&
+            !sneaker.sizeRange.includes(Number(valueObj.size))
+          ) {
+            return false;
+          }
+
+          // Returnam true daca obiectul trece toate verificarile, ceea ce inseamna ca indeplineste conditiile din valueObj
+          return true;
         });
 
-      // console.log(transformedData);
       setSneakersData(transformedData);
     } catch (err) {
       setError(err.message);
@@ -65,11 +103,23 @@ const Sneakers = () => {
 
     setIsLoading(false);
   }, []);
-  // console.log(sneakersData);
 
   useEffect(() => {
-    sneakerFetchHandler(params);
-  }, [sneakerFetchHandler, params]);
+    sneakerFetchHandler(params, query);
+  }, [sneakerFetchHandler, params, location]);
+
+  const deleteQueryHandler = (key) => {
+    const queryValue = query.get(key);
+
+    query.delete(key, queryValue);
+
+    if (query.size === 0) {
+      setActiveFilters({});
+      navigate(``);
+    } else {
+      navigate(`?${query}`);
+    }
+  };
 
   return (
     <section className={classes["section-products"]}>
@@ -81,7 +131,14 @@ const Sneakers = () => {
       {!params.id && !isLoading && sneakersData.length > 0 && (
         <div className={classes.sneakers}>
           <SneakerGender gender={params.gender} />
-          <SneakerFilter sneakersData={sneakersData} />
+          <SneakerFilter
+            sneakersData={sneakersData}
+            activeFilters={activeFilters}
+          />
+          <SneakerFilterActive
+            activeFilters={activeFilters}
+            onDeleteQuery={deleteQueryHandler}
+          />
           <SimpleLine />
           <SneakerList sneakersData={sneakersData} />
         </div>

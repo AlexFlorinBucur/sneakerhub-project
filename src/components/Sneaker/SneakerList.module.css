@@ -9,7 +9,7 @@
   max-width: 100%;
 }
 
-.sneaker {
+.sneaker-item {
   display: flex;
   background-color: #ffffff;
   flex-direction: column;
@@ -19,7 +19,15 @@
   overflow: hidden;
 }
 
-.sneaker p {
+.sneaker-item a:active,
+.sneaker-item a:hover,
+.sneaker-item a:link,
+.sneaker-item a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sneaker-item p {
   padding-left: 1rem;
   z-index: 1;
   line-height: 1.2;
@@ -32,7 +40,7 @@
   padding: 2rem 0 5rem 0;
 }
 
-.sneaker img {
+.sneaker-item img {
   /* filter: drop-shadow(1rem 4rem 2rem rgba(0, 0, 0, 0.28)); */
   align-self: center;
   filter: drop-shadow(1rem 0.8rem 0.7rem rgba(0, 0, 0, 0.28));

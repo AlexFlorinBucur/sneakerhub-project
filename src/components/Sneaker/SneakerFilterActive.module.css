@@ -1,0 +1,48 @@
+.active-search-filters {
+  text-align: center;
+  margin: 3rem 0 1rem;
+  padding: 0;
+}
+
+.active-search-filters ul {
+  list-style-type: none;
+}
+
+.active-search-filters li {
+  padding-bottom: 1rem;
+}
+
+.active-search-filters li:last-child {
+  padding-bottom: 0;
+}
+
+.active-filter-list-item {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.active-filter-list-item div {
+  display: flex;
+  align-items: center;
+}
+
+.active-filter-list-item div:hover {
+  text-decoration: underline;
+}
+
+.active-filter-name {
+  font-size: 1.3rem;
+  margin-right: 1rem;
+}
+
+.active-search-filters svg {
+  font-size: 2rem;
+}
+
+.active-search-filters a:active,
+.active-search-filters a:hover,
+.active-search-filters a:link,
+.active-search-filters a:visited {
+  text-decoration: none;
+  color: #959595;
+}
