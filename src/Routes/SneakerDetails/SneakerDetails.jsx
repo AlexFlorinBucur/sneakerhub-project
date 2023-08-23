@@ -11,7 +11,6 @@ import Spinner from "../../components/UI/Spinner";
 
 const SneakerDetails = () => {
   const params = useParams();
-  console.log(params);
 
   const [sneakersData, setSneakersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

@@ -17,7 +17,6 @@ const MainHeader = () => {
     setModalIsShown("");
   }, []);
 
-  console.log(modalIsShown);
   return (
     <>
       <Navbar onShowModal={showModalHandler} onHideModal={hideModalHandler} />
