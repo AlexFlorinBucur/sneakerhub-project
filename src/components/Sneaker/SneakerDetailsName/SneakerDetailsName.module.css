@@ -1,0 +1,15 @@
+.product-name h1 {
+  padding-bottom: 1rem;
+}
+
+.product-name h3 {
+  color: #959595;
+  padding-bottom: 2rem;
+}
+
+.product-price {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #4f80ab;
+  margin-bottom: 2rem;
+}

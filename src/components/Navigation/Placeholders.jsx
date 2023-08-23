@@ -22,4 +22,5 @@ export const placeholders = {
 export const MODALS = {
   login: "LOGIN",
   menu: "MENU",
+  cart: "CART",
 };

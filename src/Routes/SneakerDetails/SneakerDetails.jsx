@@ -1,24 +1,17 @@
-import React from "react";
 import classes from "./SneakerDetails.module.css";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiFillHeart } from "react-icons/ai";
-import { SlSocialDropbox } from "react-icons/sl";
-import { LiaShippingFastSolid } from "react-icons/lia";
-import { LiaMapMarkedAltSolid } from "react-icons/lia";
 
 import { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SimpleLine from "../../components/UI/SimpleLine";
 
-const getTimeFromStamp = function (timestamp) {
-  const day = new Date(timestamp * 1000);
-  const newTimestampFormat =
-    day.getDate() + "/" + `${day.getMonth() + 1}` + "/" + day.getFullYear();
-  return newTimestampFormat;
-};
+import SneakerDetailsFacts from "../../components/Sneaker/SneakerDetailsFacts/SneakerDetailsFacts.jsx";
+import SneakerTracking from "../../components/Sneaker/SneakerTracking/SneakerTracking.jsx";
+import SneakerDetailsImage from "../../components/Sneaker/SneakerDetailsImage/SneakerDetailsImage.jsx";
+import SneakerProductData from "../../components/Sneaker/SneakerProductData/SneakerProductData.jsx";
+import Spinner from "../../components/UI/Spinner";
 
 const SneakerDetails = () => {
   const params = useParams();
+  console.log(params);
 
   const [sneakersData, setSneakersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,11 +38,11 @@ const SneakerDetails = () => {
         .map((sneakerData) => {
           return {
             id: sneakerData.id,
-            sneakerImage: sneakerData.grid_picture_url,
+            sneakerImage: sneakerData.main_picture_url,
             brandName: sneakerData.brand_name,
             name: sneakerData.name,
             sizeRange: sneakerData.size_range,
-            retailPriceCents: sneakerData.retail_price_cents,
+            retailPrice: sneakerData.retail_price_cents / 100,
             storyHtml: sneakerData.story_html,
             details: sneakerData.details,
             releaseDateUnix: sneakerData.release_date_unix,
@@ -79,9 +72,10 @@ const SneakerDetails = () => {
   useEffect(() => {
     sneakerFetchHandler(params);
   }, [sneakerFetchHandler, params]);
+
   return (
     <>
-      {isLoading && <p style={{ fontSize: "10rem" }}>LOADING DATA...</p>}
+      {isLoading && <Spinner />}
       {!isLoading && error && <p>{error}</p>}
       {!isLoading &&
         sneakersData.length > 0 &&
@@ -92,7 +86,7 @@ const SneakerDetails = () => {
             brandName,
             name,
             sizeRange,
-            retailPriceCents,
+            retailPrice,
             storyHtml,
             details,
             releaseDateUnix,
@@ -103,94 +97,30 @@ const SneakerDetails = () => {
             upperMaterial,
             category,
           }) => (
-            <div
+            <section
               className={`${classes["section-details"]} ${classes["grid--2-cols"]}`}
               key={id}
             >
-              <div className={classes["product-image"]}>
-                <img src={sneakerImage} alt={name} />
-              </div>
-              <div className={classes["product-data"]}>
-                <div className={classes["product-name"]}>
-                  <h1>{name.toUpperCase()}</h1>
-                  <h3>{details}</h3>
-                  <p className={classes["product-price"]}>
-                    {retailPriceCents / 100} $
-                  </p>
-                </div>
-                <form>
-                  <div className={classes["product-variants"]}>
-                    <select
-                      id="select-size"
-                      name="Size"
-                      placeholder="Size"
-                      required
-                    >
-                      {sizeRange
-                        .sort((a, b) => a - b)
-                        .map((el) => (
-                          <option key={el}>{el}</option>
-                        ))}
-                    </select>
-                  </div>
-                  <div className={classes["product-buttons"]}>
-                    <button className={classes.btn}>Add to bag</button>
-                    <div className={`${classes.btn} ${classes.wishlist}`}>
-                      Wishlist <AiOutlineHeart />
-                    </div>
-                  </div>
-                </form>
-                <SimpleLine />
-                <div className={classes["product-description"]}>
-                  <h2>THE DETAILS</h2>
-                  <p>
-                    <strong>Release Date:</strong>{" "}
-                    {getTimeFromStamp(releaseDateUnix)}
-                  </p>
-                  <p>
-                    <strong>SKU:</strong> {sku}
-                  </p>
-                  <p>
-                    <strong>Designer:</strong> {designer}
-                  </p>
-                  <p>
-                    <strong>Nickname:</strong> {nickname}
-                  </p>
-                  <p>
-                    <strong>Colorway:</strong> {details}
-                  </p>
-                  <p>
-                    <strong>Main Color:</strong> {color}
-                  </p>
-                  <p>
-                    <strong>Upper Material:</strong> {upperMaterial}
-                  </p>
-                  <p>
-                    <strong>Category:</strong> {category.map((el) => `${el} `)}
-                  </p>
-                </div>
-                <SimpleLine />
-              </div>
-              <div className={classes["product-facts"]}>
-                <h2>FACTS</h2>
-                <h3>{name}</h3>
-                <p>{storyHtml}</p>
-              </div>
-              <div className={classes["product-track"]}>
-                <div className={classes["product-track-detail"]}>
-                  <SlSocialDropbox />
-                  <span>Double boxed</span>
-                </div>
-                <div className={classes["product-track-detail"]}>
-                  <LiaShippingFastSolid />
-                  <span>24H Shipping</span>
-                </div>
-                <div className={classes["product-track-detail"]}>
-                  <LiaMapMarkedAltSolid />
-                  <span>Fully tracked</span>
-                </div>
-              </div>
-            </div>
+              <SneakerDetailsImage sneakerImage={sneakerImage} name={name} />
+              <SneakerProductData
+                name={name}
+                details={details}
+                retailPrice={retailPrice}
+                sizeRange={sizeRange}
+                id={id}
+                sneakerImage={sneakerImage}
+                sku={sku}
+                designer={designer}
+                nickname={nickname}
+                color={color}
+                upperMaterial={upperMaterial}
+                category={category}
+                releaseDateUnix={releaseDateUnix}
+                gender={params.gender}
+              />
+              <SneakerDetailsFacts name={name} storyHtml={storyHtml} />
+              <SneakerTracking />
+            </section>
           )
         )}
     </>

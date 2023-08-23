@@ -6,6 +6,7 @@ import SneakerFilter from "../../components/Sneaker/SneakerFilter";
 import SneakerGender from "../../components/Sneaker/SneakerGender";
 import SimpleLine from "../../components/UI/SimpleLine";
 import SneakerFilterActive from "../../components/Sneaker/SneakerFilterActive";
+import Spinner from "../../components/UI/Spinner";
 
 const Sneakers = () => {
   const [sneakersData, setSneakersData] = useState([]);
@@ -124,9 +125,7 @@ const Sneakers = () => {
   return (
     <section className={classes["section-products"]}>
       {params.id && <Outlet />}
-      {!params.id && isLoading && (
-        <p style={{ fontSize: "10rem" }}>LOADING DATA...</p>
-      )}
+      {!params.id && isLoading && <Spinner />}
       {!params.id && !isLoading && error && <p>{error}</p>}
       {!params.id && !isLoading && sneakersData.length > 0 && (
         <div className={classes.sneakers}>

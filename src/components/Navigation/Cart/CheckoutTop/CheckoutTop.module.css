@@ -1,0 +1,19 @@
+.checkout-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0 4rem 0;
+}
+
+.checkout-top h1 {
+  font-size: 3.4rem;
+  color: #051026;
+}
+
+.checkout-top div {
+  margin-right: 3rem;
+}
+
+.checkout-top div:last-child {
+  margin-right: 0;
+}

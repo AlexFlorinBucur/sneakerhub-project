@@ -10,7 +10,7 @@ const SneakerFilterActive = ({ activeFilters, onDeleteQuery }) => {
         <div className={classes["active-search-filters"]}>
           <ul>
             {Object.entries(activeFilters).map(([key, value]) => (
-              <li>
+              <li key={key}>
                 <div
                   className={classes["active-filter-list-item"]}
                   onClick={() => onDeleteQuery(key)}

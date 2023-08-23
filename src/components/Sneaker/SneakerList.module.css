@@ -19,6 +19,11 @@
   overflow: hidden;
 }
 
+.sneaker-item a {
+  display: flex;
+  flex-direction: column;
+}
+
 .sneaker-item a:active,
 .sneaker-item a:hover,
 .sneaker-item a:link,
@@ -44,10 +49,10 @@
   /* filter: drop-shadow(1rem 4rem 2rem rgba(0, 0, 0, 0.28)); */
   align-self: center;
   filter: drop-shadow(1rem 0.8rem 0.7rem rgba(0, 0, 0, 0.28));
-  display: block;
+  display: flex;
   width: 100%;
-  /* width: 50%; */
-  /* transform: scale(1); */
+  width: 50%;
+  transform: scale(1.8);
 }
 
 .sneaker-name-size {
