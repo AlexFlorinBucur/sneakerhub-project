@@ -7,7 +7,7 @@
   background-color: var(--primary-non-colour);
 }
 
-.form {
+.form-control {
   display: flex;
   flex-direction: column;
   height: 80vh;
@@ -15,13 +15,21 @@
   justify-content: center;
 }
 
-/* .form input {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 3vh;
-  padding: 0.8rem 1.6rem;
-  border: 0.1rem solid var(--secondary-text);
-} */
+.form-control input:focus {
+  outline: none;
+  border-color: #240370;
+  background-color: #e0d4fd;
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
 
 .actions {
   margin-top: 1.5rem;

@@ -7,6 +7,7 @@ import Sneakers from "./Routes/Sneakers/Sneakers.jsx";
 import RootLayout from "./Routes/RootLayout.jsx";
 import Slider from "./Routes/Slider/Slider.jsx";
 import SneakerDetails from "./Routes/SneakerDetails/SneakerDetails";
+import Cart from "./Routes/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         element: <Sneakers />,
         children: [{ path: ":id", element: <SneakerDetails /> }],
       },
+      { path: "/cart", element: <Cart /> },
     ],
   },
 ]);

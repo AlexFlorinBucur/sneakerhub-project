@@ -1,0 +1,13 @@
+.product-facts {
+  color: #051026;
+}
+
+.product-facts h2 {
+  padding-top: 0;
+  text-decoration: underline;
+}
+
+.product-facts p {
+  padding-top: 2rem;
+  font-size: 1.6rem;
+}

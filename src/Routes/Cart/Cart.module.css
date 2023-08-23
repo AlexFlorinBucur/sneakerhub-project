@@ -1,0 +1,26 @@
+.section-cart {
+  padding: 1.5rem;
+  display: grid;
+}
+
+.grid--2-cols {
+  grid-template-columns: 0.75fr 0.25fr;
+}
+
+.checkout-header {
+  position: relative;
+  padding: 1.5rem;
+  line-height: 3rem;
+}
+
+.checkout-header-bg:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  background-color: #051026;
+  top: 0;
+  height: 6rem;
+  right: 0;
+  z-index: -1;
+}

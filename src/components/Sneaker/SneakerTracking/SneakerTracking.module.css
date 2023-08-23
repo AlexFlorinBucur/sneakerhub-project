@@ -1,0 +1,17 @@
+.product-track {
+  display: flex;
+  font-size: 5rem;
+  align-self: center;
+  justify-content: space-evenly;
+  color: #051026;
+}
+
+.product-track-detail {
+  text-align: center;
+}
+
+.product-track-detail span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+}
