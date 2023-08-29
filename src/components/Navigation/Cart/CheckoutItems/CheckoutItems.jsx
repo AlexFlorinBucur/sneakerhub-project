@@ -45,7 +45,11 @@ const CheckoutItems = ({ cartItems, totalAmount, onAdd, onRemove }) => {
                     <span className={classes["minus-span"]}>-</span>
                   </button>
                   <span>
-                    <input type="text" value={item.amount} />
+                    <input
+                      type="text"
+                      value={item.amount}
+                      onChange={() => null}
+                    />
                   </span>
                   <button
                     type="button"

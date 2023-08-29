@@ -7,14 +7,7 @@ const SneakerList = ({ sneakersData }) => {
     <div className={classes["sneaker-products"]}>
       <ul>
         {sneakersData.map(
-          ({
-            sneakerImage,
-            id,
-            brandName,
-            name,
-            sizeRange,
-            retailPriceCents,
-          }) => (
+          ({ sneakerImage, id, brandName, name, sizeRange, retailPrice }) => (
             <li className={classes["sneaker-item"]} key={id}>
               <Link to={`${id}`}>
                 <p className={classes["brand-name"]}>{brandName}</p>
@@ -24,15 +17,13 @@ const SneakerList = ({ sneakersData }) => {
                   <p>
                     {"Available: "}
                     {sizeRange
-                      .sort((a, b) => a - b)
+                      .toSorted((a, b) => a - b)
                       .map((size) => {
                         return `${size} `;
                       })}
                   </p>
                 </div>
-                <p className={classes["sneaker-price"]}>
-                  {retailPriceCents / 100} $
-                </p>
+                <p className={classes["sneaker-price"]}>{retailPrice} $</p>
               </Link>
             </li>
           )
