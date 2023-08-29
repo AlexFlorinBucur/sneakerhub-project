@@ -65,7 +65,7 @@ const Navbar = ({ onShowModal, onHideModal }) => {
           <ul className={classes["main-nav-list"]}>
             {placeholders.mainNavLinks.map(({ name, iconSvg, url }) => {
               const Component = (props) =>
-                !props.to ? <div {...props} /> : <Link {...props} />;
+                props.to ? <Link {...props} /> : <a {...props} />;
               return (
                 <li key={name}>
                   <Component

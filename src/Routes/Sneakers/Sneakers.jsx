@@ -13,14 +13,12 @@ import { cartActions } from "../../store/cart-actions";
 
 const Sneakers = () => {
   const dispatch = useDispatch();
-  const sneakersData = useSelector((state) => state.sneakerData.sneakersData);
-  const isLoading = useSelector((state) => state.sneakerData.isLoading);
-  const error = useSelector((state) => state.sneakerData.error);
-  const activeFilters = useSelector((state) => state.sneakerData.activeFilters);
+  const { sneakersData, isLoading, error, activeFilters } = useSelector(
+    (state) => state.sneakerData
+  );
 
   const params = useParams();
   const location = useLocation();
-  console.log(params, location);
   const navigate = useNavigate();
   const query = new URLSearchParams(location.search);
 

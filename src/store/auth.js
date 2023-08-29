@@ -9,8 +9,8 @@ const authSlice = createSlice({
       const token = action.payload;
       const isLoggedIn = !!token;
       return {
-        token: token,
-        isLoggedIn: isLoggedIn,
+        token,
+        isLoggedIn,
       };
     },
     logout() {},

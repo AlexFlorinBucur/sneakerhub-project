@@ -15,9 +15,9 @@ const SneakerDetails = () => {
   const params = useParams();
 
   const dispatch = useDispatch();
-  const sneakersData = useSelector((state) => state.sneakerData.sneakersData);
-  const isLoading = useSelector((state) => state.sneakerData.isLoading);
-  const error = useSelector((state) => state.sneakerData.error);
+  const { sneakersData, isLoading, error } = useSelector(
+    (state) => state.sneakerData
+  );
 
   useEffect(() => {
     dispatch(fetchSneakers(params));
