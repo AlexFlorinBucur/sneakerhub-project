@@ -17,8 +17,6 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const query = new URLSearchParams(location.search);
-
   const filterNavigateHandler = (nameItem) => {
     navigate({
       pathname: `${location.pathname}`,
@@ -47,17 +45,17 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
   // Inițializăm un array gol care va conține toate valorile "size" din obiectele din "data"
   const allSizes = [];
 
-  // Inițializăm un array gol care va conține toate valorile "retailPriceCents" din obiectele din "data"
+  // Inițializăm un array gol care va conține toate valorile "retailPrice" din obiectele din "data"
   const allPrices = [];
 
-  // Iterăm prin fiecare obiect și numărăm câte obiecte avem pentru fiecare brandName și adăugăm valorile "category", "sizeRange" și "retailPriceCents" în allCategories, allSizes și allPrices
+  // Iterăm prin fiecare obiect și numărăm câte obiecte avem pentru fiecare brandName și adăugăm valorile "category", "sizeRange" și "retailPrice" în allCategories, allSizes și allPrices
   for (const item of sneakersData) {
     const brandName = item.brandName;
     brandCounts[brandName] = (brandCounts[brandName] || 0) + 1;
 
     allCategories.push(...item.category);
     allSizes.push(item.sizeRange);
-    allPrices.push(item.retailPriceCents);
+    allPrices.push(item.retailPrice);
   }
 
   // Inițializăm un obiect gol care va conține numărul de obiecte pentru fiecare category

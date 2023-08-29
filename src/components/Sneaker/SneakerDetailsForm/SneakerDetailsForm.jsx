@@ -25,7 +25,7 @@ const SneakerDetailsForm = ({ sizeRange, onAddToCart }) => {
           required
         >
           {sizeRange
-            .sort((a, b) => a - b)
+            .toSorted((a, b) => a - b)
             .map((el) => (
               <option key={el} value={el} title={el}>
                 {el}

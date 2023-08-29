@@ -1,12 +1,62 @@
 @import url("../../assets/variables.module.css");
 
-.input input {
+.error-msg {
+  display: flex;
+  align-items: flex-end;
+  min-height: 3rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
   width: 100%;
   font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 3vh;
-  padding: 0.8rem 1.6rem;
+  padding: 1.3rem 1.6rem 1.3rem 3rem;
   border: 0.1rem solid var(--secondary-text);
 }
 
-/* NEED ADD A LABEL!! */
+.group input {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 1.3rem 1.6rem 1.3rem 3rem;
+  border: 0.1rem solid var(--secondary-text);
+}
+
+.label-input {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--secondary-text);
+  position: absolute;
+  top: 50%;
+  /* because of border */
+  left: 3.1rem;
+  transform: translateY(-50%);
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.input-icon {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 1rem;
+  color: var(--primary-text);
+}
+
+.input-icon svg {
+  font-size: 1.4rem;
+}
+
+/* tricky for type="email" */
+input:focus ~ .label-input,
+input:valid ~ .label-input {
+  font-size: 0.9rem;
+  top: 10%;
+  transform: translateY(-20%);
+}

@@ -64,9 +64,11 @@ const Navbar = ({ onShowModal, onHideModal }) => {
         <nav className={classes["nav-options"]}>
           <ul className={classes["main-nav-list"]}>
             {placeholders.mainNavLinks.map(({ name, iconSvg, url }) => {
+              const Component = (props) =>
+                !props.to ? <div {...props} /> : <Link {...props} />;
               return (
                 <li key={name}>
-                  <Link
+                  <Component
                     className={classes["main-nav-link"]}
                     // {...(url ? { href: url } : {})}
                     // SET THE URL
@@ -98,7 +100,7 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                       </span>
                     )}
                     <span>{name}</span>
-                  </Link>
+                  </Component>
                 </li>
               );
             })}
