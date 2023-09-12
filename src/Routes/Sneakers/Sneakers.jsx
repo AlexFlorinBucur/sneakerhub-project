@@ -44,7 +44,7 @@ const Sneakers = () => {
     <section className={classes["section-products"]}>
       {params.id && <Outlet />}
       {!params.id && isLoading && <Spinner />}
-      {!params.id && !isLoading && error && <p>{error}</p>}
+      {/* {!params.id && !isLoading && error && <p>{error}</p>} */}
       {!params.id && !isLoading && sneakersData.length > 0 && (
         <div className={classes.sneakers}>
           <SneakerGender gender={params.gender} />

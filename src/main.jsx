@@ -8,6 +8,7 @@ import RootLayout from "./Routes/RootLayout.jsx";
 import Slider from "./Routes/Slider/Slider.jsx";
 import SneakerDetails from "./Routes/SneakerDetails/SneakerDetails";
 import Cart from "./Routes/Cart/Cart";
+import Account from "./Routes/Account/Account";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +22,13 @@ const router = createBrowserRouter([
         children: [{ path: ":id", element: <SneakerDetails /> }],
       },
       { path: "/cart", element: <Cart /> },
+      { path: "/account", element: <Account /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RouterProvider router={router} />
+  // </React.StrictMode>
 );

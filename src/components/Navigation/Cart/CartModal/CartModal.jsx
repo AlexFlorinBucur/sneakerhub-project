@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MODALS } from "../../Placeholders";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { cartActions } from "../../../../store/cart";
+import { toast } from "react-toastify";
 
 const animationTiming = {
   enter: 300,
@@ -17,11 +18,12 @@ const CartModal = ({ show, onShowModal }) => {
   const nodeRef = useRef(null);
 
   const cartItems = useSelector((state) => state.cart.items);
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const totalAmount = +useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
 
   const cartItemRemoveHandler = (id, size, removeItem = false) => {
     dispatch(cartActions.removeItem({ id, size, removeItem }));
+    toast.success("Item removed successfully from cart!");
   };
 
   return (

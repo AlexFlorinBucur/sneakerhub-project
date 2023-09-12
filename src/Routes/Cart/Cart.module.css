@@ -11,6 +11,13 @@
   position: relative;
   padding: 1.5rem;
   line-height: 3rem;
+  margin-bottom: 3rem;
+}
+
+.checkout-header h3 {
+  font-size: 1.3rem;
+  color: #fafafa;
+  text-transform: uppercase;
 }
 
 .checkout-header-bg:before {
@@ -23,4 +30,85 @@
   height: 6rem;
   right: 0;
   z-index: -1;
+}
+
+fieldset {
+  border: none;
+}
+
+/* SE REPETA CA LA CELELALTE BUTOANE */
+@import url("../../assets/variables.module.css");
+
+.actions {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.actions button {
+  cursor: pointer;
+  color: var(--primary-non-colour);
+  background-color: var(--secondary);
+  border: 1px solid var(--primary-light);
+  padding: 0.5rem 2.5rem;
+}
+
+.actions button:hover {
+  background-color: var(--secondary-darker);
+  border-color: var(--primary-darker);
+}
+
+.actions .toggle {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: var(--secondary-text);
+  border: none;
+  padding: 0.15rem 1.5rem;
+}
+
+.actions .toggle:hover {
+  background-color: transparent;
+  color: var(--primary-text);
+}
+
+.authenticated button:last-child {
+  margin-top: 2rem;
+}
+
+/* PANA AICI */
+
+.order-button {
+  display: block;
+  text-align: center;
+}
+.shipping-adress {
+  padding: 3rem 4rem 0 4rem;
+}
+
+/* FOR EMPTY CART */
+.cart-empty-wrapper {
+  margin: 5rem auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 7.5rem;
+  color: #051026;
+  text-transform: uppercase;
+}
+
+.cart-empty-wrapper h2 {
+  font-size: 3.6rem;
+  color: inherit;
+  letter-spacing: 0.2rem;
+  font-weight: 800;
+}
+
+.info-header {
+  background-color: #051026;
+  color: #fafafa;
+  padding: 2rem;
+  font-size: 1.4rem;
+  /* text-transform: uppercase; */
+  text-align: center;
 }

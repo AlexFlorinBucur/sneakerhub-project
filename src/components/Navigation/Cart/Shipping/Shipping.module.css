@@ -1,0 +1,23 @@
+.shipping-adress {
+  padding: 3rem 4rem 0 4rem;
+}
+
+.shipping-adress label {
+  line-height: 1;
+}
+
+input:focus {
+  outline: none;
+  border-color: #240370;
+  background-color: #e0d4fd;
+}
+
+input.invalid {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+input.invalid:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
