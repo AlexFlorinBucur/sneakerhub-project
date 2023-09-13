@@ -8,8 +8,6 @@ const NicknameInput = ({
   nicknameChangedHandler,
   nicknameBlurHandler,
 }) => {
-  const nicknameInputClasses = nicknameHasError ? classes.invalid : "";
-
   return (
     <Input
       input={{
@@ -27,7 +25,7 @@ const NicknameInput = ({
       hasSvg={<HiOutlineUserCircle />}
       hasError={nicknameHasError}
       errorMsg={nicknameHasError && "Nickname should be at least 3 characters"}
-      inputValidityClass={nicknameInputClasses}
+      inputValidityClass={classes.invalid}
     />
   );
 };

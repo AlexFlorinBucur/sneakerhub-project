@@ -18,7 +18,7 @@ const Cart = () => {
 
   const cartItems = useSelector((state) => state.cart.items);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const { isLoading, error } = useSelector((state) => state.sneakerData);
+  const { isLoading } = useSelector((state) => state.sneakerData);
 
   const [shippingInfo, setShippingInfo] = useState({});
   const [inputError, setInputError] = useState({});
@@ -34,7 +34,6 @@ const Cart = () => {
       return null;
     })
     .filter((message) => message !== null);
-
 
   let formValid = false;
 
@@ -62,16 +61,13 @@ const Cart = () => {
       return;
     }
 
-    if (formValid) {
-      dispatch(sendingCartData(shippingInfo, cartItems));
-      dispatch(cartActions.clearCart());
-    }
+    dispatch(sendingCartData(shippingInfo, cartItems));
+    dispatch(cartActions.clearCart());
   };
 
   return (
     <>
-      {cartItems.length === 0 && <EmptyCart />}
-      {cartItems.length !== 0 && (
+      {cartItems.length !== 0 ? (
         <div
           className={`${classes["section-cart"]} ${classes["grid--2-cols"]}`}
         >
@@ -107,12 +103,13 @@ const Cart = () => {
               <div
                 className={`${classes["actions"]} ${classes["order-button"]}`}
               >
-                {isLoading && <Spinner />}
-                {!isLoading && <button>PLACE ORDER</button>}
+                {isLoading ? <Spinner /> : <button>PLACE ORDER</button>}
               </div>
             </fieldset>
           </form>
         </div>
+      ) : (
+        <EmptyCart />
       )}
     </>
   );

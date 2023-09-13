@@ -9,7 +9,6 @@ const EmailInput = ({
   emailBlurHandler,
   errorEmailMsg,
 }) => {
-  const emailInputClasses = emailHasError ? classes.invalid : "";
 
   return (
     <Input
@@ -32,7 +31,7 @@ const EmailInput = ({
           ? errorEmailMsg
           : "Invalid email address. Valid e-mail can contain only latin letters, numbers, '@', a part following @, '.' and domain!"
       }
-      inputValidityClass={emailInputClasses}
+      inputValidityClass={classes.invalid}
     />
   );
 };

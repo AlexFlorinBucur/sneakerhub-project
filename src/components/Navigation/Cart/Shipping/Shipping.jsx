@@ -71,13 +71,6 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
     reset: resetPostalCodeInput,
   } = useInput((value) => validatePostalCode(value));
 
-  const lastnameInputClasses = lastnameHasError ? classes.invalid : "";
-  const surnameInputClasses = surnameHasError ? classes.invalid : "";
-  const phoneNoInputClasses = phoneNoHasError ? classes.invalid : "";
-  const cityInputClasses = cityHasError ? classes.invalid : "";
-  const streetInputClasses = streetHasError ? classes.invalid : "";
-  const postalCodeInputClasses = postalCodeHasError ? classes.invalid : "";
-
   return (
     <>
       <h3>Shipping Information</h3>
@@ -108,7 +101,7 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
           }}
           hasError={lastnameHasError}
           errorMsg={lastnameHasError && "Complete This Input"}
-          inputValidityClass={lastnameInputClasses}
+          inputValidityClass={classes.invalid}
         />
         <Input
           input={{
@@ -136,7 +129,7 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
           }}
           hasError={surnameHasError}
           errorMsg={surnameHasError && "Complete This Input"}
-          inputValidityClass={surnameInputClasses}
+          inputValidityClass={classes.invalid}
         />
         <Input
           input={{
@@ -164,7 +157,7 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
           }}
           hasError={phoneNoHasError}
           errorMsg={phoneNoHasError && "Incorect phone number!"}
-          inputValidityClass={phoneNoInputClasses}
+          inputValidityClass={classes.invalid}
         />
         <Input
           input={{
@@ -192,7 +185,7 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
           }}
           hasError={cityHasError}
           errorMsg={cityHasError && "Complete This Input"}
-          inputValidityClass={cityInputClasses}
+          inputValidityClass={classes.invalid}
         />
         <Input
           input={{
@@ -220,7 +213,7 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
           }}
           hasError={streetHasError}
           errorMsg={streetHasError && "Complete This Input"}
-          inputValidityClass={streetInputClasses}
+          inputValidityClass={classes.invalid}
         />{" "}
         <Input
           input={{
@@ -251,7 +244,7 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
             postalCodeHasError &&
             "Invalid postal code. Please enter a valid 6-digit postal code."
           }
-          inputValidityClass={postalCodeInputClasses}
+          inputValidityClass={classes.invalid}
         />
       </div>
     </>

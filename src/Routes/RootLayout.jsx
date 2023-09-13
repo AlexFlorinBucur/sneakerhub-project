@@ -10,7 +10,7 @@ const RootLayout = () => {
   return (
     <Provider store={store}>
       <ToastContainer
-        style={{ zIndex: 45325325, fontSize: "1.6rem" }}
+        style={{ zIndex: 100000, fontSize: "1.6rem" }}
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

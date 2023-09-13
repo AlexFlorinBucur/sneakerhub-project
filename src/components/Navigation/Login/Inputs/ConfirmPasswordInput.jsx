@@ -10,10 +10,6 @@ const ConfirmPasswordInput = ({
   confirmPasswordBlurHandler,
   passwordMatch,
 }) => {
-  const confirmPasswordInputClasses = confirmPasswordHasError
-    ? classes.invalid
-    : "";
-
   return (
     <Input
       input={{
@@ -31,7 +27,7 @@ const ConfirmPasswordInput = ({
       hasSvg={<RiLockPasswordLine />}
       hasError={!passwordMatch && confirmPasswordHasError}
       errorMsg={"Password don't match!"}
-      inputValidityClass={confirmPasswordInputClasses}
+      inputValidityClass={classes.invalid}
     />
   );
 };

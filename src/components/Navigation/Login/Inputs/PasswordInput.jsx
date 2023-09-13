@@ -10,8 +10,6 @@ const PasswordInput = ({
   passwordBlurHandler,
   errorPswMsg,
 }) => {
-  const passwordInputClasses = passwordHasError ? classes.invalid : "";
-
   return (
     <Input
       input={{
@@ -31,7 +29,7 @@ const PasswordInput = ({
       errorMsg={
         errorPswMsg ? errorPswMsg : "Password should be at least 6 characters"
       }
-      inputValidityClass={passwordInputClasses}
+      inputValidityClass={classes.invalid}
     />
   );
 };
