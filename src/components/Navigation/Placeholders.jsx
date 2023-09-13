@@ -7,7 +7,7 @@ import {
 export const placeholders = {
   discount: "25% OFF @ CHECKOUT",
   mainNavLinks: [
-    { name: "Search", iconSvg: <HiOutlineSearch /> },
+    { name: "Search", url: "/search", iconSvg: <HiOutlineSearch /> },
     { name: "SIGN UP", iconSvg: <HiOutlineUserCircle /> },
     { name: "CART", url: "/cart", iconSvg: <HiShoppingCart /> },
   ],

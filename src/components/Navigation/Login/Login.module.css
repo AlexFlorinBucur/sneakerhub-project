@@ -7,63 +7,6 @@
   background-color: var(--primary-non-colour);
 }
 
-.form-control {
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
-  margin-bottom: 8rem;
-  justify-content: center;
-}
-
-.form-control input:focus {
-  outline: none;
-  border-color: #240370;
-  background-color: #e0d4fd;
-}
-
-input.invalid {
-  border: 1px solid #b40e0e;
-  background-color: #fddddd;
-}
-
-input.invalid:focus {
-  border-color: #ff8800;
-  background-color: #fbe8d2;
-}
-
-.actions {
-  margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-}
-
-.actions button {
-  cursor: pointer;
-  color: var(--primary-non-colour);
-  background-color: var(--secondary);
-  border: 1px solid var(--primary-light);
-  padding: 0.5rem 2.5rem;
-}
-
-.actions button:hover {
-  background-color: var(--secondary-darker);
-  border-color: var(--primary-darker);
-}
-
-.actions .toggle {
-  margin-top: 1rem;
-  background-color: transparent;
-  color: var(--secondary-text);
-  border: none;
-  padding: 0.15rem 1.5rem;
-}
-
-.actions .toggle:hover {
-  background-color: transparent;
-  color: var(--primary-text);
-}
-
 .ModalOpenRight {
   animation: slidein 0.4s ease-out forwards;
 }

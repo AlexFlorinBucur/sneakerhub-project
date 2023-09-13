@@ -8,7 +8,7 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       const totalAmount =
-        state.totalAmount + action.payload.price * action.payload.amount;
+        +state.totalAmount + action.payload.price * action.payload.amount;
 
       const existingCartItemIndex = state.items.findIndex(
         (item) =>
@@ -30,7 +30,13 @@ const cartSlice = createSlice({
         updatedItems = state.items.concat(action.payload);
       }
 
-      return { items: updatedItems, totalAmount: totalAmount };
+      localStorage.setItem("items", JSON.stringify(updatedItems));
+      localStorage.setItem("totalAmount", totalAmount);
+
+      return {
+        items: updatedItems,
+        totalAmount,
+      };
     },
     removeItem(state, action) {
       const existingCartItemIndex = state.items.findIndex(
@@ -42,7 +48,7 @@ const cartSlice = createSlice({
       let updatedTotalAmount;
       let updatedItems;
 
-      updatedTotalAmount = state.totalAmount - existingItem.price;
+      updatedTotalAmount = +state.totalAmount - existingItem.price;
 
       if (existingItem.amount === 1) {
         updatedItems = state.items.filter(
@@ -62,10 +68,21 @@ const cartSlice = createSlice({
           (_, index) => index !== existingCartItemIndex
         );
         updatedTotalAmount =
-          state.totalAmount - existingItem.price * existingItem.amount;
+          +state.totalAmount - existingItem.price * existingItem.amount;
       }
 
+      localStorage.setItem("items", JSON.stringify(updatedItems));
+      localStorage.setItem("totalAmount", updatedTotalAmount);
+
       return { items: updatedItems, totalAmount: updatedTotalAmount };
+    },
+    clearCart() {
+      return initialCartState;
+    },
+    updateCart(state, action) {
+      const items = action.payload.items;
+      const totalAmount = +action.payload.totalAmount;
+      return { items, totalAmount };
     },
   },
 });

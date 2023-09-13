@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import { fetchCartData } from "../helpers/fetch-cart";
 
 // Define initial state
 const initialState = {
@@ -41,6 +43,44 @@ const sneakersSlice = createSlice({
 export const cartActions = sneakersSlice.actions;
 
 export default sneakersSlice.reducer;
+
+// create a thunk function for sending the order
+
+export const sendingCartData =
+  (shippingInfo, cartItems) => async (dispatch) => {
+    dispatch(cartActions.setIsLoading(true));
+    dispatch(cartActions.setError(null));
+
+    try {
+      const response = await fetch(
+        "https://react-shoes-project-default-rtdb.firebaseio.com/orders.json",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: shippingInfo,
+            orderedItems: cartItems,
+          }),
+        }
+      );
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        throw new Error("Something went wrong!");
+      }
+
+      // updating cartPending
+      await fetchCartData(dispatch, "DELETE");
+      localStorage.removeItem("items");
+      localStorage.removeItem("totalAmount");
+      //
+
+      toast.success("You sent the order successfully!");
+    } catch (err) {
+      dispatch(cartActions.setError(err.message));
+      toast.error(err.message);
+    }
+    dispatch(cartActions.setIsLoading(false));
+  };
 
 // create a thunk function
 export const fetchSneakers = (params, query) => async (dispatch) => {
@@ -140,6 +180,7 @@ export const fetchSneakers = (params, query) => async (dispatch) => {
       dispatch(cartActions.setSneakersData(transformedData));
     }
   } catch (err) {
+    toast.error(err.message);
     dispatch(cartActions.setError(err.message));
   }
 

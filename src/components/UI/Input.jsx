@@ -15,7 +15,10 @@ const Input = ({
         {hasError && <p>{errorMsg}</p>}
       </div>
       <div className={classes["input-group"]}>
-        <input {...input} className={`${inputValidityClass}`}></input>
+        <input
+          {...input}
+          className={`${hasError ? inputValidityClass : ""}`}
+        ></input>
         {hasSvg && <div className={classes["input-icon"]}>{hasSvg}</div>}
         {label && (
           <label {...label} className={classes["label-input"]}>

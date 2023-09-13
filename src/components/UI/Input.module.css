@@ -4,6 +4,7 @@
   display: flex;
   align-items: flex-end;
   min-height: 3rem;
+  color: #780000;
 }
 
 .input-group {

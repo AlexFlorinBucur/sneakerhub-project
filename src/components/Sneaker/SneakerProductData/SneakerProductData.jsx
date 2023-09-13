@@ -5,6 +5,7 @@ import SimpleLine from "../../UI/SimpleLine";
 import SneakerDetailsDescription from "../SneakerDetailsDescription/SneakerDetailsDescription";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/cart";
+import { toast } from "react-toastify";
 
 const getTimeFromStamp = function (timestamp) {
   // return an empty string if there is no release_date_unix
@@ -48,6 +49,7 @@ const SneakerProductData = ({
         gender: gender,
       })
     );
+    toast.success("Product successfully added!");
   };
 
   return (

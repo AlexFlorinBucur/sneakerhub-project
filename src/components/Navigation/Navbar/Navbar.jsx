@@ -24,6 +24,7 @@ const managedClick = ({ name, onSearch, onSignUp }) => {
 
 const Navbar = ({ onShowModal, onHideModal }) => {
   const cartItem = useSelector((state) => state.cart.items);
+  const userName = useSelector((state) => state.auth.userName);
 
   const [bumpIsActive, setBumpIsActive] = useState(false);
 
@@ -99,7 +100,7 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                         {iconSvg}
                       </span>
                     )}
-                    <span>{name}</span>
+                    <span>{url ? name : userName ? userName : name}</span>
                   </Component>
                 </li>
               );
