@@ -3,7 +3,7 @@
   width: 35%;
   right: 1rem;
   top: 13rem;
-  background-color: #051026;
+  background-color: var(--primary-text);
   z-index: 100;
 }
 
@@ -13,7 +13,7 @@
   height: 0;
   border-style: solid;
   border-width: 0 1.5rem 2rem 1.5rem;
-  border-color: transparent transparent #051026 transparent;
+  border-color: transparent transparent var(--primary-text) transparent;
   position: absolute;
   top: -2rem;
   left: 90%;
@@ -86,7 +86,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: #adcae3;
+  background-color: var(--primary-light);
   overflow: hidden;
 }
 
@@ -107,7 +107,7 @@
 
 .cart-item-details span {
   font-size: 1.6rem;
-  color: #fff;
+  color: var(--primary-non-colour);
   line-height: 1.8rem;
   display: block;
   margin-bottom: 2.4rem;
@@ -115,7 +115,7 @@
 
 .minicart-footer {
   padding: 1rem 2rem;
-  background: #adcae3;
+  background: var(--primary-light);
   display: flex;
 }
 
@@ -131,8 +131,8 @@
   text-decoration: none;
   transition: all 0.3s;
   display: inline-block;
-  background-color: #051026;
-  color: #fff;
+  background-color: var(--primary-text);
+  color: var(--primary-non-colour);
 }
 
 .cart-total {
@@ -140,6 +140,6 @@
   margin-left: 2rem;
   font-size: 1.6rem;
   text-transform: uppercase;
-  color: #051026;
+  color: var(--primary-text);
   font-weight: 700;
 }

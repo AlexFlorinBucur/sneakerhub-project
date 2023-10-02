@@ -1,5 +1,3 @@
-@import url("../../../assets/variables.module.css");
-
 .header-wrapper {
   height: 16.2rem;
   font-size: 1.8rem;
@@ -21,6 +19,7 @@
   display: grid;
   grid-template-columns: 1fr 0.5fr 1fr;
   align-items: center;
+  text-align: center;
 }
 
 .outline {
@@ -38,8 +37,12 @@
 .logo {
   line-height: 0;
   text-align: center;
-  width: 50%;
+  width: 100%;
   justify-self: center;
+}
+
+.logo > a {
+  display: inline-block;
 }
 
 .logo img {

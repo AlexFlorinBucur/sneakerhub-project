@@ -32,9 +32,9 @@ const Drawer = ({
       }}
       nodeRef={nodeRef}
     >
-      <div className={`${classes.drawer} ${cssClass} `} ref={nodeRef}>
-        <div className={classes["logo-exit"]} onClick={onCloseModal}>
-          <MdClose className={classes["exit-icon"]} />
+      <div className={`${classes.drawer} ${cssClass}`} ref={nodeRef}>
+        <div className={classes["logo-exit"]}>
+          <MdClose className={classes["exit-icon"]} onClick={onCloseModal} />
         </div>
         {children}
       </div>

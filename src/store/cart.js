@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialCartState = { items: [], totalAmount: 0 };
+const initialCartState = {
+  items: [],
+  totalAmount: 0,
+  voucher: "",
+  totalAmountToPay: 0,
+};
 
 const cartSlice = createSlice({
   name: "cart",
@@ -35,6 +40,7 @@ const cartSlice = createSlice({
 
       return {
         items: updatedItems,
+        totalAmountToPay: totalAmount,
         totalAmount,
       };
     },
@@ -74,7 +80,11 @@ const cartSlice = createSlice({
       localStorage.setItem("items", JSON.stringify(updatedItems));
       localStorage.setItem("totalAmount", updatedTotalAmount);
 
-      return { items: updatedItems, totalAmount: updatedTotalAmount };
+      return {
+        items: updatedItems,
+        totalAmount: updatedTotalAmount,
+        totalAmountToPay: updatedTotalAmount,
+      };
     },
     clearCart() {
       return initialCartState;
@@ -82,7 +92,20 @@ const cartSlice = createSlice({
     updateCart(state, action) {
       const items = action.payload.items;
       const totalAmount = +action.payload.totalAmount;
-      return { items, totalAmount };
+      return { items, totalAmount, totalAmountToPay: totalAmount };
+    },
+    applyVoucher(state, action) {
+      const items = state.items;
+      const totalAmount = state.totalAmount;
+      const totalAmountToPay =
+        totalAmount - totalAmount * (action.payload.voucherValue / 100);
+      const voucher = action.payload.voucher;
+
+      return { items, totalAmount, totalAmountToPay, voucher };
+    },
+    removeVoucher(state) {
+      const totalAmount = state.totalAmount;
+      return { ...state, totalAmountToPay: totalAmount, voucher: "" };
     },
   },
 });

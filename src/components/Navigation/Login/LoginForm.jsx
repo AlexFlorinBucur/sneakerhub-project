@@ -9,6 +9,7 @@ import EmailInput from "./Inputs/EmailInput";
 import PasswordInput from "./Inputs/PasswordInput";
 import ConfirmPasswordInput from "./Inputs/ConfirmPasswordInput";
 import Spinner from "../../UI/Spinner";
+import Button from "../../UI/Button";
 
 const validateEmail = (email) => {
   const pattern = /^[\w._]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/;
@@ -211,20 +212,21 @@ const LoginForm = ({
             />
           )}
         {!userAction.isLoading && (
-          <div className={classes.actions}>
-            <button>{userAction.textBtn}</button>
-            {showingOptions &&
-              userAction.switchOptions.map((item) => (
-                <button
-                  type="button"
-                  className={classes.toggle}
-                  onClick={() => switchUserActionHandler(item.actionType)}
-                  key={item.actionType}
-                >
-                  {item.text}
-                </button>
-              ))}
-          </div>
+          <Button btnText={userAction.textBtn}>
+            <div className={classes["toggle-buttons"]}>
+              {showingOptions &&
+                userAction.switchOptions.map((item) => (
+                  <button
+                    type="button"
+                    className={classes.toggle}
+                    onClick={() => switchUserActionHandler(item.actionType)}
+                    key={item.actionType}
+                  >
+                    {item.text}
+                  </button>
+                ))}
+            </div>
+          </Button>
         )}
         {userAction.isLoading && <Spinner />}
       </>

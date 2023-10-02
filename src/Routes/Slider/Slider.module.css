@@ -4,6 +4,12 @@
   position: relative;
 }
 
+@media (max-width: 1050px) {
+  .slider {
+    height: calc(100vh - 30rem);
+  }
+}
+
 .slides {
   height: 100%;
 }
@@ -33,16 +39,16 @@
   /* option 2  */
 }
 
-.slide.next {
-  display: block;
-}
+/* .slide.next { */
+/* display: block; */
+/* } */
 
-.slide.prev {
-  display: block;
+/* .slide.prev { */
+/* display: block; */
 
-  /* transform: translateX(-100%); */
-  /* option 1 */
-}
+/* transform: translateX(-100%); */
+/* option 1 */
+/* } */
 
 .slide img {
   position: relative;
@@ -57,14 +63,16 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 50px;
-  width: 50px;
+  height: 5rem;
+  width: 5rem;
   z-index: 2;
   background-repeat: no-repeat;
-  background-size: 25px;
+  background-size: 2.5rem;
   padding: 3%;
   /* @include mixin.tablet {  background-size: 30px;  */
   cursor: pointer;
+  background-color: #8080806e;
+  background-color: var(--primary-light);
 }
 
 .arrow.prev {
@@ -77,4 +85,52 @@
   right: 0;
   background-position: center;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='33' viewBox='0 0 28 46'%3E%3Cstyle%3E path %7B fill: white; %7D %3C/style%3E%3Cpath d='m6.2 42.9l-2.8-2.9 17.1-17.1-17.1-17.1 2.8-2.9 20 20z' /%3E%3C/svg%3E");
+}
+
+.caption {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  font-size: 1rem;
+  text-shadow: none;
+  color: var(--primary-non-colour);
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  max-width: none;
+  text-align: center;
+}
+
+.slider-title,
+.title-link > h3,
+.title-link > a {
+  color: var(--primary-non-colour-section);
+  text-transform: uppercase;
+}
+
+.slider-title {
+  font-size: 6rem;
+  text-shadow: 0 0 1rem #222;
+  font-weight: 900;
+  padding: 1rem 0 2rem 0;
+  letter-spacing: 0.3rem;
+}
+
+.title-link > h3 {
+  font-size: 2.4rem;
+  text-shadow: 0 0 1rem #222;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+
+.title-link > a {
+  background-color: #1b1b1b;
+  line-height: 5rem;
+  display: inline-block;
+  padding: 0 5rem;
+  height: 5rem;
+  margin-top: 1.5rem;
+  text-decoration: none;
 }

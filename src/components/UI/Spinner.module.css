@@ -5,8 +5,8 @@
 }
 
 .loader {
-  color: #151414;
-  font-size: 11px;
+  color: var(--primary-text);
+  font-size: 1.1rem;
   text-indent: -99999rem;
   margin: 5.5rem auto;
   position: relative;
@@ -27,7 +27,7 @@
 .loader:before {
   width: 5.2rem;
   height: 10.2rem;
-  background: #ffffff;
+  background: var(--primary-non-colour);
   border-radius: 10.2rem 0 0 10.2rem;
   top: -0.1rem;
   left: -0.1rem;
@@ -40,7 +40,7 @@
 .loader:after {
   width: 5.2rem;
   height: 10.2rem;
-  background: #ffffff;
+  background: var(--primary-non-colour);
   border-radius: 0 10.2rem 10.2rem 0;
   top: -0.1rem;
   left: 4.9rem;

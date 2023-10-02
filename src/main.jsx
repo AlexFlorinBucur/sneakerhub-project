@@ -9,6 +9,8 @@ import Slider from "./Routes/Slider/Slider.jsx";
 import SneakerDetails from "./Routes/SneakerDetails/SneakerDetails";
 import Cart from "./Routes/Cart/Cart";
 import Account from "./Routes/Account/Account";
+import OrderDetails from "./Routes/OrderDetails/OrderDetails";
+import Search from "./Routes/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,12 @@ const router = createBrowserRouter([
         children: [{ path: ":id", element: <SneakerDetails /> }],
       },
       { path: "/cart", element: <Cart /> },
-      { path: "/account", element: <Account /> },
+      {
+        path: "/account/*",
+        element: <Account />,
+        children: [{ path: "order/:orderName", element: <OrderDetails /> }],
+      },
+      { path: "/search/:query", element: <Search /> },
     ],
   },
 ]);

@@ -3,7 +3,7 @@
   font-size: 5rem;
   align-self: center;
   justify-content: space-evenly;
-  color: #051026;
+  color: var(--primary-text);
 }
 
 .product-track-detail {

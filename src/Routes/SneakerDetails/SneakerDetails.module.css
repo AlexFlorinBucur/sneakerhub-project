@@ -8,10 +8,10 @@
 }
 
 .product-data {
-  color: #051026;
+  color: var(--primary-text);
 }
 
 h2 {
   padding: 3rem 0;
-  color: #4f80ab;
+  color: var(--primary-darker);
 }

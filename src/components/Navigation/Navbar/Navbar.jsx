@@ -59,9 +59,11 @@ const Navbar = ({ onShowModal, onHideModal }) => {
         >
           <HiOutlineBars3 viewBox="3 3 19 19" />
         </div>
-        <Link to="/" className={classes.logo}>
-          <img src={Logo} alt="Logo for site" />
-        </Link>
+        <div className={classes.logo}>
+          <Link to="/">
+            <img src={Logo} alt="Logo for site" />
+          </Link>
+        </div>
         <nav className={classes["nav-options"]}>
           <ul className={classes["main-nav-list"]}>
             {placeholders.mainNavLinks.map(({ name, iconSvg, url }) => {
@@ -77,7 +79,7 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                     // SET THE onClick PROPERTY
                     onClick={managedClick({
                       name,
-                      onSearch: () => console.log("Ai apasat SEARCH"),
+                      onSearch: () => onShowModal(MODALS.search),
                       onSignUp: () => onShowModal(MODALS.login),
                     })}
                     // SET THE hover PROPERTY FOR CART LINK
@@ -100,7 +102,13 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                         {iconSvg}
                       </span>
                     )}
-                    <span>{url ? name : userName ? userName : name}</span>
+                    <span>
+                      {url || name === "Search"
+                        ? name
+                        : userName
+                        ? userName
+                        : name}
+                    </span>
                   </Component>
                 </li>
               );

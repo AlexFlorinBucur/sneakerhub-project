@@ -1,0 +1,25 @@
+.order-thead {
+  background-color: var(--primary-text);
+  padding: 2rem;
+}
+
+.order-ref-head {
+  width: 40%;
+  padding: 1rem;
+}
+
+.order-data-head {
+  width: 15%;
+}
+
+.order-item {
+  padding: 2rem 0;
+  border-bottom: 0.1rem solid var(--primary-text);
+  border-right: 0.1rem solid var(--primary-text);
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.order-item:last-child {
+  border-right: none;
+}

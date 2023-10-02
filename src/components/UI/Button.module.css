@@ -1,0 +1,23 @@
+.actions {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.actions > button {
+  cursor: pointer;
+  color: var(--primary-non-colour);
+  background-color: var(--secondary);
+  border: 0.1rem solid var(--primary-light);
+  padding: 0.5rem 2.5rem;
+  /* line-height: inherit; */
+}
+
+.actions > button:hover {
+  background-color: var(--secondary-darker);
+  border-color: var(--primary-darker);
+}
+
+.authenticated button:last-child {
+  margin-top: 2rem;
+}

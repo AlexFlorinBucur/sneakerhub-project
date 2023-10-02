@@ -1,7 +1,7 @@
 .section-account {
-  background-color: #fafafa;
+  background-color: var(--primary-non-colour-section);
   padding: 0 1.5rem;
-  color: #051026;
+  color: var(--primary-text);
 }
 
 .account-actions {
@@ -20,7 +20,7 @@
 
 .edit-info {
   padding: 1rem;
-  background-color: #67a7df;
+  background-color: var(--primary);
   text-align: center;
 }
 
@@ -29,26 +29,21 @@
   padding-top: 2rem;
 }
 
-.actions {
-  margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
+.edit-info div:nth-child(even) {
+  display: block;
 }
 
-.actions button {
-  cursor: pointer;
-  color: var(--primary-non-colour);
-  background-color: var(--secondary);
-  border: 1px solid var(--primary-light);
-  padding: 0.5rem 2.5rem;
-}
-
-.actions button:hover {
-  background-color: var(--secondary-darker);
-  border-color: var(--primary-darker);
+.edit-info div:last-child {
+  display: block;
 }
 
 .account-orders {
-  background-color: #67a7df;
+  background-color: var(--primary);
+  padding: 1rem;
+}
+
+.account-orders h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
 }

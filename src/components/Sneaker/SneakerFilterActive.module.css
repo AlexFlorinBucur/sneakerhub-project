@@ -44,5 +44,5 @@
 .active-search-filters a:link,
 .active-search-filters a:visited {
   text-decoration: none;
-  color: #959595;
+  color: var(--secondary-text);
 }

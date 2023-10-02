@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCartData } from "../helpers/fetch-cart";
 import { toast } from "react-toastify";
+import { orderActions } from "./order";
 
 const initialAuthState = {
   token: "",
@@ -26,6 +27,8 @@ const logoutTimeout = (remainingTime, dispatch) =>
     // update the cart before logout
     const cartItems = JSON.parse(localStorage.getItem("items"));
     fetchCartData(dispatch, cartItems?.length === 0 ? "DELETE" : "PUT", true);
+    // clear orders from redux before logout
+    dispatch(orderActions.clearOrders());
     // do autologout
     dispatch(authActions.logout());
   }, remainingTime);

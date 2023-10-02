@@ -5,11 +5,18 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { cartActions } from "../../../../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Button from "../../../UI/Button";
+import { useRef } from "react";
+import { calculateShippingStatus } from "../../../../helpers/calculate-shipping";
+import { minPriceShippingFree, voucherCoupon } from "../../Placeholders";
 
 const CheckoutItems = ({ shipping }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = +useSelector((state) => state.cart.totalAmount);
+  const totalAmountToPay = +useSelector((state) => state.cart.totalAmountToPay);
+  const voucherRef = useRef();
+  const voucher = useSelector((state) => state.cart.voucher);
 
   const cartItemAddHandler = (item) => {
     dispatch(cartActions.addItem({ ...item, amount: 1 }));
@@ -23,24 +30,36 @@ const CheckoutItems = ({ shipping }) => {
       : toast.success("The quantity has been updated!");
   };
 
-  const shippingPrice = 5;
-  const minPriceShippingFree = 300;
+  const applyVoucherHandler = (voucherTxt) => {
+    if (!voucherTxt) {
+      return;
+    }
 
-  const shippingStatus = [
-    { name: "subtotal", total: totalAmount },
+    if (voucherTxt.toLowerCase() !== voucherCoupon.voucherCode) {
+      toast.error("The entered code is not correct!");
+      voucherRef.current.value = "";
+      return;
+    }
 
-    {
-      name: "shipping",
-      total: totalAmount > minPriceShippingFree ? "FREE" : shippingPrice,
-    },
-    {
-      name: "total",
-      total:
-        totalAmount < minPriceShippingFree
-          ? totalAmount + shippingPrice
-          : totalAmount,
-    },
-  ];
+    dispatch(
+      cartActions.applyVoucher({
+        voucherValue: voucherCoupon.voucherValue,
+        voucher: voucherCoupon,
+      })
+    );
+    toast.success("Voucher successfully applied!");
+  };
+
+  const removeVoucherHandler = () => {
+    dispatch(cartActions.removeVoucher());
+    toast.success("Voucher deleted!");
+  };
+
+  const shippingStatus = calculateShippingStatus(
+    totalAmountToPay,
+    totalAmount,
+    voucher
+  );
 
   return (
     <>
@@ -135,26 +154,55 @@ const CheckoutItems = ({ shipping }) => {
           {!shipping && (
             <tr className={classes["checkout-voucher"]}>
               <th className={classes["voucher-form"]}>
-                <input
-                  name="discount_name"
-                  type="text"
-                  className={classes["voucher-text"]}
-                  placeholder="Voucher"
-                />
-                <input
-                  type="button"
-                  className={classes["button-coupon"]}
-                  value="Apply"
-                />
+                {!voucher ? (
+                  <>
+                    <input
+                      name="discount_name"
+                      type="text"
+                      className={classes["voucher-text"]}
+                      placeholder="Voucher"
+                      ref={voucherRef}
+                    />
+                    <Button
+                      className={classes["button-coupon"]}
+                      btnText={"Apply"}
+                      extraClasses={classes["button-coupon"]}
+                      btnType={"button"}
+                      onClick={() =>
+                        applyVoucherHandler(voucherRef.current.value.trim())
+                      }
+                    />
+                  </>
+                ) : (
+                  <div className={classes["voucher-action"]}>
+                    <span>{`Voucher code apply: ${voucher.voucherCode}`}</span>
+                    <AiOutlineCloseCircle
+                      onClick={() => removeVoucherHandler()}
+                    />
+                  </div>
+                )}
               </th>
               <th className={classes["cart-total"]}>
                 <span className={classes["cart-label"]}>Total:</span>
               </th>
               <th className={classes["cart-total"]}>
-                <span className={classes["cart-total-final"]}>
+                <span
+                  {...(voucher
+                    ? {
+                        className: `${classes["cart-total-final"]} ${classes["special-line"]}`,
+                      }
+                    : {
+                        className: classes["cart-total-final"],
+                      })}
+                >
                   {totalAmount.toFixed(2)}&nbsp;$
                 </span>
               </th>
+              {voucher && (
+                <th className={classes["cart-total"]}>
+                  <span>{totalAmountToPay.toFixed(2)}&nbsp;$</span>
+                </th>
+              )}
             </tr>
           )}
           {shipping &&

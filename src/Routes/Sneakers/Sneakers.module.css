@@ -1,7 +1,7 @@
 .section-products {
-  background-color: #fafafa;
+  background-color: var(--primary-non-colour-section);
   padding: 0 1.5rem;
-  color: #051026;
+  color: var(--primary-text);
 }
 
 .sneakers {

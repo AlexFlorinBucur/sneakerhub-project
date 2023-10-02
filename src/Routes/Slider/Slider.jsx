@@ -1,25 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import styles from "./Slider.module.css";
+import React, { useState, useEffect } from "react";
+import classes from "./Slider.module.css";
+import { Link } from "react-router-dom";
+import { slideImages } from "../../components/Navigation/Placeholders";
 
 const Slider = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  let totalSlides;
-
-  const slideImages = [
-    {
-      image: "/src/assets/image-carousel-1.jpg",
-    },
-    {
-      image: "/src/assets/image-carousel-2.jpg",
-    },
-    {
-      image: "/src/assets/image-carousel-3.jpg",
-    },
-  ];
-
-  totalSlides = slideImages.length;
+  const totalSlides = slideImages.length;
 
   function slide(action) {
     if (action === "next") {
@@ -37,41 +24,69 @@ const Slider = () => {
     }
   }
 
+  useEffect(() => {
+    const intervalId = setTimeout(() => {
+      slide("next");
+    }, 7000);
+
+    return () => {
+      clearTimeout(intervalId);
+    };
+  }, [activeSlide]);
+
   return (
-    <div className={styles.slider}>
-      <div className={styles.slides}>
+    <div className={classes.slider}>
+      <div className={classes.slides}>
         {slideImages.map((slide, index) => {
           return (
             <div
-              className={`${styles.slide} 
-              ${index === activeSlide ? styles.active : ""} 
-              ${index === activeSlide + 1 ? styles.next : ""} 
-              ${index === activeSlide - 1 ? styles.prev : ""} 
-              
-              ${
-                activeSlide === 0 && index === totalSlides - 1
-                  ? styles.prev
-                  : ""
-              }
-              ${
-                activeSlide === totalSlides - 1 && index === 0
-                  ? styles.next
-                  : ""
-              }
-              `}
+              // EXPLICATIE
+              // className={`${classes.slide}
+              // ${index === activeSlide ? classes.active : "1"}
+              // ${index === activeSlide + 1 ? classes.next : "2"}
+              // ${index === activeSlide - 1 ? classes.prev : "3"}
+              // ${
+              //   activeSlide === 0 && index === totalSlides - 1
+              //     ? classes.prev
+              //     : "4"
+              // }
+              // ${
+              //   activeSlide === totalSlides - 1 && index === 0
+              //     ? classes.next
+              //     : "5"
+              // }
+
+              // Simplificare
+              //   className={`${classes.slide}
+              // ${index === activeSlide ? classes.active : "1"}
+              // `}
+
+              // Simplificare 2
+              {...(index === activeSlide
+                ? { className: `${classes.slide} ${classes.active}` }
+                : { className: classes.slide })}
               key={index}
             >
               <img src={slide.image} alt="" />
+              <span className={classes["caption"]}>
+                <h1 className={classes["slider-title"]}>{slide.header}</h1>
+                <div className={classes["title-link"]}>
+                  <h3>{slide.information}</h3>
+                  <Link to={slide.link} title={slide.header}>
+                    <span>{slide.linkText}</span>
+                  </Link>
+                </div>
+              </span>
             </div>
           );
         })}
       </div>
       <div
-        className={`${styles.arrow} ${styles.next}`}
+        className={`${classes.arrow} ${classes.next}`}
         onClick={() => slide("next")}
       ></div>
       <div
-        className={`${styles.arrow} ${styles.prev}`}
+        className={`${classes.arrow} ${classes.prev}`}
         onClick={() => slide("prev")}
       ></div>
     </div>

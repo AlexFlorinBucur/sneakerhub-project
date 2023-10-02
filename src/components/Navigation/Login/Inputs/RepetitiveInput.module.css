@@ -10,7 +10,7 @@ form input:focus {
 }
 
 input.invalid {
-  border: 1px solid #b40e0e;
+  border: 0.1rem solid #b40e0e;
   background-color: #fddddd;
 }
 

@@ -3,13 +3,13 @@
 }
 
 .product-name h3 {
-  color: #959595;
+  color: var(--secondary-text);
   padding-bottom: 2rem;
 }
 
 .product-price {
   font-size: 3rem;
   font-weight: 700;
-  color: #4f80ab;
+  color: var(--primary-darker);
   margin-bottom: 2rem;
 }

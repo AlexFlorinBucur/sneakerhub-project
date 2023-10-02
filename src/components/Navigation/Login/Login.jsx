@@ -8,11 +8,13 @@ import { useLogin } from "../../../hooks/userActions";
 import LoginForm from "./LoginForm";
 import UserAuthenticated from "./AuthenticatedUser";
 import { cartActions } from "../../../store/cart";
+import { sendingCartData } from "../../../store/order";
 
 const Login = ({ onCloseModal, show }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const expirationTime = useSelector((state) => state.auth.expirationTime);
+  const userId = useSelector((state) => state.auth.userId);
 
   const { userAction, switchAction, loadingAction } = useLogin();
 
@@ -43,6 +45,13 @@ const Login = ({ onCloseModal, show }) => {
       );
     }
   }, []);
+
+  // this is for setting the orders in My account
+  useEffect(() => {
+    if (userId) {
+      dispatch(sendingCartData("GET", null, userId));
+    }
+  }, [Boolean(userId)]);
 
   useEffect(() => {
     if (isLoggedIn && expirationTime) {

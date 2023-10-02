@@ -18,21 +18,21 @@ const validateCharacters = (char) => {
 
 const Shipping = ({ setShippingInfo, setInputError }) => {
   const {
-    value: lastnameValue,
-    isValid: lastnameIsValid,
-    hasError: lastnameHasError,
-    valueChangeHandler: lastnameChangedHandler,
-    inputBlurHandler: lastnameBlurHandler,
-    reset: resetLastnameInput,
+    value: lastNameValue,
+    isValid: lastNameIsValid,
+    hasError: lastNameHasError,
+    valueChangeHandler: lastNameChangedHandler,
+    inputBlurHandler: lastNameBlurHandler,
+    reset: resetLastNameInput,
   } = useInput((value) => value);
 
   const {
-    value: surnameValue,
-    isValid: surnameIsValid,
-    hasError: surnameHasError,
-    valueChangeHandler: surnameChangedHandler,
-    inputBlurHandler: surnameBlurHandler,
-    reset: resetSurnameInput,
+    value: firstNameValue,
+    isValid: firstNameIsValid,
+    hasError: firstNameHasError,
+    valueChangeHandler: firstNameChangedHandler,
+    inputBlurHandler: firstNameBlurHandler,
+    reset: resetFirstNameInput,
   } = useInput((value) => value);
 
   const {
@@ -78,57 +78,57 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
         <Input
           input={{
             type: "text",
-            id: "lastname",
+            id: "lastName",
             required: "required",
-            value: lastnameValue,
-            // onChange: lastnameChangedHandler,
+            value: lastNameValue,
+            // onChange: lastNameChangedHandler,
             onChange: (e) => {
-              lastnameChangedHandler(e);
+              lastNameChangedHandler(e);
               setShippingInfo((prev) => ({
                 ...prev,
-                lastname: e.target.value,
+                lastName: e.target.value,
               }));
               setInputError((prev) => ({
                 ...prev,
-                lastnameNoError: validateCharacters(e.target.value),
+                lastNameNoError: validateCharacters(e.target.value),
               }));
             },
-            onBlur: lastnameBlurHandler,
+            onBlur: lastNameBlurHandler,
           }}
           label={{
-            htmlFor: "lastname",
-            text: "Lastname",
+            htmlFor: "lastName",
+            text: "Last Name",
           }}
-          hasError={lastnameHasError}
-          errorMsg={lastnameHasError && "Complete This Input"}
+          hasError={lastNameHasError}
+          errorMsg={lastNameHasError && "Complete This Input"}
           inputValidityClass={classes.invalid}
         />
         <Input
           input={{
             type: "text",
-            id: "surname",
+            id: "firstName",
             required: "required",
-            value: surnameValue,
-            // onChange: surnameChangedHandler,
+            value: firstNameValue,
+            // onChange: firstNameChangedHandler,
             onChange: (e) => {
-              surnameChangedHandler(e);
+              firstNameChangedHandler(e);
               setShippingInfo((prev) => ({
                 ...prev,
-                surname: e.target.value,
+                firstName: e.target.value,
               }));
               setInputError((prev) => ({
                 ...prev,
-                surnameNoError: validateCharacters(e.target.value),
+                firstNameNoError: validateCharacters(e.target.value),
               }));
             },
-            onBlur: surnameBlurHandler,
+            onBlur: firstNameBlurHandler,
           }}
           label={{
-            htmlFor: "surname",
-            text: "Surname",
+            htmlFor: "firstName",
+            text: "First Name",
           }}
-          hasError={surnameHasError}
-          errorMsg={surnameHasError && "Complete This Input"}
+          hasError={firstNameHasError}
+          errorMsg={firstNameHasError && "Complete This Input"}
           inputValidityClass={classes.invalid}
         />
         <Input
