@@ -7,15 +7,17 @@ import { cartActions } from "../../../store/cart";
 import { fetchCartData } from "../../../helpers/fetch-cart";
 import { orderActions } from "../../../store/order";
 import Button from "../../UI/Button";
+import { fetchWishlist } from "../../../helpers/fetch-wishlist";
 
 const UserAuthenticated = ({ onCloseModal, switchAction }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userName = useSelector((state) => state.auth.userName);
-  const cartItems = useSelector((state) => state.cart.items);
+  const { userName } = useSelector((state) => state.auth);
+  const { items: cartItems } = useSelector((state) => state.cart);
 
   const logoutHandler = () => {
     fetchCartData(dispatch, cartItems?.length === 0 ? "DELETE" : "PUT", true);
+    dispatch(fetchWishlist(true));
     dispatch(authActions.logout());
     dispatch(cartActions.clearCart());
     dispatch(orderActions.clearOrders());

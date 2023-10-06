@@ -8,10 +8,9 @@ import OrderHistory from "../../components/Navigation/Orders/OrderHistory";
 
 const Account = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const { orderName } = useParams();
 
-  const token = useSelector((state) => state.auth.token);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { token, isLoggedIn } = useSelector((state) => state.auth);
 
   const { userAction, switchAction, loadingAction } = useLogin();
 
@@ -27,10 +26,11 @@ const Account = () => {
   return (
     <div className={classes["section-account"]}>
       <div className={classes["section-title"]}>
-        {!params.orderName ? "Profile" : `Order no. ${params.orderName}`}
+        {!orderName ? "Profile" : `Order no. ${orderName}`}
       </div>
-      {params.orderName && <Outlet />}
-      {!params.orderName && (
+      {orderName ? (
+        <Outlet />
+      ) : (
         <div className={classes["account-actions"]}>
           <div className={classes["edit-info"]}>
             <h3>Edit Information</h3>

@@ -3,7 +3,7 @@ import Modal from "../../UI/Modal";
 import Drawer from "../../UI/Drawer";
 import classes from "./SearchBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions, fetchSneakers } from "../../../store/sneakers";
+import { sneakerActions, fetchSneakers } from "../../../store/sneakers";
 import { Link, useNavigate } from "react-router-dom";
 
 const SearchBar = ({ onCloseModal, show }) => {
@@ -14,6 +14,9 @@ const SearchBar = ({ onCloseModal, show }) => {
 
   const getRequestedArticles = (event) => {
     event.preventDefault();
+
+    if (enteredFilter.trim().length === 0) return;
+
     navigate(`/search/${enteredFilter}`);
     onCloseModal();
     setEnteredFilter("");
@@ -28,7 +31,7 @@ const SearchBar = ({ onCloseModal, show }) => {
 
     return () => {
       if (enteredFilter.length === 0) {
-        dispatch(cartActions.resetSearchResults());
+        dispatch(sneakerActions.resetSearchResults());
       }
       clearTimeout(timer);
     };
@@ -61,7 +64,7 @@ const SearchBar = ({ onCloseModal, show }) => {
                   onClick={() => {
                     onCloseModal();
                     setEnteredFilter("");
-                    dispatch(cartActions.resetSearchResults());
+                    dispatch(sneakerActions.resetSearchResults());
                   }}
                 >
                   <p className={classes["result"]}>{item.name}</p>

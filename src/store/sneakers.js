@@ -7,6 +7,7 @@ const initialState = {
   isLoading: false,
   error: null,
   activeFilters: {},
+  wishlist: [],
 };
 
 // Create a slice for the reducer
@@ -42,10 +43,46 @@ const sneakersSlice = createSlice({
     resetSearchResults(state) {
       state.searchResults = [];
     },
+    updateWishData(state, action) {
+      state.wishlist = action.payload;
+      if (state.wishlist.length !== 0) {
+        localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
+      }
+    },
+    setWishlist(state, action) {
+      const newWishlistItem = action.payload;
+
+      const existingIndex = state.wishlist.findIndex(
+        (item) => item.id === newWishlistItem.id
+      );
+
+      if (existingIndex !== -1) {
+        state.wishlist.splice(existingIndex, 1);
+      } else {
+        state.wishlist = [...state.wishlist, newWishlistItem];
+      }
+
+      localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
+    },
+    removeItemFromWish(state, action) {
+      const itemIdToRmv = action.payload;
+
+      const existingIndex = state.wishlist.findIndex(
+        (item) => item.id === itemIdToRmv
+      );
+
+      if (existingIndex !== -1) {
+        state.wishlist.splice(existingIndex, 1);
+      } else {
+        state.wishlist = [...state.wishlist];
+      }
+
+      localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
+    },
   },
 });
 
-export const cartActions = sneakersSlice.actions;
+export const sneakerActions = sneakersSlice.actions;
 
 export default sneakersSlice.reducer;
 
@@ -54,8 +91,8 @@ export const fetchSneakers =
   (params, queryFilter, searchQuery, searchRoute = false) =>
   async (dispatch) => {
     if (params || searchRoute) {
-      dispatch(cartActions.setIsLoading(true));
-      dispatch(cartActions.setError(null));
+      dispatch(sneakerActions.setIsLoading(true));
+      dispatch(sneakerActions.setError(null));
     }
 
     try {
@@ -74,6 +111,7 @@ export const fetchSneakers =
           return {
             id: sneakerData.id,
             sneakerImage: sneakerData.main_picture_url,
+            // sneakerImage: sneakerData.grid_picture_url.replaceAll("375", "300"),
             brandName: sneakerData.brand_name,
             name: sneakerData.name,
             sizeRange: sneakerData.size_range,
@@ -114,7 +152,7 @@ export const fetchSneakers =
         }
 
         if (Object.values(valueObj).length !== 0) {
-          dispatch(cartActions.setActiveFilters(valueObj));
+          dispatch(sneakerActions.setActiveFilters(valueObj));
         }
 
         const filteredData = transformedData.filter((sneaker) => {
@@ -177,20 +215,20 @@ export const fetchSneakers =
           }
         }
 
-        dispatch(cartActions.setSneakersData(filteredData));
+        dispatch(sneakerActions.setSneakersData(filteredData));
       } else if (params) {
-        dispatch(cartActions.setSneakersData(transformedData));
+        dispatch(sneakerActions.setSneakersData(transformedData));
       } else if (searchQuery && !searchRoute) {
-        dispatch(cartActions.setSearchResults(transformedData));
+        dispatch(sneakerActions.setSearchResults(transformedData));
       } else if (searchRoute) {
-        dispatch(cartActions.setSearchResults(transformedData));
-        dispatch(cartActions.setSneakersData(transformedData));
+        dispatch(sneakerActions.setSearchResults(transformedData));
+        dispatch(sneakerActions.setSneakersData(transformedData));
       }
     } catch (err) {
-      dispatch(cartActions.setError(err.message));
+      dispatch(sneakerActions.setError(err.message));
     }
 
     if (params || searchRoute) {
-      dispatch(cartActions.setIsLoading(false));
+      dispatch(sneakerActions.setIsLoading(false));
     }
   };

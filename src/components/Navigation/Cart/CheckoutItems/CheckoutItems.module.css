@@ -1,22 +1,3 @@
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  color: var(--primary-non-colour-section);
-}
-
-th {
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: 1.3rem;
-}
-
-td {
-  padding: 3.5rem 0.5rem 0 0.5rem;
-}
-
 .checkout-name {
   width: 50%;
   text-align: left;

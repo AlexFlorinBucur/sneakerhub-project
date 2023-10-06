@@ -1,50 +1,24 @@
 import classes from "./SneakerList.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useIntersection } from "@mantine/hooks";
 import { useEffect, useRef, useState } from "react";
-import Spinner from "../UI/Spinner";
+import Spinner from "../../UI/Spinner";
+import SneakerLink from "../SneakerLink/SneakerLink";
+import { useSelector } from "react-redux";
 
-export const SneakerLink = ({
-  gender,
-  id,
-  brandName,
-  sneakerImage,
-  name,
-  sizeRange,
-  retailPrice,
-  classes,
-}) => {
-  return (
-    <Link to={`/shopping/${gender}/${id}`}>
-      <p className={classes["brand-name"]}>{brandName}</p>
-      <img src={sneakerImage} alt={name} />
-      <div className={classes["sneaker-name-size"]}>
-        <p>{name}</p>
-        <p>
-          {"Available: "}
-          {sizeRange
-            .toSorted((a, b) => a - b)
-            .map((size) => {
-              return `${size} `;
-            })}
-        </p>
-      </div>
-      <p className={classes["sneaker-price"]}>{retailPrice.toFixed(2)} $</p>
-    </Link>
-  );
-};
-
-const SneakerList = ({ sneakersData }) => {
+const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
   const location = useLocation();
   const [newPageLoading, setNewPageLoading] = useState(false);
+  const { wishlist } = useSelector((state) => state.sneakerData);
 
   const fetchPost = async (page) => {
     return sneakersData.slice((page - 1) * 6, page * 6);
   };
 
   const { data, fetchNextPage } = useInfiniteQuery(
-    ["query", location.search],
+    // we add snearksData because when we are in wishlist and we try to remove 1 item, this component need to render again. To do that we need to put sneakersData here(because we modify sneakersData when we remove item)
+    ["query", location.search, sneakersData],
     async ({ pageParam = 1 }) => {
       const response = await fetchPost(pageParam);
       return response;
@@ -85,9 +59,8 @@ const SneakerList = ({ sneakersData }) => {
     };
 
     fetchNextPageSneakers();
-  }, [entry, data, sneakersData]);
+  }, [entry, data, sneakersData, wishlist]);
 
-  // we use flatMap for destructuring
   const _sneakersData = data?.pages.flatMap((page) => page);
 
   return (
@@ -106,7 +79,7 @@ const SneakerList = ({ sneakersData }) => {
             },
             i
           ) => {
-            if ((i = _sneakersData.length && !newPageLoading))
+            if (i === _sneakersData.length - 1 && !newPageLoading)
               return (
                 <li className={classes["sneaker-item"]} key={id} ref={ref}>
                   <SneakerLink
@@ -117,7 +90,7 @@ const SneakerList = ({ sneakersData }) => {
                     name={name}
                     sizeRange={sizeRange}
                     retailPrice={retailPrice}
-                    classes={classes}
+                    wishlistRoute={wishlistRoute}
                   />
                 </li>
               );
@@ -132,7 +105,7 @@ const SneakerList = ({ sneakersData }) => {
                   name={name}
                   sizeRange={sizeRange}
                   retailPrice={retailPrice}
-                  classes={classes}
+                  wishlistRoute={wishlistRoute}
                 />
               </li>
             );

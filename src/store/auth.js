@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchCartData } from "../helpers/fetch-cart";
 import { toast } from "react-toastify";
 import { orderActions } from "./order";
+import { fetchWishlist } from "../helpers/fetch-wishlist";
 
 const initialAuthState = {
   token: "",
@@ -24,11 +25,16 @@ let timeoutRef;
 
 const logoutTimeout = (remainingTime, dispatch) =>
   setTimeout(() => {
-    // update the cart before logout
+    // update the cart before autologout
     const cartItems = JSON.parse(localStorage.getItem("items"));
     fetchCartData(dispatch, cartItems?.length === 0 ? "DELETE" : "PUT", true);
-    // clear orders from redux before logout
+
+    // clear orders from redux before autologout
     dispatch(orderActions.clearOrders());
+
+    // update wishlist before auto-logout
+    dispatch(fetchWishlist(true));
+
     // do autologout
     dispatch(authActions.logout());
   }, remainingTime);
@@ -51,6 +57,7 @@ const authSlice = createSlice({
       localStorage.removeItem("userId");
       localStorage.removeItem("items");
       localStorage.removeItem("totalAmount");
+      localStorage.removeItem("wishlist");
 
       toast.success("You have successfully logged out!");
 

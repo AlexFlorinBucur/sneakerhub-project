@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Navbar.module.css";
 import Logo from "../../../assets/logo.png";
-import { HiOutlineBars3 } from "react-icons/hi2";
+import { HiHeart, HiOutlineViewList } from "react-icons/hi";
 
 import { placeholders, MODALS } from "../Placeholders";
 
@@ -25,6 +25,7 @@ const managedClick = ({ name, onSearch, onSignUp }) => {
 const Navbar = ({ onShowModal, onHideModal }) => {
   const cartItem = useSelector((state) => state.cart.items);
   const userName = useSelector((state) => state.auth.userName);
+  const { wishlist } = useSelector((state) => state.sneakerData);
 
   const [bumpIsActive, setBumpIsActive] = useState(false);
 
@@ -57,7 +58,7 @@ const Navbar = ({ onShowModal, onHideModal }) => {
           className={classes.outline}
           onClick={() => onShowModal(MODALS.menu)}
         >
-          <HiOutlineBars3 viewBox="3 3 19 19" />
+          <HiOutlineViewList viewBox="3 3 19 19" />
         </div>
         <div className={classes.logo}>
           <Link to="/">
@@ -69,13 +70,18 @@ const Navbar = ({ onShowModal, onHideModal }) => {
             {placeholders.mainNavLinks.map(({ name, iconSvg, url }) => {
               const Component = (props) =>
                 props.to ? <Link {...props} /> : <a {...props} />;
+
               return (
                 <li key={name}>
                   <Component
                     className={classes["main-nav-link"]}
                     // {...(url ? { href: url } : {})}
                     // SET THE URL
-                    {...(url ? { to: url } : {})}
+                    {...(url === "/cart"
+                      ? { to: url }
+                      : url === "/wishlist"
+                      ? { to: url }
+                      : {})}
                     // SET THE onClick PROPERTY
                     onClick={managedClick({
                       name,
@@ -83,15 +89,17 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                       onSignUp: () => onShowModal(MODALS.login),
                     })}
                     // SET THE hover PROPERTY FOR CART LINK
-                    {...(url && cartItem.length > 0
+                    {...(url === "/cart" && cartItem.length > 0
                       ? {
                           onMouseEnter: () => onShowModal(MODALS.cart),
                           onMouseLeave: () => onHideModal(MODALS.cart),
                         }
                       : {})}
                   >
-                    {!url && iconSvg}
-                    {url && (
+                    {((url === "/wishlist" && wishlist.length === 0) || !url) &&
+                      iconSvg}
+                    {url === "/wishlist" && wishlist.length > 0 && <HiHeart />}
+                    {url === "/cart" && (
                       <span
                         {...(cartItem.length > 0
                           ? {

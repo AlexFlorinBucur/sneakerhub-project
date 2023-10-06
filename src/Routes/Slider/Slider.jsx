@@ -40,34 +40,16 @@ const Slider = () => {
         {slideImages.map((slide, index) => {
           return (
             <div
-              // EXPLICATIE
-              // className={`${classes.slide}
-              // ${index === activeSlide ? classes.active : "1"}
-              // ${index === activeSlide + 1 ? classes.next : "2"}
-              // ${index === activeSlide - 1 ? classes.prev : "3"}
-              // ${
-              //   activeSlide === 0 && index === totalSlides - 1
-              //     ? classes.prev
-              //     : "4"
-              // }
-              // ${
-              //   activeSlide === totalSlides - 1 && index === 0
-              //     ? classes.next
-              //     : "5"
-              // }
-
-              // Simplificare
-              //   className={`${classes.slide}
-              // ${index === activeSlide ? classes.active : "1"}
-              // `}
-
-              // Simplificare 2
               {...(index === activeSlide
                 ? { className: `${classes.slide} ${classes.active}` }
                 : { className: classes.slide })}
               key={index}
             >
-              <img src={slide.image} alt="" />
+              <picture>
+                <source srcSet={slide.imageWebp} type="image/webp" />
+                <source srcSet={slide.imageMin} type="image/jpg" />
+                <img src={slide.imageMin} alt={slide.information} />
+              </picture>
               <span className={classes["caption"]}>
                 <h1 className={classes["slider-title"]}>{slide.header}</h1>
                 <div className={classes["title-link"]}>

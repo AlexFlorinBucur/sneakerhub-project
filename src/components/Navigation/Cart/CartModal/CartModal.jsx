@@ -5,7 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MODALS } from "../../Placeholders";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { HiOutlineX } from "react-icons/hi";
 import { cartActions } from "../../../../store/cart";
 import { toast } from "react-toastify";
 
@@ -70,7 +70,7 @@ const CartModal = ({ show, onShowModal }) => {
                     cartItemRemoveHandler(item.id, item.size, true)
                   }
                 >
-                  <AiOutlineCloseCircle />
+                  <HiOutlineX />
                 </button>
               </li>
             ))}

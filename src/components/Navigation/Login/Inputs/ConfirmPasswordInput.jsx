@@ -1,4 +1,4 @@
-import { RiLockPasswordLine } from "react-icons/ri";
+import { HiOutlineLockClosed } from "react-icons/hi";
 
 import Input from "../../../UI/Input";
 import classes from "./RepetitiveInput.module.css";
@@ -24,7 +24,7 @@ const ConfirmPasswordInput = ({
         htmlFor: "password-confirm",
         text: "Confirm Password",
       }}
-      hasSvg={<RiLockPasswordLine />}
+      hasSvg={<HiOutlineLockClosed />}
       hasError={!passwordMatch && confirmPasswordHasError}
       errorMsg={"Password don't match!"}
       inputValidityClass={classes.invalid}

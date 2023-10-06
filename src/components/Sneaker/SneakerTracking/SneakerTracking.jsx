@@ -1,7 +1,8 @@
 import React from "react";
 import classes from "./SneakerTracking.module.css";
 import { SlSocialDropbox } from "react-icons/sl";
-import { LiaShippingFastSolid, LiaMapMarkedAltSolid } from "react-icons/lia";
+// import { LiaShippingFastSolid, LiaMapMarkedAltSolid } from "react-icons/lia";
+import { HiOutlineMap, HiOutlineTruck } from "react-icons/hi";
 
 const SneakerTracking = () => {
   return (
@@ -11,11 +12,11 @@ const SneakerTracking = () => {
         <span>Double boxed</span>
       </div>
       <div className={classes["product-track-detail"]}>
-        <LiaShippingFastSolid />
+        <HiOutlineTruck />
         <span>24H Shipping</span>
       </div>
       <div className={classes["product-track-detail"]}>
-        <LiaMapMarkedAltSolid />
+        <HiOutlineMap />
         <span>Fully tracked</span>
       </div>
     </div>

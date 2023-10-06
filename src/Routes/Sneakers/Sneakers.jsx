@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import classes from "./Sneakers.module.css";
-import SneakerList from "../../components/Sneaker/SneakerList";
-import SneakerFilter from "../../components/Sneaker/SneakerFilter";
-import SneakerHeader from "../../components/Sneaker/SneakerHeader";
+import SneakerList from "../../components/Sneaker/SneakerList/SneakerList";
+import SneakerFilter from "../../components/Sneaker/SneakerFilter/SneakerFilter";
+import SneakerHeader from "../../components/Sneaker/SneakerHeader/SneakerHeader";
 import SimpleLine from "../../components/UI/SimpleLine";
-import SneakerFilterActive from "../../components/Sneaker/SneakerFilterActive";
+import SneakerFilterActive from "../../components/Sneaker/SneakerFilterActive/SneakerFilterActive";
 import Spinner from "../../components/UI/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSneakers } from "../../store/sneakers";
-import { cartActions } from "../../store/sneakers";
+import { sneakerActions } from "../../store/sneakers";
 import { toast } from "react-toastify";
+import SneakerProductsFound from "../../components/Sneaker/SneakerProductsFound/SneakerProductsFound";
 
 const Sneakers = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Sneakers = () => {
 
   useEffect(() => {
     dispatch(fetchSneakers(params, query));
-    dispatch(cartActions.resetActiveFilters());
+    dispatch(sneakerActions.resetActiveFilters());
   }, [params, location]);
 
   return (
@@ -47,6 +48,9 @@ const Sneakers = () => {
           <SimpleLine />
           <SneakerList sneakersData={sneakersData} />
         </div>
+      )}
+      {!isLoading && sneakersData.length === 0 && (
+        <SneakerProductsFound products={sneakersData} />
       )}
     </section>
   );

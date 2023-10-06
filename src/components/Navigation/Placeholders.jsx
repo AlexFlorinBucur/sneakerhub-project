@@ -1,7 +1,8 @@
 import {
   HiOutlineSearch,
-  HiShoppingCart,
   HiOutlineUserCircle,
+  HiOutlineHeart,
+  HiShoppingCart,
 } from "react-icons/hi";
 
 export const placeholders = {
@@ -9,6 +10,7 @@ export const placeholders = {
   mainNavLinks: [
     { name: "Search", iconSvg: <HiOutlineSearch /> },
     { name: "SIGN UP", iconSvg: <HiOutlineUserCircle /> },
+    { name: "WISHLIST", url: "/wishlist", iconSvg: <HiOutlineHeart /> },
     { name: "CART", url: "/cart", iconSvg: <HiShoppingCart /> },
   ],
   menuLinks: [
@@ -28,21 +30,24 @@ export const MODALS = {
 
 export const slideImages = [
   {
-    image: "/src/assets/image-carousel-1.jpg",
+    imageMin: "/src/assets/image-carousel-1-min.jpg",
+    imageWebp: "/src/assets/image-carousel-1.webp",
     header: "Nike Air Jordan",
     information: "Fresh Jordans",
     link: "/search/air jordan",
     linkText: "shop now",
   },
   {
-    image: "/src/assets/image-carousel-2.jpg",
+    imageMin: "/src/assets/image-carousel-2-min.jpg",
+    imageWebp: "/src/assets/image-carousel-2.webp",
     header: "Extra25",
     information: "EXTRA 25 DISCOUNT @CHECKOUT",
     link: "/shopping/men",
     linkText: "shop now",
   },
   {
-    image: "/src/assets/image-carousel-3.jpg",
+    imageMin: "/src/assets/image-carousel-3-min.jpg",
+    imageWebp: "/src/assets/image-carousel-3.webp",
     header: "Best SB",
     information: "CHECK OUT OUR NEW PRODUCTS",
     link: "/search/SB",

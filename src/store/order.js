@@ -45,8 +45,12 @@ export const sendingCartData =
     dispatch(orderActions.setError(null));
 
     try {
+      const getDataForCurrAcc =
+        method === "GET" ? `?orderBy="uniqueId"&equalTo="${uniqueId}"` : "";
+
       const response = await fetch(
-        "https://react-shoes-project-default-rtdb.firebaseio.com/orders.json",
+        "https://react-shoes-project-default-rtdb.firebaseio.com/orders.json" +
+          getDataForCurrAcc,
         {
           method: method === "POST" ? "POST" : "GET",
           headers:
@@ -54,6 +58,7 @@ export const sendingCartData =
           body: method === "POST" ? JSON.stringify(orderData) : null,
         }
       );
+
       const data = await response.json();
 
       if (!response.ok || data.error) {
@@ -73,12 +78,11 @@ export const sendingCartData =
           orderActions.setIsFulfilled("You sent the order successfully!")
         );
       } else {
-        const keyWithUniqueId = Object.keys(data)
-          .filter((key) => data[key].uniqueId === uniqueId)
-          .map((key) => {
-            data[key].orderName = key;
-            return data[key];
-          });
+        const keyWithUniqueId = Object.keys(data).map((key) => {
+          data[key].orderName = key;
+          return data[key];
+        });
+
         dispatch(orderActions.setOrders(keyWithUniqueId));
       }
     } catch (err) {

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import { fetchSneakers, cartActions } from "../../store/sneakers";
+import { fetchSneakers, sneakerActions } from "../../store/sneakers";
 import classes from "../Sneakers/Sneakers.module.css";
-import SneakerList from "../../components/Sneaker/SneakerList";
-import SneakerFilter from "../../components/Sneaker/SneakerFilter";
-import SneakerFilterActive from "../../components/Sneaker/SneakerFilterActive";
+import SneakerList from "../../components/Sneaker/SneakerList/SneakerList";
+import SneakerFilter from "../../components/Sneaker/SneakerFilter/SneakerFilter";
+import SneakerFilterActive from "../../components/Sneaker/SneakerFilterActive/SneakerFilterActive";
 import Spinner from "../../components/UI/Spinner";
 import SimpleLine from "../../components/UI/SimpleLine";
-import SneakerHeader from "../../components/Sneaker/SneakerHeader";
-import SneakerProductsFound from "../../components/Sneaker/SneakerProductsFound";
+import SneakerHeader from "../../components/Sneaker/SneakerHeader/SneakerHeader";
+import SneakerProductsFound from "../../components/Sneaker/SneakerProductsFound/SneakerProductsFound";
 import { toast } from "react-toastify";
 
 const Search = () => {
@@ -30,14 +30,16 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(fetchSneakers(null, queryFilterURL, query, true));
-    dispatch(cartActions.resetActiveFilters());
+    dispatch(sneakerActions.resetActiveFilters());
   }, [query, location]);
+
+  const searchedQueryHasData = sneakersData.length !== 0;
 
   return (
     <section className={classes["section-products"]}>
       <SneakerHeader />
       {isLoading && <Spinner />}
-      {!isLoading && sneakersData.length !== 0 && (
+      {!isLoading && searchedQueryHasData && (
         <div className={classes["sneakers"]}>
           <SneakerFilter
             sneakersData={sneakersData}
@@ -48,7 +50,7 @@ const Search = () => {
           <SneakerList sneakersData={sneakersData} />
         </div>
       )}
-      {!isLoading && sneakersData.length === 0 && (
+      {!isLoading && !searchedQueryHasData && (
         <SneakerProductsFound products={sneakersData} />
       )}
     </section>

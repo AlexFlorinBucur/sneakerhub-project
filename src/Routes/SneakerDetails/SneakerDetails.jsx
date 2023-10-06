@@ -43,8 +43,8 @@ const SneakerDetails = () => {
             upperMaterial,
             category,
           }) => (
-            <section
-              className={`${classes["section-details"]} ${classes["grid--2-cols"]}`}
+            <div
+              className={`${classes["details"]} ${classes["grid--2-cols"]}`}
               key={id}
             >
               <SneakerDetailsImage sneakerImage={sneakerImage} name={name} />
@@ -66,7 +66,7 @@ const SneakerDetails = () => {
               />
               <SneakerDetailsFacts name={name} storyHtml={storyHtml} />
               <SneakerTracking />
-            </section>
+            </div>
           )
         )}
     </>

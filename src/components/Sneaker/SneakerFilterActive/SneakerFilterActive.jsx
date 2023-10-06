@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./SneakerFilterActive.module.css";
-import { MdFilterListOff, MdOutlineFilterAltOff } from "react-icons/md";
+import { HiOutlineFilter } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { cartActions } from "../../store/sneakers";
+import { sneakerActions } from "../../../store/sneakers";
 import { useDispatch } from "react-redux";
 
 const SneakerFilterActive = ({ activeFilters }) => {
@@ -15,7 +15,7 @@ const SneakerFilterActive = ({ activeFilters }) => {
     const queryValue = query.get(key);
 
     query.delete(key, queryValue);
-    dispatch(cartActions.removeActiveFilter(key));
+    dispatch(sneakerActions.removeActiveFilter(key));
 
     if (query.size === 0) {
       navigate(``);
@@ -39,7 +39,7 @@ const SneakerFilterActive = ({ activeFilters }) => {
                     <span className={classes["active-filter-name"]}>
                       {key.toUpperCase()}: {value}
                     </span>
-                    <MdFilterListOff />
+                    <HiOutlineFilter />
                   </div>
                 </div>
               </li>
@@ -51,7 +51,7 @@ const SneakerFilterActive = ({ activeFilters }) => {
                     <span className={classes["active-filter-name"]}>
                       Reset all filters!
                     </span>
-                    <MdOutlineFilterAltOff />
+                    <HiOutlineFilter />
                   </div>
                 </Link>
               </li>

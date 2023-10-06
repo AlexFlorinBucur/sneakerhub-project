@@ -10,9 +10,11 @@ const OrderDetails = () => {
     (order) => order.orderName === params.orderName
   );
 
+  const hasOrdersAvailable = orders.length !== 0 && currentOrderName;
+
   return (
     <>
-      {orders.length !== 0 && currentOrderName ? (
+      {hasOrdersAvailable ? (
         <div className={classes["order-data-info"]}>
           <div>
             <div className={classes["info-container"]}>
@@ -37,17 +39,19 @@ const OrderDetails = () => {
             <div className={classes["info-container"]}>
               <h2>Products</h2>
               <ul>
-                {currentOrderName.orderedItems.map((el) => (
-                  <li key={el.id + el.size * el.amount}>
-                    <div className={classes["purchased-items"]}>
-                      <div>
-                        <img src={el.image} />
+                {currentOrderName.orderedItems.map(
+                  ({ id, size, image, amount, name, price }) => (
+                    <li key={id + size + amount}>
+                      <div className={classes["purchased-items"]}>
+                        <div>
+                          <img src={image} />
+                        </div>
+                        <div>{`${name} - SIZE ${size}`}</div>
+                        <div>{`$${price.toFixed(2)} (x${amount})`}</div>
                       </div>
-                      <div>{`${el.name} - SIZE ${el.size}`}</div>
-                      <div>{`$${el.price.toFixed(2)} (x${el.amount})`}</div>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>

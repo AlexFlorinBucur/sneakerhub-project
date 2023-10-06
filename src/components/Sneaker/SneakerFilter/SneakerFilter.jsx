@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { useState } from "react";
 import classes from "./SneakerFilter.module.css";
-import { placeholders } from "./Placeholders";
-import { BiExpandVertical } from "react-icons/bi";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { placeholders } from "../Placeholders";
+import { HiSelector } from "react-icons/hi";
+import { HiArrowSmRight } from "react-icons/hi";
 import { CSSTransition } from "react-transition-group";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { generateFilterObject } from "../../helpers/generate-filter";
+import { Link, useLocation } from "react-router-dom";
+import { generateFilterObject } from "../../../helpers/generate-filter";
 
 const animationTiming = {
   enter: 400,
@@ -16,16 +16,12 @@ const animationTiming = {
 const buildSortUrl = (location, sortOrder) => {
   const currentSearch = location.search;
 
-  // Eliminare alti parametri "order"
   const cleanedSearch = currentSearch.replace(/([&?])order=[^&]+(&|$)/, "$1");
 
-  // Adăugare simbol "&" doar dacă query string nu este gol
   const separator = cleanedSearch ? "&" : "?";
 
-  // Construirea noului URL
   const newSearch = `${cleanedSearch}${separator}order=${sortOrder}`;
 
-  // Înlocuirea caracterele duplicate de tipul "&&&&" cu un singur "&"
   const finalSearch = newSearch.replace(/&+/g, "&");
 
   return finalSearch;
@@ -33,23 +29,13 @@ const buildSortUrl = (location, sortOrder) => {
 
 const SneakerFilter = ({ sneakersData, activeFilters }) => {
   const [keyFilter, setKeyFilter] = useState(false);
-  // const navigate = useNavigate();
   const location = useLocation();
 
-  const [orderActive, setOrderActive] = useState(false);
+  const [dropdownActive, setDropdownActive] = useState(false);
 
-  const openDropdownOrder = () => {
-    setOrderActive((state) => !state);
+  const openDropdownFilter = () => {
+    setDropdownActive((state) => !state);
   };
-
-  // const filterNavigateHandler = (nameItem) => {
-  //   navigate({
-  //     pathname: `${location.pathname}`,
-  //     search: location.search
-  //       ? `${location.search}&${keyFilter}=${nameItem}`
-  //       : `?${keyFilter}=${nameItem}`,
-  //   });
-  // };
 
   const filterNavigateHandler = (nameItem) => {
     return `${location.pathname}${
@@ -64,10 +50,10 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
   const filterHandlerName = (name) => {
     if (keyFilter === name) {
       setKeyFilter(false);
-      setOrderActive(false);
+      setDropdownActive(false);
     } else {
       setKeyFilter(name);
-      setOrderActive(false);
+      setDropdownActive(false);
     }
   };
 
@@ -100,18 +86,18 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
               onClick={() => filterHandlerName(filterName)}
             >
               <span>{filterName}</span>
-              <BiExpandVertical />
+              <HiSelector />
             </div>
           ))}
         <div
           className={`${classes["filter-cat"]} ${classes["order-items"]} ${
-            orderActive ? classes["open"] : ""
+            dropdownActive ? classes["open"] : ""
           }`}
-          onClick={() => openDropdownOrder()}
+          onClick={openDropdownFilter}
         >
           <div className={classes["select-order"]}>
             <span>Sort by: select</span>
-            <BiExpandVertical />
+            <HiSelector />
           </div>
           <div className={classes["dropdown-menu"]}>
             {placeholders.sortOptions.map((option) => (
@@ -143,7 +129,7 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
             {keyFilter &&
               filterObject[keyFilter].map(({ item, count }) => (
                 <li key={item}>
-                  <AiOutlineArrowRight />
+                  <HiArrowSmRight />
                   <Link to={filterNavigateHandler(item)}>
                     {item}
                     <span> ({count})</span>
@@ -173,7 +159,7 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
     //             onClick={() => filterHandlerName(filterName)}
     //           >
     //             <span>{filterName}</span>
-    //             <BiExpandVertical />
+    //             <HiSelector />
     //           </div>
     //           <CSSTransition
     //             mountOnEnter
@@ -193,7 +179,7 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
     //                 {keyFilter &&
     //                   filterObject[keyFilter].map(({ item, count }) => (
     //                     <li key={item}>
-    //                       <AiOutlineArrowRight />
+    //                       <HiArrowSmRight />
     //                       <a onClick={() => filterNavigateHandler(item)}>
     //                         {item}
     //                         <span> ({count})</span>

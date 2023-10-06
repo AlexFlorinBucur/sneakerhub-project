@@ -39,6 +39,7 @@
   text-align: center;
   width: 100%;
   justify-self: center;
+  z-index: 1;
 }
 
 .logo > a {

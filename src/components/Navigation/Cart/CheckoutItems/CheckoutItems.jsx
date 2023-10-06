@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import SimpleLine from "../../../UI/SimpleLine";
 import classes from "./CheckoutItems.module.css";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { HiOutlineX } from "react-icons/hi";
 import { cartActions } from "../../../../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -12,11 +12,10 @@ import { minPriceShippingFree, voucherCoupon } from "../../Placeholders";
 
 const CheckoutItems = ({ shipping }) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+  const { items: cartItems, voucher } = useSelector((state) => state.cart);
   const totalAmount = +useSelector((state) => state.cart.totalAmount);
   const totalAmountToPay = +useSelector((state) => state.cart.totalAmountToPay);
   const voucherRef = useRef();
-  const voucher = useSelector((state) => state.cart.voucher);
 
   const cartItemAddHandler = (item) => {
     dispatch(cartActions.addItem({ ...item, amount: 1 }));
@@ -141,7 +140,7 @@ const CheckoutItems = ({ shipping }) => {
                     cartItemRemoveHandler(item.id, item.size, true)
                   }
                 >
-                  <AiOutlineCloseCircle />
+                  <HiOutlineX />
                 </button>
               </td>
             </tr>
@@ -176,9 +175,7 @@ const CheckoutItems = ({ shipping }) => {
                 ) : (
                   <div className={classes["voucher-action"]}>
                     <span>{`Voucher code apply: ${voucher.voucherCode}`}</span>
-                    <AiOutlineCloseCircle
-                      onClick={() => removeVoucherHandler()}
-                    />
+                    <HiOutlineX onClick={removeVoucherHandler} />
                   </div>
                 )}
               </th>

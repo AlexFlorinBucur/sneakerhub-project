@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Drawer.module.css";
-import { MdClose } from "react-icons/md";
+import { HiOutlineX } from "react-icons/hi";
 import { CSSTransition } from "react-transition-group";
 import { useRef } from "react";
 
@@ -34,7 +34,7 @@ const Drawer = ({
     >
       <div className={`${classes.drawer} ${cssClass}`} ref={nodeRef}>
         <div className={classes["logo-exit"]}>
-          <MdClose className={classes["exit-icon"]} onClick={onCloseModal} />
+          <HiOutlineX className={classes["exit-icon"]} onClick={onCloseModal} />
         </div>
         {children}
       </div>

@@ -1,4 +1,4 @@
-import { RiLockPasswordLine } from "react-icons/ri";
+import { HiOutlineLockClosed } from "react-icons/hi";
 
 import Input from "../../../UI/Input";
 import classes from "./RepetitiveInput.module.css";
@@ -24,7 +24,7 @@ const PasswordInput = ({
         htmlFor: "password",
         text: "Password",
       }}
-      hasSvg={<RiLockPasswordLine />}
+      hasSvg={<HiOutlineLockClosed />}
       hasError={passwordHasError || errorPswMsg}
       errorMsg={
         errorPswMsg ? errorPswMsg : "Password should be at least 6 characters"
