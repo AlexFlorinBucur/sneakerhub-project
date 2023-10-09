@@ -1,22 +1,3 @@
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  color: #fafafa;
-}
-
-th {
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: 1.3rem;
-}
-
-td {
-  padding: 3.5rem 0.5rem 0 0.5rem;
-}
-
 .checkout-name {
   width: 50%;
   text-align: left;
@@ -41,18 +22,19 @@ td {
 .product-image {
   display: flex;
   justify-content: center;
-  width: 40%;
-  background-color: #fafafa;
+  width: 100%;
+  background-color: var(--primary-non-colour-section);
   overflow: hidden;
 }
 
 .product-image a {
-  width: 70%;
+  width: 100%;
   display: flex;
+  justify-content: center;
 }
 
 .product-image img {
-  width: 100%;
+  width: 60%;
   transform: scale(1.5);
 }
 
@@ -75,7 +57,7 @@ td {
 .product-details a:link,
 .product-details a:visited {
   text-decoration: none;
-  color: #051026;
+  color: var(--primary-text);
 }
 
 .product-details a:hover {
@@ -83,7 +65,7 @@ td {
 }
 
 .product-details span {
-  color: #959595;
+  color: var(--secondary-text);
   font-weight: 300;
 }
 
@@ -98,7 +80,7 @@ td {
   display: flex;
   align-items: center;
   font-size: 1.8rem;
-  color: #1b1b1b;
+  color: var(--primary-text);
   padding: 0 1rem;
   border: none;
   background-color: transparent;
@@ -130,7 +112,7 @@ td {
 
 .product-price {
   font-size: 1.8rem;
-  color: #959595;
+  color: var(--secondary-text);
   display: flex;
   justify-content: center;
 }
@@ -141,31 +123,19 @@ td {
 
 .voucher-form {
   text-align: left;
+  display: flex;
 }
 
 .button-coupon {
-  height: 5rem;
-  line-height: 5rem;
-  border: none;
-  color: #fff;
-  background-color: #051026;
-  text-align: center;
-  text-transform: uppercase;
-  padding: 0 2.5rem;
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-left: 1rem;
-  transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
+  justify-content: center;
+  margin: 0 0 0 1.5rem;
 }
 
 .voucher-text {
-  height: 5rem;
+  /* height: 5rem; */
   border: 0.1rem solid #d4d4d4;
   padding: 0 1.5rem;
-  line-height: 5rem;
+  /* line-height: 5rem; */
   font-size: 1.3rem;
 }
 
@@ -176,17 +146,33 @@ td {
 .cart-total span {
   font-size: 2.4rem;
   font-weight: 700;
-  color: #051026;
+  color: var(--primary-text);
+}
+
+.cart-total-final.special-line {
+  text-decoration: line-through;
+}
+
+.voucher-action {
+  font-weight: 600;
+  display: flex;
+  color: var(--primary);
+  align-items: center;
+}
+
+.voucher-action > svg {
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 .final-qty {
   font-size: 1.6rem;
   text-align: center;
-  color: #051026;
+  color: var(--primary-text);
 }
 
 .cart-order-free {
-  color: #051026;
+  color: var(--primary-text);
   font-size: 1.2rem;
   text-align: inherit;
 }

@@ -1,4 +1,4 @@
-.section-details {
+.details {
   padding: 1.5rem;
   display: grid;
 }
@@ -8,10 +8,5 @@
 }
 
 .product-data {
-  color: #051026;
-}
-
-h2 {
-  padding: 3rem 0;
-  color: #4f80ab;
+  color: var(--primary-text);
 }

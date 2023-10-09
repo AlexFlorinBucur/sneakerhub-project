@@ -3,12 +3,19 @@ import "./index.css";
 
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Sneakers from "./Routes/Sneakers/Sneakers.jsx";
-import RootLayout from "./Routes/RootLayout.jsx";
-import Slider from "./Routes/Slider/Slider.jsx";
-import SneakerDetails from "./Routes/SneakerDetails/SneakerDetails";
-import Cart from "./Routes/Cart/Cart";
-import Account from "./Routes/Account/Account";
+
+import {
+  Account,
+  Cart,
+  OrderDetails,
+  RootLayout,
+  Search,
+  Slider,
+  SneakerDetails,
+  Sneakers,
+  Wishlist,
+} from "./Routes/asyncComponents";
+// import Wishlist from "./Routes/Wishlist/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +29,18 @@ const router = createBrowserRouter([
         children: [{ path: ":id", element: <SneakerDetails /> }],
       },
       { path: "/cart", element: <Cart /> },
-      { path: "/account", element: <Account /> },
+      {
+        path: "/account/*",
+        element: <Account />,
+        children: [
+          {
+            path: "order/:orderName",
+            element: <OrderDetails />,
+          },
+        ],
+      },
+      { path: "/search/:query", element: <Search /> },
+      { path: "/wishlist", element: <Wishlist /> },
     ],
   },
 ]);

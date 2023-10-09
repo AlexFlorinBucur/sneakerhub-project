@@ -1,23 +1,11 @@
-import classes from "./SneakerProductData.module.css";
 import SneakerDetailsName from "../SneakerDetailsName/SneakerDetailsName";
 import SneakerDetailsForm from "../SneakerDetailsForm/SneakerDetailsForm";
 import SimpleLine from "../../UI/SimpleLine";
 import SneakerDetailsDescription from "../SneakerDetailsDescription/SneakerDetailsDescription";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import { toast } from "react-toastify";
-
-const getTimeFromStamp = function (timestamp) {
-  // return an empty string if there is no release_date_unix
-  if (!timestamp) {
-    return "";
-  }
-
-  const day = new Date(timestamp * 1000);
-  const newTimestampFormat =
-    day.getDate() + "/" + `${day.getMonth() + 1}` + "/" + day.getFullYear();
-  return newTimestampFormat;
-};
+import { getTimeFromStamp } from "../../../helpers/get-time";
 
 const SneakerProductData = ({
   name,
@@ -53,7 +41,7 @@ const SneakerProductData = ({
   };
 
   return (
-    <div className={classes["product-data"]}>
+    <div>
       <SneakerDetailsName
         name={name}
         details={details}

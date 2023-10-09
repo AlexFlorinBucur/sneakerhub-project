@@ -8,11 +8,15 @@ import { useLogin } from "../../../hooks/userActions";
 import LoginForm from "./LoginForm";
 import UserAuthenticated from "./AuthenticatedUser";
 import { cartActions } from "../../../store/cart";
+import { sendingCartData } from "../../../store/order";
+import { fetchWishlist } from "../../../helpers/fetch-wishlist";
+import { sneakerActions } from "../../../store/sneakers";
 
 const Login = ({ onCloseModal, show }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const expirationTime = useSelector((state) => state.auth.expirationTime);
+  const userId = useSelector((state) => state.auth.userId);
 
   const { userAction, switchAction, loadingAction } = useLogin();
 
@@ -43,6 +47,21 @@ const Login = ({ onCloseModal, show }) => {
       );
     }
   }, []);
+
+  // this is for setting the orders and wishlist
+  useEffect(() => {
+    if (userId) {
+      dispatch(sendingCartData("GET", null, userId));
+
+      const oldWish = JSON.parse(localStorage.getItem("wishlist"));
+
+      if (!oldWish && oldWish?.length !== 0) {
+        dispatch(fetchWishlist());
+      } else {
+        dispatch(sneakerActions.updateWishData(oldWish));
+      }
+    }
+  }, [Boolean(userId)]);
 
   useEffect(() => {
     if (isLoggedIn && expirationTime) {

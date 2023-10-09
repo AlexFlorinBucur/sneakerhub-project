@@ -1,6 +1,5 @@
 import classes from "./SneakerDetails.module.css";
-
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import SneakerDetailsFacts from "../../components/Sneaker/SneakerDetailsFacts/SneakerDetailsFacts.jsx";
@@ -8,20 +7,18 @@ import SneakerTracking from "../../components/Sneaker/SneakerTracking/SneakerTra
 import SneakerDetailsImage from "../../components/Sneaker/SneakerDetailsImage/SneakerDetailsImage.jsx";
 import SneakerProductData from "../../components/Sneaker/SneakerProductData/SneakerProductData.jsx";
 import Spinner from "../../components/UI/Spinner";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchSneakers } from "../../store/cart-actions";
 
 const SneakerDetails = () => {
   const params = useParams();
 
-  const dispatch = useDispatch();
   const { sneakersData, isLoading, error } = useSelector(
     (state) => state.sneakerData
   );
 
-  useEffect(() => {
-    dispatch(fetchSneakers(params));
-  }, [params]);
+  // not needed, because we do fetch in parent path (Sneakers.jsx)
+  // useEffect(() => {
+  //   dispatch(fetchSneakers(params));
+  // }, [params.id]);
 
   return (
     <>
@@ -46,8 +43,8 @@ const SneakerDetails = () => {
             upperMaterial,
             category,
           }) => (
-            <section
-              className={`${classes["section-details"]} ${classes["grid--2-cols"]}`}
+            <div
+              className={`${classes["details"]} ${classes["grid--2-cols"]}`}
               key={id}
             >
               <SneakerDetailsImage sneakerImage={sneakerImage} name={name} />
@@ -69,7 +66,7 @@ const SneakerDetails = () => {
               />
               <SneakerDetailsFacts name={name} storyHtml={storyHtml} />
               <SneakerTracking />
-            </section>
+            </div>
           )
         )}
     </>

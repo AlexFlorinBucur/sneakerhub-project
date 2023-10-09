@@ -11,4 +11,7 @@
   --secondary-text: #959595;
 
   --primary-non-colour: #fff;
+  --primary-non-colour-section: #fafafa;
+
+  --error-colour: #780000;
 }

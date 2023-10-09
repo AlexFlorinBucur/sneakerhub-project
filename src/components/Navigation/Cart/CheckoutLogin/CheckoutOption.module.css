@@ -1,5 +1,3 @@
-@import url("../../../../assets/variables.module.css");
-
 /* padding-top from login-container + padding-top checkout-option =3.5rem ~ same as td element */
 .checkout-option {
   padding-top: 1.5rem;

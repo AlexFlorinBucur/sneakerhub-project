@@ -2,15 +2,17 @@ import classes from "./Account.module.css";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useLogin } from "../../hooks/userActions";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import LoginForm from "../../components/Navigation/Login/LoginForm";
+import OrderHistory from "../../components/Navigation/Orders/OrderHistory";
 
 const Account = () => {
-  const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
+  const { orderName } = useParams();
+
+  const { token, isLoggedIn } = useSelector((state) => state.auth);
 
   const { userAction, switchAction, loadingAction } = useLogin();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   // for Protecting Route if the user is not logged in
   useEffect(() => {
@@ -23,22 +25,28 @@ const Account = () => {
 
   return (
     <div className={classes["section-account"]}>
-      <div className={classes["section-title"]}>Profile</div>
-      <div className={classes["account-actions"]}>
-        <div className={classes["edit-info"]}>
-          <div>
+      <div className={classes["section-title"]}>
+        {!orderName ? "Profile" : `Order no. ${orderName}`}
+      </div>
+      {orderName ? (
+        <Outlet />
+      ) : (
+        <div className={classes["account-actions"]}>
+          <div className={classes["edit-info"]}>
             <h3>Edit Information</h3>
             <LoginForm
               userAction={userAction}
               switchAction={switchAction}
               loadingAction={loadingAction}
               token={token}
-              showingOptions={false}
             />
           </div>
+          <div className={classes["account-orders"]}>
+            <h1>My orders</h1>
+            <OrderHistory />
+          </div>
         </div>
-        <div className={classes["account-orders"]}>My orders</div>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,9 +1,29 @@
 import React from "react";
 import classes from "./SneakerFilterActive.module.css";
-import { MdFilterListOff, MdOutlineFilterAltOff } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { HiOutlineFilter } from "react-icons/hi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { sneakerActions } from "../../../store/sneakers";
+import { useDispatch } from "react-redux";
 
-const SneakerFilterActive = ({ activeFilters, onDeleteQuery }) => {
+const SneakerFilterActive = ({ activeFilters }) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const query = new URLSearchParams(location.search);
+
+  const deleteQueryHandler = (key) => {
+    const queryValue = query.get(key);
+
+    query.delete(key, queryValue);
+    dispatch(sneakerActions.removeActiveFilter(key));
+
+    if (query.size === 0) {
+      navigate(``);
+    } else {
+      navigate(`?${query}`);
+    }
+  };
+
   return (
     <>
       {Object.keys(activeFilters).length > 0 && (
@@ -13,13 +33,13 @@ const SneakerFilterActive = ({ activeFilters, onDeleteQuery }) => {
               <li key={key}>
                 <div
                   className={classes["active-filter-list-item"]}
-                  onClick={() => onDeleteQuery(key)}
+                  onClick={() => deleteQueryHandler(key)}
                 >
                   <div>
                     <span className={classes["active-filter-name"]}>
                       {key.toUpperCase()}: {value}
                     </span>
-                    <MdFilterListOff />
+                    <HiOutlineFilter />
                   </div>
                 </div>
               </li>
@@ -31,7 +51,7 @@ const SneakerFilterActive = ({ activeFilters, onDeleteQuery }) => {
                     <span className={classes["active-filter-name"]}>
                       Reset all filters!
                     </span>
-                    <MdOutlineFilterAltOff />
+                    <HiOutlineFilter />
                   </div>
                 </Link>
               </li>

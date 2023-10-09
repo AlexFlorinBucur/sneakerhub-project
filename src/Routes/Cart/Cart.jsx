@@ -7,18 +7,33 @@ import CheckoutItems from "../../components/Navigation/Cart/CheckoutItems/Checko
 import CheckoutLogin from "../../components/Navigation/Cart/CheckoutLogin/CheckoutLogin";
 import Shipping from "../../components/Navigation/Cart/Shipping/Shipping";
 import { useState } from "react";
-import { sendingCartData } from "../../store/cart-actions";
 import Spinner from "../../components/UI/Spinner";
 import EmptyCart from "../../components/Navigation/Cart/EmptyCart/EmptyCart";
 import { toast } from "react-toastify";
 import { cartActions } from "../../store/cart";
+import { sendingCartData } from "../../store/order";
+import { getTimeFromStamp } from "../../helpers/get-time";
+import Button from "../../components/UI/Button";
+import {
+  minPriceShippingFree,
+  shippingPrice,
+} from "../../components/Navigation/Placeholders";
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.items);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const { isLoading } = useSelector((state) => state.sneakerData);
+  const {
+    items: cartItems,
+    totalAmount,
+    totalAmountToPay,
+    voucher,
+  } = useSelector((state) => state.cart);
+  const { isLoggedIn, userId } = useSelector((state) => state.auth);
+  const {
+    isLoading,
+    error,
+    fulfilledMessage: fulfilledMsg,
+  } = useSelector((state) => state.order);
 
   const [shippingInfo, setShippingInfo] = useState({});
   const [inputError, setInputError] = useState({});
@@ -45,6 +60,14 @@ const Cart = () => {
     formValid = true;
   }
 
+  if (fulfilledMsg) {
+    toast.success(fulfilledMsg);
+  }
+
+  if (error) {
+    toast.error(error);
+  }
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -61,7 +84,18 @@ const Cart = () => {
       return;
     }
 
-    dispatch(sendingCartData(shippingInfo, cartItems));
+    const orderData = {
+      deliveryAdress: shippingInfo,
+      orderedItems: cartItems,
+      uniqueId: userId,
+      orderDate: getTimeFromStamp(new Date().getTime() / 1000),
+      status: "PROCESSING",
+      totalAmount: voucher ? totalAmountToPay : totalAmount,
+      voucher: voucher,
+      deliveryPrice: totalAmount < minPriceShippingFree ? shippingPrice : 0,
+    };
+
+    dispatch(sendingCartData("POST", orderData));
     dispatch(cartActions.clearCart());
   };
 
@@ -75,36 +109,37 @@ const Cart = () => {
           <CheckoutSidebar />
           <form onSubmit={submitHandler}>
             <fieldset>
-              <div className={classes["checkout-blocks"]}>
-                <div className={classes["checkout-header"]}>
-                  <div className={classes["checkout-header-bg"]}>
-                    <CheckoutItems />
-                  </div>
-                </div>
-                <div className={classes["checkout-header"]}>
-                  <div className={classes["checkout-header-bg"]}>
-                    <CheckoutLogin />
-                  </div>
-                </div>
-                <div className={classes["checkout-header"]}>
-                  <div className={classes["checkout-header-bg"]}>
-                    <Shipping
-                      setShippingInfo={setShippingInfo}
-                      setInputError={setInputError}
-                    />
-                  </div>
-                </div>
-                <div className={classes["checkout-header"]}>
-                  <div className={classes["checkout-header-bg"]}>
-                    <CheckoutItems shipping={true} />
-                  </div>
+              <div className={classes["checkout-header"]}>
+                <div className={classes["checkout-header-bg"]}>
+                  <CheckoutItems />
                 </div>
               </div>
-              <div
-                className={`${classes["actions"]} ${classes["order-button"]}`}
-              >
-                {isLoading ? <Spinner /> : <button>PLACE ORDER</button>}
+              <div className={classes["checkout-header"]}>
+                <div className={classes["checkout-header-bg"]}>
+                  <CheckoutLogin />
+                </div>
               </div>
+              <div className={classes["checkout-header"]}>
+                <div className={classes["checkout-header-bg"]}>
+                  <Shipping
+                    setShippingInfo={setShippingInfo}
+                    setInputError={setInputError}
+                  />
+                </div>
+              </div>
+              <div className={classes["checkout-header"]}>
+                <div className={classes["checkout-header-bg"]}>
+                  <CheckoutItems shipping={true} />
+                </div>
+              </div>
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <Button
+                  btnText={"PLACE ORDER"}
+                  extraClasses={classes["order-button"]}
+                />
+              )}
             </fieldset>
           </form>
         </div>
