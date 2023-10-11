@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "./SneakerTracking.module.css";
 import { SlSocialDropbox } from "react-icons/sl";
-// import { LiaShippingFastSolid, LiaMapMarkedAltSolid } from "react-icons/lia";
 import { HiOutlineMap, HiOutlineTruck } from "react-icons/hi";
 
 const SneakerTracking = () => {

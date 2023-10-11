@@ -114,7 +114,7 @@ export const fetchSneakers =
             // sneakerImage: sneakerData.grid_picture_url.replaceAll("375", "300"),
             brandName: sneakerData.brand_name,
             name: sneakerData.name,
-            sizeRange: sneakerData.size_range,
+            sizeRange: sneakerData.size_range.sort((a, b) => a - b),
             retailPrice: sneakerData.retail_price_cents / 100,
             storyHtml: sneakerData.story_html,
             details: sneakerData.details,
@@ -129,7 +129,7 @@ export const fetchSneakers =
           };
         })
         .filter((sneaker) => {
-          // Filtrare comună bazată pe params
+          // common filter based on params
           if (params) {
             return params.id
               ? sneaker.id === Number(params.id) &&

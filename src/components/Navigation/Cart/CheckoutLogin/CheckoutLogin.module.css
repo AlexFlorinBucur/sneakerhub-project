@@ -13,3 +13,9 @@
 .checkout-login-inputs > div {
   padding: 0rem 2rem 0 4rem;
 }
+
+@media (max-width: 30em) {
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+}

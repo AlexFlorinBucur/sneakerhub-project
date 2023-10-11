@@ -15,11 +15,6 @@ const SneakerDetails = () => {
     (state) => state.sneakerData
   );
 
-  // not needed, because we do fetch in parent path (Sneakers.jsx)
-  // useEffect(() => {
-  //   dispatch(fetchSneakers(params));
-  // }, [params.id]);
-
   return (
     <>
       {isLoading && <Spinner />}

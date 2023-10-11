@@ -26,9 +26,9 @@ const SneakerDetailsForm = ({ sizeRange, onAddToCart }) => {
   const toggleWishList = () => {
     if (isLoggedIn) {
       dispatch(sneakerActions.setWishlist(sneakerData[0]));
-      toast.success("Wishlist-ul a fost updatat!");
+      toast.success("The wishlist has been updated!");
     } else {
-      toast.error("logheaza-te");
+      toast.error("Log in to add products to your favorites.");
     }
   };
 
@@ -44,13 +44,11 @@ const SneakerDetailsForm = ({ sizeRange, onAddToCart }) => {
           ref={selectedSizeRef}
           required
         >
-          {sizeRange
-            .toSorted((a, b) => a - b)
-            .map((el) => (
-              <option key={el} value={el} title={el}>
-                {el}
-              </option>
-            ))}
+          {sizeRange.map((el) => (
+            <option key={el} value={el} title={el}>
+              {el}
+            </option>
+          ))}
         </select>
       </div>
       <div className={classes["product-buttons"]}>

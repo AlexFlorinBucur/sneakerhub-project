@@ -55,3 +55,16 @@
   text-align: center;
   padding-bottom: 3.5rem;
 }
+
+@media (max-width: 55em) {
+  .order-data-info {
+    padding: 0 1rem;
+  }
+}
+
+/* 672px */
+@media (max-width: 42em) {
+  .order-data-info {
+    grid-template-columns: 1fr;
+  }
+}

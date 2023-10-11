@@ -20,7 +20,11 @@ const OrderHistory = () => {
               <th className={classes["order-ref-head"]}>Order reference</th>
               <th className={classes["order-data-head"]}>Date</th>
               <th className={classes["order-data-head"]}>Total</th>
-              <th className={classes["order-data-head"]}>Status</th>
+              <th
+                className={`${classes["order-data-head"]} ${classes["order-item-status"]}`}
+              >
+                Status
+              </th>
               <th className={classes["order-data-head"]}>Details</th>
             </tr>
           </thead>
@@ -29,8 +33,14 @@ const OrderHistory = () => {
               <tr key={order.orderName}>
                 <td className={classes["order-item"]}>{order.orderName}</td>
                 <td className={classes["order-item"]}>{order.orderDate}</td>
-                <td className={classes["order-item"]}>{order.totalAmount} $</td>
-                <td className={classes["order-item"]}>{order.status}</td>
+                <td className={classes["order-item"]}>
+                  {order.totalAmount.toFixed(2)} $
+                </td>
+                <td
+                  className={`${classes["order-item"]} ${classes["order-item-status"]}`}
+                >
+                  {order.status}
+                </td>
                 <td className={classes["order-item"]}>
                   <Link to={`order/${order.orderName}`}>Details</Link>
                 </td>

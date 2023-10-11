@@ -120,11 +120,9 @@
 }
 
 .minicart-button {
-  /* width: 100%; */
   padding: 1rem 1.5rem;
   cursor: pointer;
   border: none;
-  /* border-radius: 1rem; */
   justify-self: flex-start;
   font-size: 1.3rem;
   font-weight: 600;
@@ -142,4 +140,10 @@
   text-transform: uppercase;
   color: var(--primary-text);
   font-weight: 700;
+}
+
+@media (max-width: 66em) {
+  .cart-active {
+    display: none;
+  }
 }

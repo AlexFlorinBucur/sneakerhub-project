@@ -138,6 +138,15 @@ const Cart = () => {
                 <Button
                   btnText={"PLACE ORDER"}
                   extraClasses={classes["order-button"]}
+                  btnType={
+                    Object.entries(inputError).length === 6
+                      ? "button"
+                      : "submit"
+                  }
+                  {...(errorMessages.length === 0 &&
+                  Object.entries(inputError).length !== 6
+                    ? {}
+                    : { onClick: submitHandler })}
                 />
               )}
             </fieldset>

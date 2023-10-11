@@ -46,7 +46,6 @@
 .btn.wishlist svg {
   margin-left: 1rem;
   stroke: var(--primary-text);
-  /* fill: var(--primary-text); */
 }
 
 .btn.wishlist:hover {
@@ -55,4 +54,10 @@
 
 .btn.wishlist svg:hover {
   margin-left: 1rem;
+}
+
+@media (max-width: 55em) {
+  .btn {
+    padding: 1rem;
+  }
 }

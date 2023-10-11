@@ -37,11 +37,16 @@ const UserAuthenticated = ({ onCloseModal, switchAction }) => {
         className={classes["welcome-user"]}
       >{`Welcome to SNKR, ${userName}!`}</h3>
       <div className={classes["authenticated"]}>
-        <Button btnText={"My account"} onClick={navigateToAccount}></Button>
+        <Button
+          btnText={"My account"}
+          onClick={navigateToAccount}
+          btnType={"button"}
+        ></Button>
         <Button
           btnText={"Log out"}
           onClick={logoutHandler}
           extraClasses={classes["btn-margin"]}
+          btnType={"button"}
         ></Button>
       </div>
     </>

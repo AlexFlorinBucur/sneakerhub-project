@@ -85,3 +85,10 @@
     transform: translateY(-100%);
   }
 }
+
+@media (max-width: 30em) {
+  .search-input {
+    font-size: 2rem;
+    height: 5rem;
+  }
+}
