@@ -16,6 +16,7 @@
   justify-content: center;
   font-size: 3.6rem;
   font-weight: 700;
+  text-align: center;
 }
 
 .edit-info {
@@ -46,4 +47,20 @@
   font-size: 2rem;
   text-transform: uppercase;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 42em) {
+  .section-title {
+    font-size: 2.6rem;
+  }
+
+  .account-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 30em) {
+  .section-account {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+  }
 }

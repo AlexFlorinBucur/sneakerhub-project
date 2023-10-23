@@ -15,3 +15,9 @@
   font-size: 1rem;
   font-weight: 600;
 }
+
+@media (max-width: 42em) {
+  .product-track {
+    font-size: 3rem;
+  }
+}

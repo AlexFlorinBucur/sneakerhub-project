@@ -5,6 +5,13 @@ import {
   HiShoppingCart,
 } from "react-icons/hi";
 
+import imageFreshJd from "../../assets/image-carousel-1-min.jpg";
+import imageFreshJdW from "../../assets/image-carousel-1.webp";
+import imageDiscount from "../../assets/image-carousel-2-min.jpg";
+import imageDiscountW from "../../assets/image-carousel-2.webp";
+import imageSB from "../../assets/image-carousel-3-min.jpg";
+import imageSBW from "../../assets/image-carousel-3.webp";
+
 export const placeholders = {
   discount: "25% OFF @ CHECKOUT",
   mainNavLinks: [
@@ -30,24 +37,24 @@ export const MODALS = {
 
 export const slideImages = [
   {
-    imageMin: "/src/assets/image-carousel-1-min.jpg",
-    imageWebp: "/src/assets/image-carousel-1.webp",
+    imageMin: imageFreshJd,
+    imageWebp: imageFreshJdW,
     header: "Nike Air Jordan",
     information: "Fresh Jordans",
     link: "/search/air jordan",
     linkText: "shop now",
   },
   {
-    imageMin: "/src/assets/image-carousel-2-min.jpg",
-    imageWebp: "/src/assets/image-carousel-2.webp",
+    imageMin: imageDiscount,
+    imageWebp: imageDiscountW,
     header: "Extra25",
     information: "EXTRA 25 DISCOUNT @CHECKOUT",
     link: "/shopping/men",
     linkText: "shop now",
   },
   {
-    imageMin: "/src/assets/image-carousel-3-min.jpg",
-    imageWebp: "/src/assets/image-carousel-3.webp",
+    imageMin: imageSB,
+    imageWebp: imageSBW,
     header: "Best SB",
     information: "CHECK OUT OUR NEW PRODUCTS",
     link: "/search/SB",
@@ -56,10 +63,33 @@ export const slideImages = [
 ];
 
 export const voucherCoupon = {
-  voucherCode: "snkr25",
+  voucherCode: "extra25",
   voucherValue: 25,
 };
 
 export const shippingPrice = 5;
 
 export const minPriceShippingFree = 300;
+
+export const ButtonTypes = {
+  account: {
+    text: "My account",
+    type: "button",
+  },
+  logout: {
+    text: "Log out",
+    type: "button",
+  },
+  voucher: {
+    text: "Apply",
+    type: "button",
+  },
+  addToCart: {
+    text: "Add to bag",
+    type: "submit",
+  },
+  wishlist: {
+    text: "Wishlist",
+    type: "button",
+  },
+};

@@ -10,3 +10,13 @@
 .product-data {
   color: var(--primary-text);
 }
+
+@media (max-width: 42em) {
+  .grid--2-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .details > div:last-child {
+    padding: 3rem 0;
+  }
+}

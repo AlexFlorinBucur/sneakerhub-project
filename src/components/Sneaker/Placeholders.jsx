@@ -4,7 +4,6 @@ export const placeholders = {
     { filterName: "brands" },
     { filterName: "price" },
     { filterName: "size" },
-    // { filterName: "sort by: select" },
   ],
   sortOptions: [
     { sortItem: "name-asc", sortTxt: "Name, A to Z" },

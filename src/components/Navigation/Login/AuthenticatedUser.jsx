@@ -8,6 +8,7 @@ import { fetchCartData } from "../../../helpers/fetch-cart";
 import { orderActions } from "../../../store/order";
 import Button from "../../UI/Button";
 import { fetchWishlist } from "../../../helpers/fetch-wishlist";
+import { ButtonTypes } from "../Placeholders";
 
 const UserAuthenticated = ({ onCloseModal, switchAction }) => {
   const dispatch = useDispatch();
@@ -37,12 +38,17 @@ const UserAuthenticated = ({ onCloseModal, switchAction }) => {
         className={classes["welcome-user"]}
       >{`Welcome to SNKR, ${userName}!`}</h3>
       <div className={classes["authenticated"]}>
-        <Button btnText={"My account"} onClick={navigateToAccount}></Button>
         <Button
-          btnText={"Log out"}
+          btnText={ButtonTypes.account.text}
+          onClick={navigateToAccount}
+          btnType={ButtonTypes.account.type}
+        />
+        <Button
+          btnText={ButtonTypes.logout.text}
           onClick={logoutHandler}
           extraClasses={classes["btn-margin"]}
-        ></Button>
+          btnType={ButtonTypes.logout.type}
+        />
       </div>
     </>
   );

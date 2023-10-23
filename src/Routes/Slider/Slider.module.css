@@ -4,12 +4,6 @@
   position: relative;
 }
 
-@media (max-width: 1050px) {
-  .slider {
-    height: calc(100vh - 30rem);
-  }
-}
-
 .slides {
   height: 100%;
 }
@@ -69,7 +63,6 @@
   background-repeat: no-repeat;
   background-size: 2.5rem;
   padding: 3%;
-  /* @include mixin.tablet {  background-size: 30px;  */
   cursor: pointer;
   background-color: #8080806e;
   background-color: var(--primary-light);
@@ -133,4 +126,35 @@
   height: 5rem;
   margin-top: 1.5rem;
   text-decoration: none;
+}
+
+/* 1056px */
+@media (max-width: 66em) {
+  .slider {
+    height: calc(100vh - 30rem);
+  }
+}
+
+@media (max-width: 42em) {
+  .slider {
+    height: calc(100vh - 16.2rem);
+  }
+}
+
+@media (max-width: 30em) {
+  .slider {
+    height: calc(100vh - 12.6rem);
+  }
+
+  .caption {
+    margin: 0 5rem;
+  }
+
+  .slider-title {
+    font-size: 3rem;
+  }
+
+  .title-link > a {
+    padding: 0 2rem;
+  }
 }

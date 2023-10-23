@@ -23,3 +23,13 @@
 .order-item:last-child {
   border-right: none;
 }
+
+@media (max-width: 30em) {
+  .order-item-status {
+    display: none;
+  }
+
+  .order-item {
+    font-size: 1rem;
+  }
+}

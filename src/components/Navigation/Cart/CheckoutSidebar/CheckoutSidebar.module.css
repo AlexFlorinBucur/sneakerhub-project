@@ -3,3 +3,10 @@
   color: green;
   font-weight: 900;
 }
+
+@media (max-width: 55em) {
+  .checkout-sidebar {
+    grid-row: 3;
+    padding-top: 3rem;
+  }
+}

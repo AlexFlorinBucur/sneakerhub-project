@@ -110,7 +110,7 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                         {iconSvg}
                       </span>
                     )}
-                    <span>
+                    <span className={classes["nav-text"]}>
                       {url || name === "Search"
                         ? name
                         : userName

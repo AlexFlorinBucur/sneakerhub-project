@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Button from "../../../UI/Button";
 import { useRef } from "react";
 import { calculateShippingStatus } from "../../../../helpers/calculate-shipping";
-import { minPriceShippingFree, voucherCoupon } from "../../Placeholders";
+import { ButtonTypes, minPriceShippingFree, voucherCoupon } from "../../Placeholders";
 
 const CheckoutItems = ({ shipping }) => {
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const CheckoutItems = ({ shipping }) => {
             <th className={classes["checkout-qty"]}></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={classes["body-items"]}>
           {cartItems.map((item) => (
             <tr key={`${item.id} ${item.size}`}>
               <td>
@@ -92,47 +92,58 @@ const CheckoutItems = ({ shipping }) => {
               </td>
               <td>
                 {!shipping && (
-                  <div className={classes["modify-qty"]}>
-                    <button
-                      type="button"
-                      className={classes["qty-btn"]}
-                      // onClick={cartItemRemoveHandler.bind(null, item.id, item.size)}
-                      onClick={() => cartItemRemoveHandler(item.id, item.size)}
-                    >
-                      <span className={classes["minus-span"]}>-</span>
-                    </button>
-                    <span>
-                      <input
-                        type="text"
-                        value={item.amount}
-                        onChange={() => null}
-                      />
-                    </span>
-                    <button
-                      type="button"
-                      className={classes["qty-btn"]}
-                      // onClick={cartItemAddHandler.bind(null, item)}
-                      onClick={() => cartItemAddHandler(item)}
-                    >
-                      <span className="plus-span">+</span>
-                    </button>
-                  </div>
+                  <>
+                    <span>Quantity</span>
+                    <div className={classes["modify-qty"]}>
+                      <button
+                        type="button"
+                        className={classes["qty-btn"]}
+                        // onClick={cartItemRemoveHandler.bind(null, item.id, item.size)}
+                        onClick={() =>
+                          cartItemRemoveHandler(item.id, item.size)
+                        }
+                      >
+                        <span className={classes["minus-span"]}>-</span>
+                      </button>
+                      <span>
+                        <input
+                          type="text"
+                          value={item.amount}
+                          onChange={() => null}
+                        />
+                      </span>
+                      <button
+                        type="button"
+                        className={classes["qty-btn"]}
+                        // onClick={cartItemAddHandler.bind(null, item)}
+                        onClick={() => cartItemAddHandler(item)}
+                      >
+                        <span className="plus-span">+</span>
+                      </button>
+                    </div>
+                  </>
                 )}
                 {shipping && (
-                  <div className={classes["final-qty"]}>{item.amount}</div>
+                  <>
+                    <span>Quantity</span>
+                    <div className={classes["final-qty"]}>{item.amount}</div>
+                  </>
                 )}
               </td>
               <td>
+                <span>Price</span>
                 <span className={classes["product-price"]}>
                   {item.price.toFixed(2)} $
                 </span>
               </td>
               <td>
+                <span>Total</span>
                 <span className={classes["product-price"]}>
                   {(item.price * item.amount).toFixed(2)} $
                 </span>
               </td>
               <td>
+                <span>Remove</span>
                 <button
                   type="button"
                   className={classes["qty-btn"]}
@@ -164,9 +175,9 @@ const CheckoutItems = ({ shipping }) => {
                     />
                     <Button
                       className={classes["button-coupon"]}
-                      btnText={"Apply"}
+                      btnText={ButtonTypes.voucher.text}
                       extraClasses={classes["button-coupon"]}
-                      btnType={"button"}
+                      btnType={ButtonTypes.voucher.type}
                       onClick={() =>
                         applyVoucherHandler(voucherRef.current.value.trim())
                       }
@@ -221,8 +232,9 @@ const CheckoutItems = ({ shipping }) => {
           {shipping && totalAmount < minPriceShippingFree && (
             <tr>
               <th className={classes["cart-order-free"]}>
-                Please order ${(minPriceShippingFree - totalAmount).toFixed(2)}{" "}
-                more for free shipping.
+                {`Please order ${(minPriceShippingFree - totalAmount).toFixed(
+                  2
+                )} more for free shipping.`}
               </th>
             </tr>
           )}

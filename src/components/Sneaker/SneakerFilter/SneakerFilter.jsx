@@ -7,24 +7,54 @@ import { HiArrowSmRight } from "react-icons/hi";
 import { CSSTransition } from "react-transition-group";
 import { Link, useLocation } from "react-router-dom";
 import { generateFilterObject } from "../../../helpers/generate-filter";
+import { Fragment } from "react";
+import { buildSortUrl } from "../../../helpers/generate-url-sort";
 
 const animationTiming = {
   enter: 400,
   exit: 100,
 };
 
-const buildSortUrl = (location, sortOrder) => {
-  const currentSearch = location.search;
-
-  const cleanedSearch = currentSearch.replace(/([&?])order=[^&]+(&|$)/, "$1");
-
-  const separator = cleanedSearch ? "&" : "?";
-
-  const newSearch = `${cleanedSearch}${separator}order=${sortOrder}`;
-
-  const finalSearch = newSearch.replace(/&+/g, "&");
-
-  return finalSearch;
+const FilterTransition = ({
+  isMobile,
+  keyFilter,
+  filterName,
+  filterObject,
+  filterNavigateHandler,
+  animationTiming,
+  classes,
+  nodeRef,
+}) => {
+  return (
+    <CSSTransition
+      mountOnEnter
+      unmountOnExit
+      in={isMobile ? keyFilter === filterName : Boolean(keyFilter)}
+      timeout={animationTiming}
+      classNames={{
+        enter: "",
+        enterActive: classes.FilterOpen,
+        exit: "",
+        exitActive: classes.FilterClosed,
+      }}
+      nodeRef={nodeRef}
+    >
+      <div className={classes["filter-list"]} ref={nodeRef}>
+        <ul>
+          {keyFilter &&
+            filterObject[keyFilter].map(({ item, count }) => (
+              <li key={item}>
+                <HiArrowSmRight />
+                <Link to={filterNavigateHandler(item)}>
+                  {item}
+                  <span> ({count})</span>
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </div>
+    </CSSTransition>
+  );
 };
 
 const SneakerFilter = ({ sneakersData, activeFilters }) => {
@@ -59,6 +89,8 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
 
   const filterObject = generateFilterObject(sneakersData);
 
+  const isMobile = window.innerWidth <= 672;
+
   return (
     <>
       <div
@@ -78,16 +110,30 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
               !activeFilters.hasOwnProperty(filterActive.filterName)
           )
           .map(({ filterName }) => (
-            <div
-              className={`${classes["filter-cat"]} ${
-                keyFilter === filterName ? classes.active : ""
-              }`}
-              key={filterName}
-              onClick={() => filterHandlerName(filterName)}
-            >
-              <span>{filterName}</span>
-              <HiSelector />
-            </div>
+            <Fragment key={filterName}>
+              <div
+                className={`${classes["filter-cat"]} ${
+                  keyFilter === filterName ? classes.active : ""
+                }`}
+                key={filterName}
+                onClick={() => filterHandlerName(filterName)}
+              >
+                <span>{filterName}</span>
+                <HiSelector />
+              </div>
+              {isMobile && (
+                <FilterTransition
+                  isMobile={isMobile}
+                  keyFilter={keyFilter}
+                  filterName={filterName}
+                  filterObject={filterObject}
+                  filterNavigateHandler={filterNavigateHandler}
+                  animationTiming={animationTiming}
+                  classes={classes}
+                  nodeRef={nodeRef}
+                />
+              )}
+            </Fragment>
           ))}
         <div
           className={`${classes["filter-cat"]} ${classes["order-items"]} ${
@@ -111,88 +157,18 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
           </div>
         </div>
       </div>
-      <CSSTransition
-        mountOnEnter
-        unmountOnExit
-        in={Boolean(keyFilter)}
-        timeout={animationTiming}
-        classNames={{
-          enter: "",
-          enterActive: classes.FilterOpen,
-          exit: "",
-          exitActive: classes.FilterClosed,
-        }}
-        nodeRef={nodeRef}
-      >
-        <div className={classes["filter-list"]} ref={nodeRef}>
-          <ul>
-            {keyFilter &&
-              filterObject[keyFilter].map(({ item, count }) => (
-                <li key={item}>
-                  <HiArrowSmRight />
-                  <Link to={filterNavigateHandler(item)}>
-                    {item}
-                    <span> ({count})</span>
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-      </CSSTransition>
+      {!isMobile && (
+        <FilterTransition
+          isMobile={isMobile}
+          keyFilter={keyFilter}
+          filterObject={filterObject}
+          filterNavigateHandler={filterNavigateHandler}
+          animationTiming={animationTiming}
+          classes={classes}
+          nodeRef={nodeRef}
+        />
+      )}
     </>
-
-    // !!!!!!FOR FUTURE MOBILE
-    // <>
-    //   <div className={classes["search-filters"]}>
-    //     {placeholders.filters
-    //       .filter(
-    //         (filterActive) =>
-    //           !activeFilters.hasOwnProperty(filterActive.filterName)
-    //       )
-    //       .map(({ filterName }) => (
-    //         <>
-    //           <div
-    //             className={`${classes["filter-cat"]} ${
-    //               keyFilter === filterName ? classes.active : ""
-    //             }`}
-    //             key={filterName}
-    //             onClick={() => filterHandlerName(filterName)}
-    //           >
-    //             <span>{filterName}</span>
-    //             <HiSelector />
-    //           </div>
-    //           <CSSTransition
-    //             mountOnEnter
-    //             unmountOnExit
-    //             in={Boolean(keyFilter === filterName)}
-    //             timeout={animationTiming}
-    //             classNames={{
-    //               enter: "",
-    //               enterActive: classes.FilterOpen,
-    //               exit: "",
-    //               exitActive: classes.FilterClosed,
-    //             }}
-    //             nodeRef={nodeRef}
-    //           >
-    //             <div className={classes["filter-list"]} ref={nodeRef}>
-    //               <ul>
-    //                 {keyFilter &&
-    //                   filterObject[keyFilter].map(({ item, count }) => (
-    //                     <li key={item}>
-    //                       <HiArrowSmRight />
-    //                       <a onClick={() => filterNavigateHandler(item)}>
-    //                         {item}
-    //                         <span> ({count})</span>
-    //                       </a>
-    //                     </li>
-    //                   ))}
-    //               </ul>
-    //             </div>
-    //           </CSSTransition>
-    //         </>
-    //       ))}
-    //   </div>
-    // </>
   );
 };
 

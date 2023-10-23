@@ -38,11 +38,9 @@ const SneakerLink = ({
         {!wishlistRoute ? (
           <p>
             {"Available: "}
-            {sizeRange
-              .toSorted((a, b) => a - b)
-              .map((size) => {
-                return `${size} `;
-              })}
+            {sizeRange.map((size) => {
+              return `${size} `;
+            })}
           </p>
         ) : (
           <HiOutlineTrash
