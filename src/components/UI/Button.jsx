@@ -1,7 +1,14 @@
 import React from "react";
 import classes from "./Button.module.css";
 
-const Button = ({ btnText, children, extraClasses, onClick, btnType }) => {
+const Button = ({
+  btnText,
+  children,
+  extraClasses,
+  onClick,
+  btnType,
+  btnIcon,
+}) => {
   const btnClasses = extraClasses
     ? `${classes["actions"]} ${extraClasses}`
     : classes["actions"];
@@ -9,7 +16,7 @@ const Button = ({ btnText, children, extraClasses, onClick, btnType }) => {
   return (
     <div className={btnClasses}>
       <button onClick={onClick} type={btnType}>
-        {btnText}
+        {btnText} {btnIcon}
       </button>
       {children}
     </div>

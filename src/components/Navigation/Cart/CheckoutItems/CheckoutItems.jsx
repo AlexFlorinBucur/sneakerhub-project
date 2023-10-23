@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Button from "../../../UI/Button";
 import { useRef } from "react";
 import { calculateShippingStatus } from "../../../../helpers/calculate-shipping";
-import { minPriceShippingFree, voucherCoupon } from "../../Placeholders";
+import { ButtonTypes, minPriceShippingFree, voucherCoupon } from "../../Placeholders";
 
 const CheckoutItems = ({ shipping }) => {
   const dispatch = useDispatch();
@@ -175,9 +175,9 @@ const CheckoutItems = ({ shipping }) => {
                     />
                     <Button
                       className={classes["button-coupon"]}
-                      btnText={"Apply"}
+                      btnText={ButtonTypes.voucher.text}
                       extraClasses={classes["button-coupon"]}
-                      btnType={"button"}
+                      btnType={ButtonTypes.voucher.type}
                       onClick={() =>
                         applyVoucherHandler(voucherRef.current.value.trim())
                       }

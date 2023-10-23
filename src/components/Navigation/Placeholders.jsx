@@ -70,3 +70,26 @@ export const voucherCoupon = {
 export const shippingPrice = 5;
 
 export const minPriceShippingFree = 300;
+
+export const ButtonTypes = {
+  account: {
+    text: "My account",
+    type: "button",
+  },
+  logout: {
+    text: "Log out",
+    type: "button",
+  },
+  voucher: {
+    text: "Apply",
+    type: "button",
+  },
+  addToCart: {
+    text: "Add to bag",
+    type: "submit",
+  },
+  wishlist: {
+    text: "Wishlist",
+    type: "button",
+  },
+};

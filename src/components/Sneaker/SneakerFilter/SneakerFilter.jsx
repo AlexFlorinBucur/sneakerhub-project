@@ -29,7 +29,7 @@ const FilterTransition = ({
     <CSSTransition
       mountOnEnter
       unmountOnExit
-      in={isMobile ? Boolean(keyFilter === filterName) : Boolean(keyFilter)}
+      in={isMobile ? keyFilter === filterName : Boolean(keyFilter)}
       timeout={animationTiming}
       classNames={{
         enter: "",
@@ -90,8 +90,6 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
   const filterObject = generateFilterObject(sneakersData);
 
   const isMobile = window.innerWidth <= 672;
-
-  console.log(isMobile);
 
   return (
     <>

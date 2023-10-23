@@ -8,56 +8,50 @@
 
 .product-buttons {
   display: grid;
-  grid-template-columns: 1fr 0.1fr;
+  grid-template-columns: 8fr 2fr;
   grid-gap: 2rem;
+  margin: 0;
 }
 
-.btn {
-  width: 100%;
-  cursor: pointer;
-  border: none;
+.cart-btn {
+  margin: 0;
+}
+
+.cart-btn > button {
+  color: var(--primary-non-colour);
+  background-color: var(--primary-text);
   border-radius: 1rem;
-  justify-self: flex-start;
   padding: 1.6rem;
+  transition: all 0.3s;
   font-size: 1.6rem;
   font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s;
+  border: none;
   display: inline-block;
-  background-color: var(--primary-text);
-  color: var(--primary-non-colour);
 }
 
-.btn:hover {
+.cart-btn > button:hover {
   color: var(--primary-text);
   background-color: var(--primary-darker);
 }
 
-.wishlist {
-  text-align: center;
-  width: 100%;
+.wishlist-btn > button {
   background-color: var(--primary-non-colour);
   box-shadow: inset 0 0 0 0.1rem var(--primary-text);
   color: var(--primary-text);
   display: flex;
-  justify-content: center;
 }
 
-.btn.wishlist svg {
+.wishlist-btn svg {
   margin-left: 1rem;
   stroke: var(--primary-text);
 }
 
-.btn.wishlist:hover {
+.wishlist-btn > button:hover {
   background-color: var(--secondary-text);
 }
 
-.btn.wishlist svg:hover {
-  margin-left: 1rem;
-}
-
 @media (max-width: 55em) {
-  .btn {
+  .cart-btn > button {
     padding: 1rem;
   }
 }

@@ -19,6 +19,8 @@ import {
   shippingPrice,
 } from "../../components/Navigation/Placeholders";
 
+const NO_OF_INPUTS_DELIVERY_INFO = 6;
+
 const Cart = () => {
   const dispatch = useDispatch();
 
@@ -54,7 +56,7 @@ const Cart = () => {
 
   if (
     Object.values(inputError).every((value) => value === true) &&
-    Object.entries(inputError).length === 6 &&
+    Object.entries(inputError).length === NO_OF_INPUTS_DELIVERY_INFO &&
     errorMessages.length === 0
   ) {
     formValid = true;
@@ -139,12 +141,14 @@ const Cart = () => {
                   btnText={"PLACE ORDER"}
                   extraClasses={classes["order-button"]}
                   btnType={
-                    Object.entries(inputError).length === 6
+                    Object.entries(inputError).length ===
+                    NO_OF_INPUTS_DELIVERY_INFO
                       ? "button"
                       : "submit"
                   }
                   {...(errorMessages.length === 0 &&
-                  Object.entries(inputError).length !== 6
+                  Object.entries(inputError).length !==
+                    NO_OF_INPUTS_DELIVERY_INFO
                     ? {}
                     : { onClick: submitHandler })}
                 />
