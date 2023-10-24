@@ -7,18 +7,18 @@ import Spinner from "../../UI/Spinner";
 import SneakerLink from "../SneakerLink/SneakerLink";
 import { useSelector } from "react-redux";
 
-const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
+const SneakerList = ({ listData, wishlistRoute = false }) => {
   const location = useLocation();
   const [newPageLoading, setNewPageLoading] = useState(false);
   const { wishlist } = useSelector((state) => state.sneakerData);
 
   const fetchPost = async (page) => {
-    return sneakersData.slice((page - 1) * 6, page * 6);
+    return listData.slice((page - 1) * 6, page * 6);
   };
 
   const { data, fetchNextPage } = useInfiniteQuery(
-    // we add snearksData because when we are in wishlist and we try to remove 1 item, this component need to render again. To do that we need to put sneakersData here(because we modify sneakersData when we remove item)
-    ["query", location.search, sneakersData],
+    // we add listData because when we are in wishlist and we try to remove 1 item, this component need to render again. To do that we need to put listData here(because we modify listData when we remove item)
+    ["query", location.search, listData],
     async ({ pageParam = 1 }) => {
       const response = await fetchPost(pageParam);
       return response;
@@ -28,7 +28,7 @@ const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
         return pages.length + 1;
       },
       initialData: {
-        pages: [sneakersData.slice(0, 6)],
+        pages: [listData.slice(0, 6)],
         pageParams: [1],
       },
     }
@@ -45,7 +45,7 @@ const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
     const fetchNextPageSneakers = async () => {
       if (
         entry?.isIntersecting &&
-        data?.pages.flatMap((page) => page).length < sneakersData.length &&
+        data?.pages.flatMap((page) => page).length < listData.length &&
         !newPageLoading
       ) {
         setNewPageLoading(true);
@@ -59,14 +59,14 @@ const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
     };
 
     fetchNextPageSneakers();
-  }, [entry, data, sneakersData, wishlist]);
+  }, [entry, data, listData, wishlist]);
 
-  const _sneakersData = data?.pages.flatMap((page) => page);
+  const _listData = data?.pages.flatMap((page) => page);
 
   return (
     <div className={classes["sneaker-products"]}>
       <ul>
-        {_sneakersData?.map(
+        {_listData?.map(
           (
             {
               sneakerImage,
@@ -79,7 +79,7 @@ const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
             },
             i
           ) => {
-            if (i === _sneakersData.length - 1 && !newPageLoading)
+            if (i === _listData.length - 1 && !newPageLoading)
               return (
                 <li className={classes["sneaker-item"]} key={id} ref={ref}>
                   <SneakerLink
@@ -116,7 +116,7 @@ const SneakerList = ({ sneakersData, wishlistRoute = false }) => {
         {newPageLoading ? (
           <Spinner />
         ) : (
-          `There are ${sneakersData.length} articles with the searched filters.`
+          `There are ${listData.length} articles with the searched filters.`
         )}
       </div>
     </div>

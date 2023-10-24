@@ -48,6 +48,8 @@ const Navbar = ({ onShowModal, onHideModal }) => {
     };
   }, [cartItem]);
 
+  const displayCartModal = window.innerWidth >= 1056;
+
   return (
     <header className={classes["header-wrapper"]}>
       <div className={classes["header-discount"]}>
@@ -89,7 +91,9 @@ const Navbar = ({ onShowModal, onHideModal }) => {
                       onSignUp: () => onShowModal(MODALS.login),
                     })}
                     // SET THE hover PROPERTY FOR CART LINK
-                    {...(url === "/cart" && cartItem.length > 0
+                    {...(url === "/cart" &&
+                    cartItem.length > 0 &&
+                    displayCartModal
                       ? {
                           onMouseEnter: () => onShowModal(MODALS.cart),
                           onMouseLeave: () => onHideModal(MODALS.cart),

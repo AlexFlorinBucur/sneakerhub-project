@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { useState } from "react";
 import classes from "./SneakerFilter.module.css";
 import { placeholders } from "../Placeholders";
@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import { generateFilterObject } from "../../../helpers/generate-filter";
 import { Fragment } from "react";
 import { buildSortUrl } from "../../../helpers/generate-url-sort";
+import { useSelector } from "react-redux";
 
 const animationTiming = {
   enter: 400,
@@ -20,11 +21,18 @@ const FilterTransition = ({
   keyFilter,
   filterName,
   filterObject,
-  filterNavigateHandler,
-  animationTiming,
-  classes,
-  nodeRef,
 }) => {
+  const location = useLocation();
+  const nodeRef = useRef(null);
+
+  const filterNavigateHandler = (nameItem) => {
+    return `${location.pathname}${
+      location.search
+        ? `${location.search}&${keyFilter}=${nameItem}`
+        : `?${keyFilter}=${nameItem}`
+    }`;
+  };
+
   return (
     <CSSTransition
       mountOnEnter
@@ -57,37 +65,25 @@ const FilterTransition = ({
   );
 };
 
-const SneakerFilter = ({ sneakersData, activeFilters }) => {
+const SneakerFilter = () => {
   const [keyFilter, setKeyFilter] = useState(false);
   const location = useLocation();
+  const { sneakersData, activeFilters } = useSelector(
+    (state) => state.sneakerData
+  );
 
   const [dropdownActive, setDropdownActive] = useState(false);
 
-  const openDropdownFilter = () => {
-    setDropdownActive((state) => !state);
-  };
+  const filterHandlerName = useCallback((name) => {
+    setKeyFilter((prev) => (prev === name ? false : name));
+    setDropdownActive(false);
+  }, []);
 
-  const filterNavigateHandler = (nameItem) => {
-    return `${location.pathname}${
-      location.search
-        ? `${location.search}&${keyFilter}=${nameItem}`
-        : `?${keyFilter}=${nameItem}`
-    }`;
-  };
-
-  const nodeRef = useRef(null);
-
-  const filterHandlerName = (name) => {
-    if (keyFilter === name) {
-      setKeyFilter(false);
-      setDropdownActive(false);
-    } else {
-      setKeyFilter(name);
-      setDropdownActive(false);
-    }
-  };
-
-  const filterObject = generateFilterObject(sneakersData);
+  // works with empty [] too
+  const filterObject = useMemo(
+    () => generateFilterObject(sneakersData),
+    [JSON.stringify(sneakersData)]
+  );
 
   const isMobile = window.innerWidth <= 672;
 
@@ -127,10 +123,6 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
                   keyFilter={keyFilter}
                   filterName={filterName}
                   filterObject={filterObject}
-                  filterNavigateHandler={filterNavigateHandler}
-                  animationTiming={animationTiming}
-                  classes={classes}
-                  nodeRef={nodeRef}
                 />
               )}
             </Fragment>
@@ -139,7 +131,7 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
           className={`${classes["filter-cat"]} ${classes["order-items"]} ${
             dropdownActive ? classes["open"] : ""
           }`}
-          onClick={openDropdownFilter}
+          onClick={() => setDropdownActive(!dropdownActive)}
         >
           <div className={classes["select-order"]}>
             <span>Sort by: select</span>
@@ -162,10 +154,6 @@ const SneakerFilter = ({ sneakersData, activeFilters }) => {
           isMobile={isMobile}
           keyFilter={keyFilter}
           filterObject={filterObject}
-          filterNavigateHandler={filterNavigateHandler}
-          animationTiming={animationTiming}
-          classes={classes}
-          nodeRef={nodeRef}
         />
       )}
     </>

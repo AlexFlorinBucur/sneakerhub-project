@@ -3,30 +3,30 @@ import classes from "./Slider.module.css";
 import { Link } from "react-router-dom";
 import { slideImages } from "../../components/Navigation/Placeholders";
 
+const slide = (action, activeSlide, setActiveSlide) => {
+  const totalSlides = slideImages.length;
+
+  if (action === "next") {
+    if (activeSlide < totalSlides - 1) {
+      setActiveSlide((previousState) => previousState + 1);
+    } else {
+      setActiveSlide(0);
+    }
+  } else if (action === "prev") {
+    if (activeSlide === 0) {
+      setActiveSlide(totalSlides - 1);
+    } else {
+      setActiveSlide((previousState) => previousState - 1);
+    }
+  }
+};
+
 const Slider = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const totalSlides = slideImages.length;
-
-  function slide(action) {
-    if (action === "next") {
-      if (activeSlide < totalSlides - 1) {
-        setActiveSlide((previousState) => previousState + 1);
-      } else {
-        setActiveSlide(0);
-      }
-    } else if (action === "prev") {
-      if (activeSlide === 0) {
-        setActiveSlide(totalSlides - 1);
-      } else {
-        setActiveSlide((previousState) => previousState - 1);
-      }
-    }
-  }
-
   useEffect(() => {
     const intervalId = setTimeout(() => {
-      slide("next");
+      slide("next", activeSlide, setActiveSlide);
     }, 7000);
 
     return () => {
@@ -65,11 +65,11 @@ const Slider = () => {
       </div>
       <div
         className={`${classes.arrow} ${classes.next}`}
-        onClick={() => slide("next")}
+        onClick={() => slide("next", activeSlide, setActiveSlide)}
       ></div>
       <div
         className={`${classes.arrow} ${classes.prev}`}
-        onClick={() => slide("prev")}
+        onClick={() => slide("prev", activeSlide, setActiveSlide)}
       ></div>
     </div>
   );

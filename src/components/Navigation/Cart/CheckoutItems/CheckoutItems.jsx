@@ -6,9 +6,14 @@ import { cartActions } from "../../../../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Button from "../../../UI/Button";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { calculateShippingStatus } from "../../../../helpers/calculate-shipping";
-import { ButtonTypes, minPriceShippingFree, voucherCoupon } from "../../Placeholders";
+import {
+  ButtonTypes,
+  minPriceShippingFree,
+  voucherCoupon,
+} from "../../Placeholders";
+import { useCallback } from "react";
 
 const CheckoutItems = ({ shipping }) => {
   const dispatch = useDispatch();
@@ -17,19 +22,20 @@ const CheckoutItems = ({ shipping }) => {
   const totalAmountToPay = +useSelector((state) => state.cart.totalAmountToPay);
   const voucherRef = useRef();
 
-  const cartItemAddHandler = (item) => {
+  // because of multiple key stroke or adding/remove items from this component we wrap this functions in useCallback for not recreate them
+  const cartItemAddHandler = useCallback((item) => {
     dispatch(cartActions.addItem({ ...item, amount: 1 }));
     toast.success("The quantity has been updated!");
-  };
+  }, []);
 
-  const cartItemRemoveHandler = (id, size, removeItem = false) => {
+  const cartItemRemoveHandler = useCallback((id, size, removeItem = false) => {
     dispatch(cartActions.removeItem({ id, size, removeItem }));
     removeItem
       ? toast.success("Item removed successfully from cart!")
       : toast.success("The quantity has been updated!");
-  };
+  }, []);
 
-  const applyVoucherHandler = (voucherTxt) => {
+  const applyVoucherHandler = useCallback((voucherTxt) => {
     if (!voucherTxt) {
       return;
     }
@@ -47,18 +53,16 @@ const CheckoutItems = ({ shipping }) => {
       })
     );
     toast.success("Voucher successfully applied!");
-  };
+  }, []);
 
-  const removeVoucherHandler = () => {
+  const removeVoucherHandler = useCallback(() => {
     dispatch(cartActions.removeVoucher());
     toast.success("Voucher deleted!");
-  };
+  }, []);
 
-  const shippingStatus = calculateShippingStatus(
-    totalAmountToPay,
-    totalAmount,
-    voucher
-  );
+  const shippingStatus = useMemo(() => {
+    return calculateShippingStatus(totalAmountToPay, totalAmount, voucher);
+  }, [totalAmountToPay, totalAmount, voucher]);
 
   return (
     <>
