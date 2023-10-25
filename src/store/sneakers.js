@@ -156,12 +156,10 @@ export const fetchSneakers =
         }
 
         const filteredData = transformedData.filter((sneaker) => {
-          // Verificam daca obiectul valueObj contine cheia "brands" si daca brandul corespunde
           if ("brands" in valueObj && sneaker.brandName !== valueObj.brands) {
             return false;
           }
 
-          // Verificam daca obiectul valueObj contine cheia "categories" si daca categoria corespunde
           if (
             "categories" in valueObj &&
             !sneaker.category.includes(valueObj.categories)
@@ -169,7 +167,6 @@ export const fetchSneakers =
             return false;
           }
 
-          // Verificam daca obiectul valueObj contine cheia "price" si daca pretul se incadreaza in intervalul specificat
           if ("price" in valueObj) {
             const priceRange = valueObj.price
               .replaceAll("$", "")
@@ -185,7 +182,6 @@ export const fetchSneakers =
             }
           }
 
-          // Verificăm dacă obiectul valueObj conține cheia "size" și dacă mărimea este specificată în array-ul sizeRange al sneaker-ului
           if (
             "size" in valueObj &&
             !sneaker.sizeRange.includes(Number(valueObj.size))
@@ -193,7 +189,6 @@ export const fetchSneakers =
             return false;
           }
 
-          // Returnam true daca obiectul trece toate verificarile
           return true;
         });
 

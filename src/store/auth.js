@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCartData } from "../helpers/fetch-cart";
-import { toast } from "react-toastify";
 import { orderActions } from "./order";
 import { fetchWishlist } from "../helpers/fetch-wishlist";
 
@@ -42,7 +41,6 @@ const logoutTimeout = (remainingTime, dispatch) =>
 // thunk function because setTimeout is async
 export const autoLogout = (expirationTime) => (dispatch) => {
   timeoutRef = logoutTimeout(expirationTime, dispatch);
-  console.log("timeoutRef referinta", timeoutRef);
 };
 
 const authSlice = createSlice({
@@ -58,8 +56,6 @@ const authSlice = createSlice({
       localStorage.removeItem("items");
       localStorage.removeItem("totalAmount");
       localStorage.removeItem("wishlist");
-
-      toast.success("You have successfully logged out!");
 
       clearTimeout(timeoutRef);
 

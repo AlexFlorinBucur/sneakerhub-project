@@ -9,6 +9,7 @@ import { orderActions } from "../../../store/order";
 import Button from "../../UI/Button";
 import { fetchWishlist } from "../../../helpers/fetch-wishlist";
 import { ButtonTypes } from "../Placeholders";
+import { toast } from "react-toastify";
 
 const UserAuthenticated = ({ onCloseModal, switchAction }) => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const UserAuthenticated = ({ onCloseModal, switchAction }) => {
     fetchCartData(dispatch, cartItems?.length === 0 ? "DELETE" : "PUT", true);
     dispatch(fetchWishlist(true));
     dispatch(authActions.logout());
+    toast.success("You have successfully logged out!");
     dispatch(cartActions.clearCart());
     dispatch(orderActions.clearOrders());
     switchAction("SIGN_UP");

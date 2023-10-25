@@ -98,11 +98,8 @@ const LoginForm = ({
     errorEmailHandler("");
   };
 
-  console.log(userAction);
   useEffect(() => {
-    if (!show) {
-      resetForm();
-    }
+    resetForm();
   }, [show]);
 
   const switchUserActionHandler = (type) => {

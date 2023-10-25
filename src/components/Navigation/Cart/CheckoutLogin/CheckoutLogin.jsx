@@ -24,6 +24,7 @@ const CheckoutLogin = () => {
             <CheckoutOption switchAction={switchAction} />
             <div className={classes["checkout-login-inputs"]}>
               <LoginForm
+                show={userAction}
                 userAction={userAction}
                 switchAction={switchAction}
                 loadingAction={loadingAction}

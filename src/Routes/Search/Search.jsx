@@ -20,7 +20,7 @@ const Search = () => {
   const location = useLocation();
   const queryFilterURL = new URLSearchParams(location.search);
 
-  const { sneakersData, isLoading, error, activeFilters } = useSelector(
+  const { sneakersData, isLoading, error } = useSelector(
     (state) => state.sneakerData
   );
 
@@ -41,18 +41,13 @@ const Search = () => {
       {isLoading && <Spinner />}
       {!isLoading && searchedQueryHasData && (
         <div className={classes["sneakers"]}>
-          <SneakerFilter
-            sneakersData={sneakersData}
-            activeFilters={activeFilters}
-          />
-          <SneakerFilterActive activeFilters={activeFilters} />
+          <SneakerFilter />
+          <SneakerFilterActive />
           <SimpleLine />
-          <SneakerList sneakersData={sneakersData} />
+          <SneakerList listData={sneakersData} />
         </div>
       )}
-      {!isLoading && !searchedQueryHasData && (
-        <SneakerProductsFound products={sneakersData} />
-      )}
+      {!isLoading && !searchedQueryHasData && <SneakerProductsFound />}
     </section>
   );
 };

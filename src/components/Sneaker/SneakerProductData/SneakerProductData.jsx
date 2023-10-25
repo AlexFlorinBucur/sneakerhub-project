@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import { toast } from "react-toastify";
 import { getTimeFromStamp } from "../../../helpers/get-time";
+import { useCallback } from "react";
 
 const SneakerProductData = ({
   name,
@@ -25,7 +26,7 @@ const SneakerProductData = ({
 }) => {
   const dispatch = useDispatch();
 
-  const addToCartHandler = (size) => {
+  const addToCartHandler = useCallback((size) => {
     dispatch(
       cartActions.addItem({
         id: id,
@@ -38,7 +39,7 @@ const SneakerProductData = ({
       })
     );
     toast.success("Product successfully added!");
-  };
+  }, []);
 
   return (
     <div>

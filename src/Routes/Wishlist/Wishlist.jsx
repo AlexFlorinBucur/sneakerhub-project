@@ -15,8 +15,8 @@ const Wishlist = () => {
     <section className={classes["section-products"]}>
       {wishlistData.length !== 0 && (
         <div className={classes["sneakers"]}>
-          <SneakerHeader gender={location.pathname.replace("/", "")} />
-          <SneakerList sneakersData={wishlistData} wishlistRoute={true} />
+          <SneakerHeader headerName={location.pathname.replace("/", "")} />
+          <SneakerList listData={wishlistData} wishlistRoute={true} />
         </div>
       )}
       {isLoggedIn && wishlistData.length === 0 && (

@@ -39,19 +39,14 @@ const Sneakers = () => {
       {/* {!params.id && !isLoading && error && <p>{error}</p>} */}
       {!params.id && !isLoading && sneakersData.length > 0 && (
         <div className={classes.sneakers}>
-          <SneakerHeader gender={params.gender} />
-          <SneakerFilter
-            sneakersData={sneakersData}
-            activeFilters={activeFilters}
-          />
-          <SneakerFilterActive activeFilters={activeFilters} />
+          <SneakerHeader headerName={params.gender} />
+          <SneakerFilter />
+          <SneakerFilterActive />
           <SimpleLine />
-          <SneakerList sneakersData={sneakersData} />
+          <SneakerList listData={sneakersData} />
         </div>
       )}
-      {!isLoading && sneakersData.length === 0 && (
-        <SneakerProductsFound products={sneakersData} />
-      )}
+      {!isLoading && sneakersData.length === 0 && <SneakerProductsFound />}
     </section>
   );
 };

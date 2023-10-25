@@ -3,13 +3,14 @@ import classes from "./SneakerFilterActive.module.css";
 import { HiOutlineFilter } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { sneakerActions } from "../../../store/sneakers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const SneakerFilterActive = ({ activeFilters }) => {
+const SneakerFilterActive = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const query = new URLSearchParams(location.search);
+  const { activeFilters } = useSelector((state) => state.sneakerData);
 
   const deleteQueryHandler = (key) => {
     const queryValue = query.get(key);
