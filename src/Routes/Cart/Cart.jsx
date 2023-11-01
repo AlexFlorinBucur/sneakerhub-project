@@ -6,7 +6,7 @@ import CheckoutSidebar from "../../components/Navigation/Cart/CheckoutSidebar/Ch
 import CheckoutItems from "../../components/Navigation/Cart/CheckoutItems/CheckoutItems";
 import CheckoutLogin from "../../components/Navigation/Cart/CheckoutLogin/CheckoutLogin";
 import Shipping from "../../components/Navigation/Cart/Shipping/Shipping";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../../components/UI/Spinner";
 import EmptyCart from "../../components/Navigation/Cart/EmptyCart/EmptyCart";
 import { toast } from "react-toastify";
@@ -39,6 +39,12 @@ const Cart = () => {
 
   const [shippingInfo, setShippingInfo] = useState({});
   const [inputError, setInputError] = useState({});
+
+  // if we currently we are not logged in and we have items on cart and we type in inputs and let that inputs filled, then we delete all cart and then logged in (with currently items on database for that account) we not clear this states and we can send order without completing inputs
+  useEffect(() => {
+    setInputError({});
+    setShippingInfo({});
+  }, [isLoggedIn]);
 
   const errorMessages = Object.keys(inputError)
     .map((key) => {

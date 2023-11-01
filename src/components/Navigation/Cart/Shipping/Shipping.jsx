@@ -2,6 +2,8 @@ import React from "react";
 import Input from "../../../UI/Input";
 import useInput from "../../../../hooks/useInput";
 import classes from "./Shipping.module.css";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const validatePhone = (phoneNo) => {
   const pattern = /^(?:(?:\+40\s*7\d{8})|(?:07\d{8}))$/;
@@ -17,6 +19,8 @@ const validateCharacters = (char) => {
 };
 
 const Shipping = ({ setShippingInfo, setInputError }) => {
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   const {
     value: lastNameValue,
     isValid: lastNameIsValid,
@@ -70,6 +74,19 @@ const Shipping = ({ setShippingInfo, setInputError }) => {
     inputBlurHandler: postalCodeBlurHandler,
     reset: resetPostalCodeInput,
   } = useInput((value) => validatePostalCode(value));
+
+  const resetForm = () => {
+    resetPostalCodeInput();
+    resetCityInput();
+    resetPhoneNoInput();
+    resetStreetInput();
+    resetLastNameInput();
+    resetFirstNameInput();
+  };
+
+  useEffect(() => {
+    resetForm();
+  }, [isLoggedIn]);
 
   return (
     <>
