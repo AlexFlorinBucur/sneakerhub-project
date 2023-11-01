@@ -103,7 +103,7 @@ const SneakerList = ({ listData, wishlistRoute = false }) => {
             i
           ) => {
             const lastItemInRedux =
-              id === sneakersData[sneakersData.length - 1].id;
+              id === sneakersData[sneakersData.length - 1]?.id;
             if (
               i === _listData.length - 1 &&
               !newPageLoading &&
